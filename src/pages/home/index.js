@@ -1,11 +1,22 @@
 import React from "react";
 import Sidebar from "../../components/sidebar";
+import SearchBar from "../../components/searchBar";
 
 const Home = () => {
   return (
-    <div className="py-9 pl-8 pr-6 flex gap-x-11 h-auto">
+    <div className="py-8 pl-7 pr-6 flex gap-x-11 h-auto font-pop">
       <Sidebar activePage={"home"} />
-      <div className="w-4/5">Main Content</div>
+      <div className="w-[85%] flex gap-y-10 flex-wrap justify-between">
+        <div className="w-[35%]">
+          <SearchBar />
+        </div>
+        {/* <div className="w-[36%] bg-black/80">sadas</div>
+        <div className="w-[29.5%] bg-black/60">asdasd</div>
+        <div className="w-[29.5%] bg-black/60">asdasd</div>
+        <div className="w-[36%] bg-black/60">asdasd</div>
+        <div className="w-[29.5%] bg-black/60">asdasd</div>
+        <div className="w-[29.5%] bg-black/60">asdasd</div> */}
+      </div>
     </div>
   );
 };

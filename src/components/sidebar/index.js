@@ -1,17 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { VscHome } from "react-icons/vsc";
 import { TbMessageCircle, TbSettings } from "react-icons/tb";
 import { BsBell } from "react-icons/bs";
 import { GoSignOut } from "react-icons/go";
-import { Link } from "react-router-dom";
 import SidebarMenu from "../sidebarMenu";
 
 const Sidebar = ({ activePage }) => {
-  let [active, setActive] = useState(activePage);
+  let active = activePage;
 
   return (
-    <div className="w-[12.5%] py-10 bg-primary h-full rounded-[20px] flex flex-col gap-y-[78px]">
-      <div className="w-full overflow-hidden gap-y-10 flex flex-col items-center justify-center">
+    <div className="w-[13%] py-10 bg-primary h-full rounded-lg flex flex-col gap-y-[78px]">
+      <div className="w-full overflow-hidden gap-y-10 flex flex-col items-center justify-start">
         <picture className="pb-10">
           <img
             src="images/user_avatar.png"
@@ -22,7 +21,7 @@ const Sidebar = ({ activePage }) => {
 
         <SidebarMenu
           customClass={`${
-            active == "home"
+            active === "home"
               ? "before:block after:block text-primaryTwo"
               : "after:hidden before:hidden text-white/70 hover:text-white"
           }`}
@@ -31,7 +30,7 @@ const Sidebar = ({ activePage }) => {
         ></SidebarMenu>
         <SidebarMenu
           customClass={`${
-            active == "messages"
+            active === "messages"
               ? "before:block after:block text-primaryTwo"
               : "after:hidden before:hidden text-white/70 hover:text-white"
           }`}
@@ -40,25 +39,25 @@ const Sidebar = ({ activePage }) => {
         ></SidebarMenu>
         <SidebarMenu
           customClass={`${
-            active == "notifications"
+            active === "notifications"
               ? "before:block after:block text-primaryTwo"
               : "after:hidden before:hidden text-white/70 hover:text-white"
           }`}
           Icon={BsBell}
-          goTo={"/"}
+          goTo={"/notifications"}
         ></SidebarMenu>
         <SidebarMenu
           customClass={`${
-            active == "settings"
+            active === "settings"
               ? "before:block after:block text-primaryTwo"
               : "after:hidden before:hidden text-white/70 hover:text-white"
           }`}
           Icon={TbSettings}
-          goTo={"/"}
+          goTo={"/settings"}
         ></SidebarMenu>
         <SidebarMenu
-          customClass={`${
-            active == "settings"
+          customClass={`!text-[47px] ml-2 mt-24 justify-self-end ${
+            active === "signOut"
               ? "before:block after:block text-primaryTwo"
               : "after:hidden before:hidden text-white/70 hover:text-white"
           }`}

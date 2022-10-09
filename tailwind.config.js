@@ -6,6 +6,7 @@ module.exports = {
       fontFamily: {
         nunito: ["Nunito", "sans-serif"],
         open: ["Open Sans", "sans-serif"],
+        pop: ["Poppins", "sans-serif"],
       },
       textColor: {
         primary: "#11175D",
@@ -43,6 +44,9 @@ module.exports = {
         md: "768px",
         lg: "1000px",
         xl: "1280px",
+      },
+      borderRadius: {
+        lg: "20px",
       },
     },
   },

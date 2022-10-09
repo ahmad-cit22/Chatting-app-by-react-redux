@@ -4,6 +4,8 @@ import Login from "./pages/login";
 import Registration from "./pages/registration";
 import Home from "./pages/home";
 import Messages from "./pages/messages";
+import Settings from "./pages/settings";
+import Notifications from "./pages/notifications";
 
 const App = () => {
   return (
@@ -12,6 +14,8 @@ const App = () => {
       <Route path={"/login"} element={<Login />} />
       <Route path={"/"} element={<Home />} />
       <Route path={"/messages"} element={<Messages />} />
+      <Route path={"/notifications"} element={<Notifications />} />
+      <Route path={"/settings"} element={<Settings />} />
     </Routes>
   );
 };

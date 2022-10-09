@@ -9,6 +9,7 @@ module.exports = {
       },
       textColor: {
         primary: "#11175D",
+        primaryTwo: "#5F35F5",
         secondary: "#03014C",
         yellow: "#EA6C00",
       },
@@ -37,10 +38,11 @@ module.exports = {
         },
       },
       screens: {
-        sm: "375px",
-        sml: "500px",
+        sm: "320px",
+        sml: "560px",
         md: "768px",
-        lg: "1200px",
+        lg: "1000px",
+        xl: "1280px",
       },
     },
   },

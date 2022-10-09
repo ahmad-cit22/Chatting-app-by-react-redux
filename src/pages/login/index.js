@@ -84,7 +84,7 @@ const Login = () => {
     <div className="flex items-center font-open">
       <div className="w-[52%] text-secondary h-screen flex flex-col justify-center items-center">
         <div className="mt-12">
-          <h1 className="text-4xl font-bold">Login to your account!</h1>
+          <h1 className="text-[34px] font-bold">Login to your account!</h1>
           <a
             href="#"
             className="text-sm font-semibold mt-9 mb-10 inline-block pl-6 pr-10 py-5 rounded-lg border-2 border-secondary/20 hover:border-secondary/60 linear duration-300"

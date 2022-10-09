@@ -107,26 +107,26 @@ const Registration = () => {
 
   return (
     <div className="flex items-center font-nunito">
-      <div className="w-[52%] h-screen flex flex-col justify-center items-end">
-        <div className="mt-12 mr-[70px]">
-          <h1 className="text-4xl text-primary font-bold">
+      <div className="sml:w-[52%] h-screen flex flex-col justify-center sml:items-end">
+        <div className="md:mt-12 sml:mr-[30px] lg:!mr-[70px]">
+          <h1 className="text-[22px] md:text-[24px] lg:text-[27px] xl:text-[34px] text-center md:text-left text-primary font-bold">
             Get started with easily register
           </h1>
-          <p className="text-xl text-primary opacity-70 mt-3 mb-10">
+          <p className="text-sm md:text-lg lg:text-xl text-center sml:text-left text-primary opacity-70 mt-1 sml:mt-3 mb-6 sml:mb-10">
             Free register and you can enjoy it!
           </p>
 
-          <div className="w-[368px] text-primary">
+          <div className="md:w-[368px] text-primary">
             <div>
               <form
                 action="#"
                 method="POST"
-                className="flex flex-col gap-10 w-[368px] mb-6"
+                className="flex flex-col md:gap-10 w-[368px] mb-6"
               >
                 <div className="relative" onClick={handleFocusEmail}>
                   <input
                     type={"text"}
-                    className="w-full py-6 px-12 rounded-lg border-[2.5px] border-primary text-xl text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
+                    className="w-full md:py-6 md:px-12 rounded-lg border-[2.5px] border-primary text-xl text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
                     ref={refEmail}
                     onBlur={handleBlurEmail}
                     onChange={handleEmail}
@@ -150,7 +150,7 @@ const Registration = () => {
                 <div className="relative" onClick={handleFocusName}>
                   <input
                     type={"text"}
-                    className="w-full py-6 px-12 rounded-lg border-[2.5px] border-primary text-xl text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
+                    className="w-full md:py-6 md:px-12 rounded-lg border-[2.5px] border-primary text-xl text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
                     ref={refName}
                     onBlur={handleBlurName}
                     onChange={handleName}
@@ -178,7 +178,7 @@ const Registration = () => {
                 >
                   <input
                     type={`${passVisibility ? "text" : "password"}`}
-                    className="w-full py-6 pl-12 pr-14 rounded-lg border-[2.5px] border-primary text-xl text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
+                    className="w-full md:py-6 md:pl-12 md:pr-14 rounded-lg border-[2.5px] border-primary text-xl text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
                     ref={refPass}
                     onChange={handlePass}
                   />
@@ -234,7 +234,7 @@ const Registration = () => {
           </div>
         </div>
       </div>
-      <div className="w-[48%] h-screen">
+      <div className="w-[48%] hidden sml:block h-screen">
         <picture className="w-full h-full">
           <img
             className="h-screen w-full object-cover"

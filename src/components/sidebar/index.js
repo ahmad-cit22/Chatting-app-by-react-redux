@@ -10,7 +10,7 @@ const Sidebar = ({ activePage }) => {
 
   return (
     <div className="w-[13%] py-10 bg-primary h-full rounded-lg flex flex-col gap-y-[78px]">
-      <div className="w-full overflow-hidden gap-y-10 flex flex-col items-center justify-start">
+      <div className="w-full overflow-hidden gap-y-8 flex flex-col items-center justify-start">
         <picture className="pb-10">
           <img
             src="images/user_avatar.png"
@@ -56,7 +56,7 @@ const Sidebar = ({ activePage }) => {
           goTo={"/settings"}
         ></SidebarMenu>
         <SidebarMenu
-          customClass={`!text-[47px] ml-2 mt-24 justify-self-end ${
+          customClass={`!text-[47px] ml-2 mt-28 justify-self-end ${
             active === "signOut"
               ? "before:block after:block text-primaryTwo"
               : "after:hidden before:hidden text-white/70 hover:text-white"

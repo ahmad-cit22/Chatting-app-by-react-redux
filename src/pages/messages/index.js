@@ -5,7 +5,7 @@ const Messages = () => {
   return (
     <div className="py-8 pl-7 pr-6 flex gap-x-11 h-auto">
       <Sidebar activePage={"messages"} />
-      <div className="w-4/5">Main Content</div>
+      <div className="w-4/5">Message Page</div>
     </div>
   );
 };

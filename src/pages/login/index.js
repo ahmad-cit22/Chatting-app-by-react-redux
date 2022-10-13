@@ -104,7 +104,7 @@ const Login = () => {
                 <div className="relative" onClick={handleFocusEmail}>
                   <input
                     type={"text"}
-                    className="w-[90%] py-5 border-b-[2px] border-focusSec text-xl font-semibold outline-0 focus:border-secondary linear duration-300 z-10"
+                    className="w-[90%] px-1 py-5 border-b-[2px] border-focusSec text-xl font-semibold outline-0 focus:border-secondary linear duration-300 z-10"
                     ref={refEmail}
                     onBlur={handleBlurEmail}
                     onChange={handleEmail}
@@ -114,7 +114,7 @@ const Login = () => {
                       isFocusedEmail
                         ? "opacity-80 top-[-10px] text-sm"
                         : "opacity-50 px-0 text-lg top-[19px]"
-                    }  font-semibold absolute linear duration-300`}
+                    }  font-semibold absolute left-[4px] linear duration-300`}
                   >
                     Email Address
                   </p>
@@ -132,7 +132,7 @@ const Login = () => {
                 >
                   <input
                     type={`${passVisibility ? "text" : "password"}`}
-                    className="w-[90%] py-5 pr-12 border-b-[2px] border-focusSec text-xl font-semibold outline-0 focus:border-secondary linear duration-300 z-10"
+                    className="w-[90%] px-1 py-5 pr-12 border-b-[2px] border-focusSec text-xl font-semibold outline-0 focus:border-secondary linear duration-300 z-10"
                     ref={refPass}
                     onChange={handlePass}
                   />
@@ -141,7 +141,7 @@ const Login = () => {
                       isFocusedPass
                         ? "opacity-80 top-[-10px] text-sm"
                         : "opacity-50 px-0 text-lg top-[19px]"
-                    }  font-semibold absolute linear duration-300`}
+                    }  font-semibold absolute left-[4px] linear duration-300`}
                   >
                     Password
                   </p>

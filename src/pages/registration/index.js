@@ -2,9 +2,18 @@ import React, { useState, useRef } from "react";
 import Button from "../../components/button";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { RiEyeFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  updateProfile,
+} from "firebase/auth";
 
 const Registration = () => {
+  const auth = getAuth();
+  const navigate = useNavigate();
+
   let [isFocusedEmail, setIsFocusedEmail] = useState(false);
   let [isFocusedName, setIsFocusedName] = useState(false);
   let [isFocusedPass, setIsFocusedPass] = useState(false);
@@ -19,6 +28,8 @@ const Registration = () => {
   let [errName, setErrName] = useState("");
   let [errPass, setErrPass] = useState("");
 
+  let [fErrEmail, setFErrEmail] = useState("");
+
   let [successMsg, setSuccessMsg] = useState("");
 
   const validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -27,6 +38,8 @@ const Registration = () => {
   const validPassL = /[a-z]/;
   const validPassD = /[0-9]/;
   const validPassS = /[^\w]/;
+
+  const validPass = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w])/;
 
   const handleFocusEmail = () => {
     setIsFocusedEmail(true);
@@ -54,6 +67,7 @@ const Registration = () => {
   const handleEmail = (e) => {
     setUserRegEmail(e.target.value);
     setErrEmail("");
+    setFErrEmail("");
     setSuccessMsg("");
   };
   const handleName = (e) => {
@@ -70,13 +84,60 @@ const Registration = () => {
   const passShowHide = () => {
     setPassVisibility(!passVisibility);
   };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   if (!userRegEmail) {
+  //     setErrEmail("You must enter your email address!");
+  //   } else if (!validEmail.test(userRegEmail)) {
+  //     setErrEmail("You must enter a valid email address!");
+  //   } else if (!userRegName) {
+  //     setErrName("You must enter your full name!");
+  //   } else if (!validName.test(userRegName)) {
+  //     setErrName("Your name can't contain any number or special characters!");
+  //   } else if (userRegName.split(" ").length < 2) {
+  //     setErrName("You must enter both your first name and last name!");
+  //   } else if (userRegName.length < 4) {
+  //     setErrName("Your name must contain at least 4 characters!");
+  //   } else if (!userRegPass) {
+  //     setErrPass("You must create a password for your account!");
+  //   } else if (!validPassU.test(userRegPass)) {
+  //     setErrPass("Password must contain at least one uppercase character!");
+  //   } else if (!validPassL.test(userRegPass)) {
+  //     setErrPass("Password must contain at least one lowercase character!");
+  //   } else if (!validPassD.test(userRegPass)) {
+  //     setErrPass("Password must contain at least one digit!");
+  //   } else if (!validPassS.test(userRegPass)) {
+  //     setErrPass("Password must contain at least one special character!");
+  //   } else if (userRegPass.length < 8 || userRegPass.length > 16) {
+  //     setErrPass("Password length must be between 8 to 16 characters!");
+  //   } else {
+  //     createUserWithEmailAndPassword(auth, userRegEmail, userRegPass)
+  //       .then((userCredential) => {
+  //         // Signed in
+  //         const user = userCredential.user;
+  //         console.log(userCredential);
+  //         console.log(user);
+  //         // ...
+  //       })
+  //       .catch((error) => {
+  //         const errorCode = error.code;
+  //         const errorMessage = error.message;
+  //         // ..
+  //       });
+  //     setSuccessMsg("Registration done!");
+  //   }
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (!userRegEmail) {
       setErrEmail("You must enter your email address!");
     } else if (!validEmail.test(userRegEmail)) {
       setErrEmail("You must enter a valid email address!");
-    } else if (!userRegName) {
+    }
+
+    if (!userRegName) {
       setErrName("You must enter your full name!");
     } else if (!validName.test(userRegName)) {
       setErrName("Your name can't contain any number or special characters!");
@@ -84,7 +145,9 @@ const Registration = () => {
       setErrName("You must enter both your first name and last name!");
     } else if (userRegName.length < 4) {
       setErrName("Your name must contain at least 4 characters!");
-    } else if (!userRegPass) {
+    }
+
+    if (!userRegPass) {
       setErrPass("You must create a password for your account!");
     } else if (!validPassU.test(userRegPass)) {
       setErrPass("Password must contain at least one uppercase character!");
@@ -96,9 +159,72 @@ const Registration = () => {
       setErrPass("Password must contain at least one special character!");
     } else if (userRegPass.length < 8 || userRegPass.length > 16) {
       setErrPass("Password length must be between 8 to 16 characters!");
-    } else {
-      setSuccessMsg("Registration done!");
     }
+
+    if (
+      userRegEmail &&
+      userRegName &&
+      userRegPass &&
+      validEmail.test(userRegEmail) &&
+      validName.test(userRegName) &&
+      userRegName.split(" ").length >= 2 &&
+      userRegName.length > 4 &&
+      validPass.test(userRegPass) &&
+      userRegPass.length > 7 &&
+      userRegPass.length < 17
+    ) {
+      createUserWithEmailAndPassword(auth, userRegEmail, userRegPass)
+        .then((userCredential) => {
+          // Signed in
+          const user = userCredential.user;
+          console.log(user);
+
+          updateProfile(auth.currentUser, {
+            displayName: userRegName,
+            photoURL: "images/default_avatar.png",
+          })
+            .then(() => {
+              console.log("Profile updated!");
+              sendEmailVerification(auth.currentUser).then(() => {
+                console.log("sent");
+                setSuccessMsg(
+                  "Registration successful! Now you will be redirected to the login page."
+                );
+                setTimeout(() => {
+                  navigate("/login");
+                }, 1500);
+              });
+            })
+            .catch((error) => {
+              console.log(error.code);
+            });
+        })
+        .catch((error) => {
+          const errorCode = error.code;
+          if (errorCode.includes("auth/email-already-in-use")) {
+            setFErrEmail("Sorry! This Email has already been registered.");
+          }
+          const errorMessage = error.message;
+          console.log(errorMessage);
+          // ..
+        });
+    }
+    //  else {
+    //    createUserWithEmailAndPassword(auth, userRegEmail, userRegPass)
+    //      .then((userCredential) => {
+    //        // Signed in
+    //        const user = userCredential.user;
+    //        console.log(userCredential);
+    //        console.log(user);
+    //        // ...
+    //      })
+    //      .catch((error) => {
+    //        const errorCode = error.code;
+    //        const errorMessage = error.message;
+    //        // ..
+    //      });
+    // setSuccessMsg("Registration done!");
+    //  }
   };
 
   const refEmail = useRef(null);
@@ -112,21 +238,26 @@ const Registration = () => {
           <h1 className="text-[22px] md:text-[24px] lg:text-[27px] xl:text-[34px] text-center md:text-left text-primary font-bold">
             Get started with easily register
           </h1>
-          <p className="text-sm md:text-lg lg:text-xl text-center sml:text-left text-primary opacity-70 mt-1 sml:mt-3 mb-6 sml:mb-10">
+          <p className="text-sm md:text-lg lg:text-xl text-center sml:text-left text-primary opacity-70 mt-1 mb-6 sml:mb-10">
             Free register and you can enjoy it!
           </p>
 
           <div className="md:w-[368px] text-primary">
+            {successMsg != "" && (
+              <p className="mb-8 px-2 py-1 text-[green] bg-[green]/20 border-[1px] border-[green] rounded-md text-lg font-semibold animate-[popDown_.4s_ease_1]">
+                {successMsg}
+              </p>
+            )}
             <div>
               <form
                 action="#"
                 method="POST"
-                className="flex flex-col md:gap-10 w-[368px] mb-6"
+                className="flex flex-col md:gap-10 w-[380px] mb-6"
               >
                 <div className="relative" onClick={handleFocusEmail}>
                   <input
                     type={"text"}
-                    className="w-full md:py-6 md:px-12 rounded-lg border-[2.5px] border-primary text-xl text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
+                    className="w-full md:py-6 md:px-12 rounded-lg border-[2.5px] border-primary text-[19px] text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
                     ref={refEmail}
                     onBlur={handleBlurEmail}
                     onChange={handleEmail}
@@ -145,12 +276,17 @@ const Registration = () => {
                       {errEmail}
                     </p>
                   )}
+                  {fErrEmail != "" && (
+                    <p className="pt-[2px] pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                      {fErrEmail}
+                    </p>
+                  )}
                 </div>
 
                 <div className="relative" onClick={handleFocusName}>
                   <input
                     type={"text"}
-                    className="w-full md:py-6 md:px-12 rounded-lg border-[2.5px] border-primary text-xl text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
+                    className="w-full md:py-6 md:px-12 rounded-lg border-[2.5px] border-primary text-[19px] text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
                     ref={refName}
                     onBlur={handleBlurName}
                     onChange={handleName}
@@ -178,7 +314,7 @@ const Registration = () => {
                 >
                   <input
                     type={`${passVisibility ? "text" : "password"}`}
-                    className="w-full md:py-6 md:pl-12 md:pr-14 rounded-lg border-[2.5px] border-primary text-xl text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
+                    className="w-full md:py-6 md:pl-12 md:pr-14 rounded-lg border-[2.5px] border-primary text-[19px] text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
                     ref={refPass}
                     onChange={handlePass}
                   />
@@ -193,23 +329,18 @@ const Registration = () => {
                   </p>
                   {passVisibility ? (
                     <RiEyeFill
-                      className="absolute top-7 right-5 text-[26px] opacity-60 cursor-pointer hover:opacity-80 linear duration-300"
+                      className="absolute top-7 right-6 text-[26px] opacity-60 cursor-pointer hover:opacity-80 linear duration-300"
                       onClick={passShowHide}
                     />
                   ) : (
                     <RiEyeCloseLine
-                      className="absolute top-7 right-5 text-[26px] opacity-60 cursor-pointer hover:opacity-80 linear duration-300"
+                      className="absolute top-7 right-6 text-[26px] opacity-60 cursor-pointer hover:opacity-80 linear duration-300"
                       onClick={passShowHide}
                     />
                   )}
                   {errPass != "" && (
                     <p className="pt-[2px] pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                       {errPass}
-                    </p>
-                  )}
-                  {successMsg != "" && (
-                    <p className="py-[2px] pl-1 text-[green]/90 text-lg font-semibold animate-[popDown_.4s_ease_1]">
-                      {successMsg}
                     </p>
                   )}
                 </div>

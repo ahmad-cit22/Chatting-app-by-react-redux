@@ -23,10 +23,10 @@ const BlockField = () => {
           message={"Long time no see.."}
           btnText={"Unblock"}
           classAvatar={"w-[17%]"}
-          classTextBox={"w-[55%] pl-3"}
+          classTextBox={"w-[51%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classBtn={"text-base px-2.5 py-[3px]"}
+          classBtn={"text-[16px] px-2.5 py-[3px]"}
         />
         <ChatDisplayMin
           avatarPath={"images/frnd_avatar_2.png"}
@@ -35,10 +35,10 @@ const BlockField = () => {
           message={"Lunch?"}
           btnText={"Unblock"}
           classAvatar={"w-[17%]"}
-          classTextBox={"w-[55%] pl-3"}
+          classTextBox={"w-[51%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classBtn={"text-base px-2.5 py-[3px]"}
+          classBtn={"text-[16px] px-2.5 py-[3px]"}
         />
 
         <ChatDisplayMin
@@ -48,10 +48,10 @@ const BlockField = () => {
           message={"Coming today?"}
           btnText={"Unblock"}
           classAvatar={"w-[17%]"}
-          classTextBox={"w-[55%] pl-3"}
+          classTextBox={"w-[51%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classBtn={"text-base px-2.5 py-[3px]"}
+          classBtn={"text-[16px] px-2.5 py-[3px]"}
           classTime={"justify-self-end"}
         />
         <ChatDisplayMin
@@ -61,10 +61,10 @@ const BlockField = () => {
           message={"Go there quickly!"}
           btnText={"Unblock"}
           classAvatar={"w-[17%]"}
-          classTextBox={"w-[55%] pl-3"}
+          classTextBox={"w-[51%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classBtn={"text-base px-2.5 py-[3px]"}
+          classBtn={"text-[16px] px-2.5 py-[3px]"}
         />
 
         <ChatDisplayMin
@@ -76,10 +76,10 @@ const BlockField = () => {
           btnLink="#"
           chatLink="#"
           classAvatar={"w-[17%]"}
-          classTextBox={"w-[55%] pl-3"}
+          classTextBox={"w-[51%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classBtn={"text-base px-2.5 py-[3px]"}
+          classBtn={"text-[16px] px-2.5 py-[3px]"}
         />
         <ChatDisplayMin
           avatarPath={"images/grp_avatar_2.png"}
@@ -88,10 +88,10 @@ const BlockField = () => {
           message={"Coming today?"}
           btnText={"Unblock"}
           classAvatar={"w-[17%]"}
-          classTextBox={"w-[55%] pl-3"}
+          classTextBox={"w-[51%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classBtn={"text-base px-2.5 py-[3px]"}
+          classBtn={"text-[16px] px-2.5 py-[3px]"}
           classTime={"justify-self-end"}
         />
       </SimpleBar>

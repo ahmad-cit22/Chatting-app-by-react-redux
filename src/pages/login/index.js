@@ -3,33 +3,47 @@ import Button from "../../components/button";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { RiEyeFill } from "react-icons/ri";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { PulseLoader } from "react-spinners";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+  updateProfile,
+} from "firebase/auth";
 
 const Login = () => {
+  const auth = getAuth();
+  const provider = new GoogleAuthProvider();
+
+  const navigate = useNavigate();
+
   let [isFocusedEmail, setIsFocusedEmail] = useState(false);
-  let [isFocusedName, setIsFocusedName] = useState(false);
   let [isFocusedPass, setIsFocusedPass] = useState(false);
 
   let [passVisibility, setPassVisibility] = useState(false);
 
+  let [loading, setLoading] = useState(false);
+
   let [userEmail, setUserEmail] = useState("");
   let [userPass, setUserPass] = useState("");
 
-  let [userRegEmail, setUserRegEmail] = useState("ahmad@1.com");
-  let [userRegPass, setUserRegPass] = useState("Abc111@");
+  const validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 
   let [errEmail, setErrEmail] = useState("");
   let [errPass, setErrPass] = useState("");
+
+  let [fErrEmail, setFErrEmail] = useState("");
+  let [fErrPass, setFErrPass] = useState("");
+
   let [successMsg, setSuccessMsg] = useState("");
 
   const handleFocusEmail = () => {
     setIsFocusedEmail(true);
     refEmail.current.focus();
   };
-  const handleFocusName = () => {
-    setIsFocusedName(true);
-    refName.current.focus();
-  };
+
   const handleFocusPass = () => {
     setIsFocusedPass(true);
     refPass.current.focus();
@@ -37,9 +51,6 @@ const Login = () => {
 
   const handleBlurEmail = () => {
     refEmail.current.value == "" && setIsFocusedEmail(false);
-  };
-  const handleBlurName = () => {
-    refName.current.value == "" && setIsFocusedName(false);
   };
   const handleBlurPass = () => {
     refPass.current.value == "" && setIsFocusedPass(false);
@@ -52,27 +63,79 @@ const Login = () => {
   const handleEmail = (e) => {
     setUserEmail(e.target.value);
     setErrEmail("");
+    setFErrEmail("");
     setSuccessMsg("");
   };
 
   const handlePass = (e) => {
     setUserPass(e.target.value);
     setErrPass("");
+    setFErrEmail("");
     setSuccessMsg("");
+  };
+
+  let handleGoogleSignIn = () => {
+    signInWithPopup(auth, provider).then(()=>{
+      console.log('dine');
+      updateProfile(auth.currentUser, {
+        photoURL: "images/default_avatar.png",
+      }).then(()=>{
+        navigate('/');
+      })
+    })
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // if (!userEmail) {
+    //   setErrEmail("You must enter your email address!");
+    // } else if (userEmail != userRegEmail) {
+    //   setErrEmail("Email does not match with our records! Try again pls.");
+    // } else if (!userPass) {
+    //   setErrPass("You must enter your password!");
+    // } else if (userPass != userRegPass) {
+    //   setErrPass("Wrong password! Try again pls.");
+    // } else {
+    //   setSuccessMsg("Log in done!");
+    // }
+
     if (!userEmail) {
       setErrEmail("You must enter your email address!");
-    } else if (userEmail != userRegEmail) {
-      setErrEmail("Email does not match with our records! Try again pls.");
-    } else if (!userPass) {
+    } else if (!validEmail.test(userEmail)) {
+      setErrEmail("You must enter a valid email address!");
+    }
+
+    if (!userPass) {
       setErrPass("You must enter your password!");
-    } else if (userPass != userRegPass) {
-      setErrPass("Wrong password! Try again pls.");
-    } else {
-      setSuccessMsg("Log in done!");
+    }
+
+    if (userEmail && validEmail.test(userEmail) && userPass) {
+      setLoading(true);
+      signInWithEmailAndPassword(auth, userEmail, userPass)
+        .then((userCredential) => {
+          // Signed in
+          console.log("logged in!");
+          const user = userCredential.user;
+          console.log(user.displayName);
+          setSuccessMsg(
+            "Credentials matched successfully! We're redirecting you to the homepage..."
+          );
+          setTimeout(() => {
+            navigate("/");
+            setLoading(false);
+          }, 1500);
+        })
+        .catch((error) => {
+          setLoading(false);
+          const errorCode = error.code;
+          if (errorCode.includes("auth/user-not-found")) {
+            setFErrEmail("User not found! Sign up first if you are new here.");
+          } else if (errorCode.includes("auth/wrong-password")) {
+            setFErrPass("Wrong password! Try again pls.");
+          }
+          console.log(errorCode);
+          // const errorMessage = error.message;
+        });
     }
   };
 
@@ -86,8 +149,8 @@ const Login = () => {
         <div className="mt-12">
           <h1 className="text-[34px] font-bold">Login to your account!</h1>
           <a
-            href="#"
-            className="text-sm font-semibold mt-9 mb-10 inline-block pl-6 pr-10 py-5 rounded-lg border-2 border-secondary/20 hover:border-secondary/60 linear duration-300"
+            className="text-sm font-semibold mt-9 mb-10 inline-block pl-6 pr-10 py-5 rounded-lg border-2 border-secondary/20 hover:border-secondary/60 linear duration-300 cursor-pointer"
+            onClick={handleGoogleSignIn}
           >
             <button className="flex items-center gap-2">
               <FcGoogle className="text-[22px]" /> Login with Google
@@ -119,8 +182,13 @@ const Login = () => {
                     Email Address
                   </p>
                   {errEmail != "" && (
-                    <p className="pt-[2px] text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                    <p className="pt-[3px] text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                       {errEmail}
+                    </p>
+                  )}
+                  {fErrEmail != "" && (
+                    <p className="pt-[3px] text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                      {fErrEmail}
                     </p>
                   )}
                 </div>
@@ -157,12 +225,17 @@ const Login = () => {
                     />
                   )}
                   {errPass != "" && (
-                    <p className="pt-[2px] text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                    <p className="pt-[3px] text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                       {errPass}
                     </p>
                   )}
+                  {fErrPass != "" && (
+                    <p className="pt-[3px] text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                      {fErrPass}
+                    </p>
+                  )}
                   {successMsg != "" && (
-                    <p className="py-[2px] text-[green]/90 text-lg font-semibold animate-[popDown_.4s_ease_1]">
+                    <p className="mt-8 px-2 py-1 text-[green] bg-[green]/20 border-[1px] border-[green] rounded-md text-lg font-semibold animate-[popDown_.4s_ease_1]">
                       {successMsg}
                     </p>
                   )}
@@ -171,8 +244,14 @@ const Login = () => {
                 <Button
                   customClass={"py-7 w-full text-xl rounded-lg font-semibold"}
                   goTo={"#"}
-                  text={"Login to Continue"}
+                  text={!loading && "Login to Continue"}
+                  btnDisable={loading}
                   clickAct={handleSubmit}
+                  Loader={PulseLoader}
+                  loaderColor="#fff"
+                  loaderCss={`fontSize: '110px'`}
+                  loadingStatus={loading}
+                  loaderMargin={3}
                 />
               </form>
             </div>

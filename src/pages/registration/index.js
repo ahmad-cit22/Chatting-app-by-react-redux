@@ -9,6 +9,7 @@ import {
   sendEmailVerification,
   updateProfile,
 } from "firebase/auth";
+import { BeatLoader } from "react-spinners";
 
 const Registration = () => {
   const auth = getAuth();
@@ -19,6 +20,8 @@ const Registration = () => {
   let [isFocusedPass, setIsFocusedPass] = useState(false);
 
   let [passVisibility, setPassVisibility] = useState(false);
+
+  let [loading, setLoading] = useState(false);
 
   let [userRegEmail, setUserRegEmail] = useState("");
   let [userRegName, setUserRegName] = useState("");
@@ -173,6 +176,7 @@ const Registration = () => {
       userRegPass.length > 7 &&
       userRegPass.length < 17
     ) {
+      setLoading(true);
       createUserWithEmailAndPassword(auth, userRegEmail, userRegPass)
         .then((userCredential) => {
           // Signed in
@@ -184,14 +188,15 @@ const Registration = () => {
             photoURL: "images/default_avatar.png",
           })
             .then(() => {
-              console.log("Profile updated!");
+              console.log("Profile Updated!");
               sendEmailVerification(auth.currentUser).then(() => {
                 console.log("sent");
                 setSuccessMsg(
-                  "Registration successful! Now you will be redirected to the login page."
+                  "Registration successful! We're redirecting you to the login page."
                 );
                 setTimeout(() => {
                   navigate("/login");
+                  setLoading(false);
                 }, 1500);
               });
             })
@@ -200,13 +205,12 @@ const Registration = () => {
             });
         })
         .catch((error) => {
+          setLoading(false);
           const errorCode = error.code;
           if (errorCode.includes("auth/email-already-in-use")) {
             setFErrEmail("Sorry! This Email has already been registered.");
           }
-          const errorMessage = error.message;
-          console.log(errorMessage);
-          // ..
+          // const errorMessage = error.message;
         });
     }
     //  else {
@@ -349,8 +353,13 @@ const Registration = () => {
                     customClass={
                       "py-5 w-full text-xl rounded-[86px] font-semibold"
                     }
-                    text={"Sign up"}
+                    text={!loading && "Sign up"}
+                    btnDisable={loading}
                     clickAct={handleSubmit}
+                    Loader={BeatLoader}
+                    loaderColor="#fff"
+                    loadingStatus={loading}
+                    loaderMargin={3}
                   />
                 </div>
               </form>

@@ -6,7 +6,7 @@ const ChatDisplayMin = ({
   avatarAlt,
   chatName,
   chatLink,
-  message,
+  email,
   btnText,
   btnLink,
   classAvatar,
@@ -34,11 +34,11 @@ const ChatDisplayMin = ({
               {chatName}
             </p>
           </Link>
-          <p className={`opacity-70 text-sm ${classMsg}`}>{message}</p>
+          <p className={`opacity-70 text-sm ${classMsg}`}>{email}</p>
         </div>
         <Link to={btnLink} className={`w-1/5 justify-self-end ${classLink}`}>
           <button
-            className={`bg-primary/90 hover:bg-primary linear duration-300 text-lg font-semibold text-white px-2 py-1 rounded-md ${classBtn}`}
+            className={`bg-primary/90 hover:bg-primary linear duration-300 text-[17px] font-semibold text-white px-3 py-1 rounded-md ${classBtn}`}
           >
             {btnText}
           </button>

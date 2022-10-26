@@ -18,7 +18,7 @@ const Home = () => {
   let [emailVerify, setEmailVerify] = useState(false);
 
   useEffect(() => {
-    if (user == null) {
+    if (user === null) {
       navigate("/login");
     } else if (auth.currentUser.emailVerified) {
       setEmailVerify(true);

@@ -22,77 +22,59 @@ const BlockField = () => {
           chatName={"John Doe"}
           message={"Long time no see.."}
           btnText={"Unblock"}
-          classAvatar={"w-[17%]"}
-          classTextBox={"w-[51%] pl-3"}
+          classAvatar={"w-[17%] mr-1"}
+          classTextBox={"w-[44%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classBtn={"text-[16px] px-2.5 py-[3px]"}
+          classBtn={"text-[16px] px-3 py-[3px]"}
+        />
+        <ChatDisplayMin
+          avatarPath={"images/frnd_avatar_3.png"}
+          avatarAlt={"frnd_avatar_2"}
+          chatName={"Lane Dam"}
+          message={"Long time no see.."}
+          btnText={"Unblock"}
+          classAvatar={"w-[17%] mr-1"}
+          classTextBox={"w-[44%] pl-3"}
+          classChtName={"text-base pb-[2px]"}
+          classMsg={"text-xs"}
+          classBtn={"text-[16px] px-3 py-[3px]"}
         />
         <ChatDisplayMin
           avatarPath={"images/frnd_avatar_2.png"}
-          avatarAlt={"frnd_avatar_3"}
-          chatName={"Mashie Grill"}
-          message={"Lunch?"}
+          avatarAlt={"frnd_avatar_2"}
+          chatName={"Jenny"}
+          message={"Long time no see.."}
           btnText={"Unblock"}
-          classAvatar={"w-[17%]"}
-          classTextBox={"w-[51%] pl-3"}
+          classAvatar={"w-[17%] mr-1"}
+          classTextBox={"w-[44%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classBtn={"text-[16px] px-2.5 py-[3px]"}
+          classBtn={"text-[16px] px-3 py-[3px]"}
         />
-
-        <ChatDisplayMin
-          avatarPath={"images/grp_avatar_2.png"}
-          avatarAlt={"frnd_avatar_3"}
-          chatName={"Ena Harbar"}
-          message={"Coming today?"}
-          btnText={"Unblock"}
-          classAvatar={"w-[17%]"}
-          classTextBox={"w-[51%] pl-3"}
-          classChtName={"text-base pb-[2px]"}
-          classMsg={"text-xs"}
-          classBtn={"text-[16px] px-2.5 py-[3px]"}
-          classTime={"justify-self-end"}
-        />
-        <ChatDisplayMin
-          avatarPath={"images/frnd_avatar_2.png"}
-          avatarAlt={"frnd_avatar_3"}
-          chatName={"Hana Dan"}
-          message={"Go there quickly!"}
-          btnText={"Unblock"}
-          classAvatar={"w-[17%]"}
-          classTextBox={"w-[51%] pl-3"}
-          classChtName={"text-base pb-[2px]"}
-          classMsg={"text-xs"}
-          classBtn={"text-[16px] px-2.5 py-[3px]"}
-        />
-
         <ChatDisplayMin
           avatarPath={"images/frnd_avatar_1.png"}
-          avatarAlt={"frnd_avatar_1"}
-          chatName={"Jacky"}
-          message={"Hey bro, Wassup!"}
+          avatarAlt={"frnd_avatar_2"}
+          chatName={"John Doe"}
+          message={"Long time no see.."}
           btnText={"Unblock"}
-          btnLink="#"
-          chatLink="#"
-          classAvatar={"w-[17%]"}
-          classTextBox={"w-[51%] pl-3"}
+          classAvatar={"w-[17%] mr-1"}
+          classTextBox={"w-[44%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classBtn={"text-[16px] px-2.5 py-[3px]"}
+          classBtn={"text-[16px] px-3 py-[3px]"}
         />
         <ChatDisplayMin
-          avatarPath={"images/grp_avatar_2.png"}
-          avatarAlt={"frnd_avatar_3"}
-          chatName={"Neeta"}
-          message={"Coming today?"}
+          avatarPath={"images/frnd_avatar_1.png"}
+          avatarAlt={"frnd_avatar_2"}
+          chatName={"John Doe"}
+          message={"Long time no see.."}
           btnText={"Unblock"}
-          classAvatar={"w-[17%]"}
-          classTextBox={"w-[51%] pl-3"}
+          classAvatar={"w-[17%] mr-1"}
+          classTextBox={"w-[44%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classBtn={"text-[16px] px-2.5 py-[3px]"}
-          classTime={"justify-self-end"}
+          classBtn={"text-[16px] px-3 py-[3px]"}
         />
       </SimpleBar>
     </div>

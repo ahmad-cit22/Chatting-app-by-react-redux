@@ -20,7 +20,7 @@ const FriendReqField = () => {
           avatarAlt={"frnd_avatar_1"}
           chatName={"John Dill"}
           message={"Web Designer"}
-          classTextBox={"w-[53%]"}
+          classTextBox={"w-[63%]"}
           btnText={"Accept"}
           btnLink="#"
           chatLink="#"
@@ -30,7 +30,7 @@ const FriendReqField = () => {
           avatarAlt={"frnd_avatar_2"}
           chatName={"Helena James"}
           message={"Graphics Designer"}
-          classTextBox={"w-[53%]"}
+          classTextBox={"w-[63%]"}
           btnText={"Accept"}
         />
         <ChatDisplayMin
@@ -38,7 +38,7 @@ const FriendReqField = () => {
           avatarAlt={"frnd_avatar_3"}
           chatName={"Rail Parker"}
           message={"Student"}
-          classTextBox={"w-[53%]"}
+          classTextBox={"w-[63%]"}
           btnText={"Accept"}
         />
         <ChatDisplayMin
@@ -46,7 +46,7 @@ const FriendReqField = () => {
           avatarAlt={"frnd_avatar_3"}
           chatName={"Jimmy"}
           message={"CEO, ITB"}
-          classTextBox={"w-[53%]"}
+          classTextBox={"w-[63%]"}
           btnText={"Accept"}
         />
         <ChatDisplayMin
@@ -54,7 +54,7 @@ const FriendReqField = () => {
           avatarAlt={"frnd_avatar_3"}
           chatName={"Rail Parker"}
           message={"Student"}
-          classTextBox={"w-[53%]"}
+          classTextBox={"w-[63%]"}
           btnText={"Accept"}
         />
         <ChatDisplayMin
@@ -62,7 +62,7 @@ const FriendReqField = () => {
           avatarAlt={"frnd_avatar_3"}
           chatName={"Jimmy"}
           message={"CEO, ITB"}
-          classTextBox={"w-[53%]"}
+          classTextBox={"w-[63%]"}
           btnText={"Accept"}
         />
         <ChatDisplayMin
@@ -70,7 +70,7 @@ const FriendReqField = () => {
           avatarAlt={"frnd_avatar_3"}
           chatName={"Rail Parker"}
           message={"Student"}
-          classTextBox={"w-[53%]"}
+          classTextBox={"w-[63%]"}
           btnText={"Accept"}
         />
         <ChatDisplayMin
@@ -78,7 +78,7 @@ const FriendReqField = () => {
           avatarAlt={"frnd_avatar_3"}
           chatName={"Jimmy"}
           message={"CEO, ITB"}
-          classTextBox={"w-[53%]"}
+          classTextBox={"w-[63%]"}
           btnText={"Accept"}
         />
         <ChatDisplayMin
@@ -86,7 +86,7 @@ const FriendReqField = () => {
           avatarAlt={"frnd_avatar_3"}
           chatName={"Kavin Rock"}
           message={"Web Developer"}
-          classTextBox={"w-[53%]"}
+          classTextBox={"w-[63%]"}
           btnText={"Accept"}
         />
       </SimpleBar>

@@ -18,7 +18,7 @@ const GroupsField = () => {
           chatName={"College friends"}
           message={"Go there quickly!"}
           btnText={""}
-          classAvatar={"w-[17%]"}
+          classAvatar={"w-[17%] mr-1"}
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
@@ -31,7 +31,7 @@ const GroupsField = () => {
           chatName={"Dhaka Boys'"}
           message={"Long time no see.."}
           btnText={""}
-          classAvatar={"w-[17%]"}
+          classAvatar={"w-[17%] mr-1"}
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
@@ -44,7 +44,7 @@ const GroupsField = () => {
           chatName={"Crazy Guyz"}
           message={"Lunch?"}
           btnText={""}
-          classAvatar={"w-[17%]"}
+          classAvatar={"w-[17%] mr-1"}
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
@@ -57,7 +57,7 @@ const GroupsField = () => {
           chatName={"ESS React 01"}
           message={"Coming today?"}
           btnText={""}
-          classAvatar={"w-[17%]"}
+          classAvatar={"w-[17%] mr-1"}
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
@@ -73,7 +73,7 @@ const GroupsField = () => {
           btnText={""}
           btnLink="#"
           chatLink="#"
-          classAvatar={"w-[17%]"}
+          classAvatar={"w-[17%] mr-1"}
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
@@ -86,7 +86,7 @@ const GroupsField = () => {
           chatName={"ESS React 01"}
           message={"Coming today?"}
           btnText={""}
-          classAvatar={"w-[17%]"}
+          classAvatar={"w-[17%] mr-1"}
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
@@ -102,7 +102,7 @@ const GroupsField = () => {
           btnText={""}
           btnLink="#"
           chatLink="#"
-          classAvatar={"w-[17%]"}
+          classAvatar={"w-[17%] mr-1"}
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}

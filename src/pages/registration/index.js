@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Button from "../../components/button";
 import { RiEyeCloseLine } from "react-icons/ri";
 import { RiEyeFill } from "react-icons/ri";
@@ -9,10 +9,13 @@ import {
   sendEmailVerification,
   updateProfile,
 } from "firebase/auth";
+import { getDatabase, ref, set, push } from "firebase/database";
 import { BeatLoader } from "react-spinners";
 
 const Registration = () => {
   const auth = getAuth();
+  const db = getDatabase();
+
   const navigate = useNavigate();
 
   let [isFocusedEmail, setIsFocusedEmail] = useState(false);
@@ -44,10 +47,19 @@ const Registration = () => {
 
   const validPass = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w])/;
 
+  const refEmail = useRef(null);
+  const refName = useRef(null);
+  const refPass = useRef(null);
+
   const handleFocusEmail = () => {
     setIsFocusedEmail(true);
     refEmail.current.focus();
   };
+
+  useEffect(() => {
+    document.activeElement === refEmail.current && setIsFocusedEmail(true);
+  });
+
   const handleFocusName = () => {
     setIsFocusedName(true);
     refName.current.focus();
@@ -58,13 +70,13 @@ const Registration = () => {
   };
 
   const handleBlurEmail = () => {
-    refEmail.current.value == "" && setIsFocusedEmail(false);
+    refEmail.current.value === "" && setIsFocusedEmail(false);
   };
   const handleBlurName = () => {
-    refName.current.value == "" && setIsFocusedName(false);
+    refName.current.value === "" && setIsFocusedName(false);
   };
   const handleBlurPass = () => {
-    refPass.current.value == "" && setIsFocusedPass(false);
+    refPass.current.value === "" && setIsFocusedPass(false);
   };
 
   const handleEmail = (e) => {
@@ -189,16 +201,27 @@ const Registration = () => {
           })
             .then(() => {
               console.log("Profile Updated!");
-              sendEmailVerification(auth.currentUser).then(() => {
-                console.log("sent");
-                setSuccessMsg(
-                  "Registration successful! We're redirecting you to the login page."
-                );
-                setTimeout(() => {
-                  navigate("/login");
-                  setLoading(false);
-                }, 1500);
-              });
+              sendEmailVerification(auth.currentUser)
+                .then(() => {
+                  console.log("sent");
+                  setSuccessMsg(
+                    "Registration successful! Check your email for the verification link."
+                  );
+                })
+                .then(() => {
+                  let userRef = ref(db, "users/" + user.uid);
+                  set(userRef, {
+                    fullName: user.displayName,
+                    email: user.email,
+                    profile_picture: user.photoURL,
+                  }).then(() => {
+                    console.log("done");
+                    setTimeout(() => {
+                      navigate("/login");
+                      setLoading(false);
+                    }, 1500);
+                  });
+                });
             })
             .catch((error) => {
               console.log(error.code);
@@ -209,7 +232,10 @@ const Registration = () => {
           const errorCode = error.code;
           if (errorCode.includes("auth/email-already-in-use")) {
             setFErrEmail("Sorry! This Email has already been registered.");
+          } else if (errorCode.includes("auth/network-request-failed")) {
+            setErrPass("Network error! Check your connection pls.");
           }
+          console.log(errorCode);
           // const errorMessage = error.message;
         });
     }
@@ -231,10 +257,6 @@ const Registration = () => {
     //  }
   };
 
-  const refEmail = useRef(null);
-  const refName = useRef(null);
-  const refPass = useRef(null);
-
   return (
     <div className="flex items-center font-nunito">
       <div className="sml:w-[52%] h-screen flex flex-col justify-center sml:items-end">
@@ -247,11 +269,13 @@ const Registration = () => {
           </p>
 
           <div className="md:w-[368px] text-primary">
-            {successMsg != "" && (
+            {successMsg !== "" && (
               <p className="mb-8 px-2 py-1 text-[green] bg-[green]/20 border-[1px] border-[green] rounded-md text-lg font-semibold animate-[popDown_.4s_ease_1]">
                 {successMsg}
               </p>
             )}
+
+            {/* ========== Registration form starts ========== */}
             <div>
               <form
                 action="#"
@@ -260,11 +284,12 @@ const Registration = () => {
               >
                 <div className="relative" onClick={handleFocusEmail}>
                   <input
-                    type={"text"}
+                    type={"email"}
                     className="w-full md:py-6 md:px-12 rounded-lg border-[2.5px] border-primary text-[19px] text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
                     ref={refEmail}
                     onBlur={handleBlurEmail}
                     onChange={handleEmail}
+                    autoFocus
                   />
                   <p
                     className={`${
@@ -275,12 +300,12 @@ const Registration = () => {
                   >
                     Email Address
                   </p>
-                  {errEmail != "" && (
+                  {errEmail !== "" && (
                     <p className="pt-[2px] pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                       {errEmail}
                     </p>
                   )}
-                  {fErrEmail != "" && (
+                  {fErrEmail !== "" && (
                     <p className="pt-[2px] pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                       {fErrEmail}
                     </p>
@@ -304,7 +329,7 @@ const Registration = () => {
                   >
                     Full Name
                   </p>
-                  {errName != "" && (
+                  {errName !== "" && (
                     <p className="pt-[2px] pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                       {errName}
                     </p>
@@ -342,7 +367,7 @@ const Registration = () => {
                       onClick={passShowHide}
                     />
                   )}
-                  {errPass != "" && (
+                  {errPass !== "" && (
                     <p className="pt-[2px] pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                       {errPass}
                     </p>
@@ -350,9 +375,9 @@ const Registration = () => {
                 </div>
                 <div>
                   <Button
-                    customClass={
-                      "py-5 w-full text-xl rounded-[86px] font-semibold"
-                    }
+                    customClass={`py-5 w-full text-xl rounded-[86px] font-semibold mb-3 ${
+                      loading && "pt-6 pb-4"
+                    }`}
                     text={!loading && "Sign up"}
                     btnDisable={loading}
                     clickAct={handleSubmit}
@@ -363,9 +388,10 @@ const Registration = () => {
                   />
                 </div>
               </form>
+              {/* ========== Registration form ends ========== */}
             </div>
 
-            <p className="text-center text-secondary text-[15px]">
+            <p className="text-center text-secondary text-[16.5px]">
               Already have an account ?{" "}
               <Link to="/login" className="text-yellow font-semibold">
                 Sign In
@@ -380,6 +406,7 @@ const Registration = () => {
             className="h-screen w-full object-cover"
             src="images/signup.webp"
             loading="lazy"
+            alt=""
           />
         </picture>
       </div>

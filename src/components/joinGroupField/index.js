@@ -17,6 +17,7 @@ const JoinGroupField = () => {
           avatarAlt={"grp_avatar_1"}
           chatName={"Rocking Friends"}
           message={"Hi Guys, Wassup!"}
+          classTextBox={"w-[72%]"}
           btnText={"Join"}
           btnLink="#"
           chatLink="#"
@@ -27,6 +28,7 @@ const JoinGroupField = () => {
           avatarAlt={"grp_avatar_2"}
           chatName={"Lifetime Friends"}
           message={"Good to see you."}
+          classTextBox={"w-[72%]"}
           btnText={"Join"}
           btnLink="#"
           chatLink="#"
@@ -37,6 +39,7 @@ const JoinGroupField = () => {
           avatarAlt={"grp_avatar_3"}
           chatName={"Crazy Guyzz"}
           message={"What plans today?"}
+          classTextBox={"w-[72%]"}
           btnText={"Join"}
           btnLink="#"
           chatLink="#"
@@ -47,6 +50,7 @@ const JoinGroupField = () => {
           avatarAlt={"grp_avatar_1"}
           chatName={"Rocking Friends"}
           message={"Hi Guys, Wassup!"}
+          classTextBox={"w-[72%]"}
           btnText={"Join"}
           btnLink="#"
           chatLink="#"
@@ -57,6 +61,7 @@ const JoinGroupField = () => {
           avatarAlt={"grp_avatar_2"}
           chatName={"Lifetime Friends"}
           message={"Good to see you."}
+          classTextBox={"w-[72%]"}
           btnText={"Join"}
           btnLink="#"
           chatLink="#"

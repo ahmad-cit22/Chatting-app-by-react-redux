@@ -9,6 +9,7 @@ const Button = ({
   loadingStatus,
   loaderMargin,
   btnDisable,
+  loaderSize,
 }) => {
   return (
     <button
@@ -21,6 +22,7 @@ const Button = ({
         color={loaderColor}
         loading={loadingStatus}
         margin={loaderMargin}
+        size={loaderSize}
       />
     </button>
   );

@@ -18,7 +18,7 @@ const FriendsField = () => {
           chatName={"Jimmy"}
           message={"Go there quickly!"}
           btnText={""}
-          classAvatar={"w-[17%]"}
+          classAvatar={"w-[17%] mr-1"}
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
@@ -31,7 +31,7 @@ const FriendsField = () => {
           chatName={"Helena James"}
           message={"Long time no see.."}
           btnText={""}
-          classAvatar={"w-[17%]"}
+          classAvatar={"w-[17%] mr-1"}
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
@@ -44,7 +44,7 @@ const FriendsField = () => {
           chatName={"Kavin Rock"}
           message={"Lunch?"}
           btnText={""}
-          classAvatar={"w-[17%]"}
+          classAvatar={"w-[17%] mr-1"}
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
@@ -57,7 +57,7 @@ const FriendsField = () => {
           chatName={"Rail Parker"}
           message={"Coming today?"}
           btnText={""}
-          classAvatar={"w-[17%]"}
+          classAvatar={"w-[17%] mr-1"}
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
@@ -73,7 +73,7 @@ const FriendsField = () => {
           btnText={""}
           btnLink="#"
           chatLink="#"
-          classAvatar={"w-[17%]"}
+          classAvatar={"w-[17%] mr-1"}
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
@@ -86,7 +86,7 @@ const FriendsField = () => {
           chatName={"Kavin Rock"}
           message={"Lunch?"}
           btnText={""}
-          classAvatar={"w-[17%]"}
+          classAvatar={"w-[17%] mr-1"}
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
@@ -99,7 +99,7 @@ const FriendsField = () => {
           chatName={"Rail Parker"}
           message={"Coming today?"}
           btnText={""}
-          classAvatar={"w-[17%]"}
+          classAvatar={"w-[17%] mr-1"}
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
@@ -115,7 +115,7 @@ const FriendsField = () => {
           btnText={""}
           btnLink="#"
           chatLink="#"
-          classAvatar={"w-[17%]"}
+          classAvatar={"w-[17%] mr-1"}
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}

@@ -22,7 +22,8 @@ const FriendsField = () => {
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classLink={"hidden"}
+          classBtn={"hidden"}
+          classTime={"justify-self-end pr-1"}
           subText={"Today, 8:56pm"}
         />
         <ChatDisplayMin
@@ -35,7 +36,8 @@ const FriendsField = () => {
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classLink={"hidden"}
+          classBtn={"hidden"}
+          classTime={"justify-self-end pr-1"}
           subText={"Today, 8:56pm"}
         />
         <ChatDisplayMin
@@ -48,7 +50,8 @@ const FriendsField = () => {
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classLink={"hidden"}
+          classBtn={"hidden"}
+          classTime={"justify-self-end pr-1"}
           subText={"Yesterday, 8:56pm"}
         />
         <ChatDisplayMin
@@ -61,9 +64,9 @@ const FriendsField = () => {
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classLink={"hidden"}
+          classBtn={"hidden"}
+          classTime={"justify-self-end pr-1"}
           subText={"Wednesday, 8:56pm"}
-          classTime={"justify-self-end"}
         />
         <ChatDisplayMin
           avatarPath={"images/frnd_avatar_1.png"}
@@ -77,7 +80,8 @@ const FriendsField = () => {
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classLink={"hidden"}
+          classBtn={"hidden"}
+          classTime={"justify-self-end pr-1"}
           subText={"28 Jun, 8:56pm"}
         />
         <ChatDisplayMin
@@ -90,7 +94,8 @@ const FriendsField = () => {
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classLink={"hidden"}
+          classBtn={"hidden"}
+          classTime={"justify-self-end pr-1"}
           subText={"Yesterday, 8:56pm"}
         />
         <ChatDisplayMin
@@ -103,9 +108,9 @@ const FriendsField = () => {
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classLink={"hidden"}
+          classBtn={"hidden"}
+          classTime={"justify-self-end pr-1"}
           subText={"Wednesday, 8:56pm"}
-          classTime={"justify-self-end"}
         />
         <ChatDisplayMin
           avatarPath={"images/frnd_avatar_1.png"}
@@ -119,7 +124,8 @@ const FriendsField = () => {
           classTextBox={"w-[57%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classLink={"hidden"}
+          classBtn={"hidden"}
+          classTime={"justify-self-end pr-1"}
           subText={"28 Jun, 8:56pm"}
         />
       </SimpleBar>

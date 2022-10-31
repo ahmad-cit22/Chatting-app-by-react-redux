@@ -22,73 +22,10 @@ const FriendReqField = () => {
           message={"Web Designer"}
           classTextBox={"w-[63%]"}
           btnText={"Accept"}
-          btnLink="#"
+          classBtn={"!w-[28%]"}
           chatLink="#"
         />
-        <ChatDisplayMin
-          avatarPath={"images/frnd_avatar_2.png"}
-          avatarAlt={"frnd_avatar_2"}
-          chatName={"Helena James"}
-          message={"Graphics Designer"}
-          classTextBox={"w-[63%]"}
-          btnText={"Accept"}
-        />
-        <ChatDisplayMin
-          avatarPath={"images/frnd_avatar_4.png"}
-          avatarAlt={"frnd_avatar_3"}
-          chatName={"Rail Parker"}
-          message={"Student"}
-          classTextBox={"w-[63%]"}
-          btnText={"Accept"}
-        />
-        <ChatDisplayMin
-          avatarPath={"images/frnd_avatar_3.png"}
-          avatarAlt={"frnd_avatar_3"}
-          chatName={"Jimmy"}
-          message={"CEO, ITB"}
-          classTextBox={"w-[63%]"}
-          btnText={"Accept"}
-        />
-        <ChatDisplayMin
-          avatarPath={"images/frnd_avatar_4.png"}
-          avatarAlt={"frnd_avatar_3"}
-          chatName={"Rail Parker"}
-          message={"Student"}
-          classTextBox={"w-[63%]"}
-          btnText={"Accept"}
-        />
-        <ChatDisplayMin
-          avatarPath={"images/frnd_avatar_3.png"}
-          avatarAlt={"frnd_avatar_3"}
-          chatName={"Jimmy"}
-          message={"CEO, ITB"}
-          classTextBox={"w-[63%]"}
-          btnText={"Accept"}
-        />
-        <ChatDisplayMin
-          avatarPath={"images/frnd_avatar_4.png"}
-          avatarAlt={"frnd_avatar_3"}
-          chatName={"Rail Parker"}
-          message={"Student"}
-          classTextBox={"w-[63%]"}
-          btnText={"Accept"}
-        />
-        <ChatDisplayMin
-          avatarPath={"images/frnd_avatar_3.png"}
-          avatarAlt={"frnd_avatar_3"}
-          chatName={"Jimmy"}
-          message={"CEO, ITB"}
-          classTextBox={"w-[63%]"}
-          btnText={"Accept"}
-        />
-        <ChatDisplayMin
-          avatarPath={"images/frnd_avatar_1.png"}
-          avatarAlt={"frnd_avatar_3"}
-          chatName={"Kavin Rock"}
-          message={"Web Developer"}
-          classTextBox={"w-[63%]"}
-          btnText={"Accept"}
-        />
+      
       </SimpleBar>
     </div>
   );

@@ -8,15 +8,14 @@ const ChatDisplayMin = ({
   chatLink,
   email,
   btnText,
-  btnLink,
   classAvatar,
   classTextBox,
   classChtName,
   classMsg,
-  classLink,
   classBtn,
   classTime,
   subText,
+  clickAct,
 }) => {
   return (
     <div className="py-[14px] flex items-center border-b-[.5px] border-b-slate-300 last:border-none justify-start">
@@ -36,13 +35,12 @@ const ChatDisplayMin = ({
           </Link>
           <p className={`opacity-70 text-sm ${classMsg}`}>{email}</p>
         </div>
-        <Link to={btnLink} className={`w-1/5 justify-self-end ${classLink}`}>
-          <button
-            className={`bg-primary/90 hover:bg-primary linear duration-300 text-[17px] font-semibold text-white px-3 py-1 rounded-md ${classBtn}`}
-          >
-            {btnText}
-          </button>
-        </Link>
+        <button
+          className={`w-1/5 justify-self-end bg-primary/90 hover:bg-primary linear duration-300 text-[17px] font-semibold text-white px-3 py-1 rounded-md ${classBtn}`}
+          onClick={clickAct}
+        >
+          {btnText}
+        </button>
         <p
           className={`text-[10px] font-semibold opacity-50 last:justify-self-end ${classTime}`}
         >

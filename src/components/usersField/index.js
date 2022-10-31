@@ -4,8 +4,10 @@ import ChatDisplayMin from "../chatDisplayMin";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import { getDatabase, ref, onValue } from "firebase/database";
+import { getAuth } from "firebase/auth";
 
 const UsersField = () => {
+  const auth = getAuth();
   const db = getDatabase();
   let [usersList, setUsersList] = useState([]);
 
@@ -14,11 +16,18 @@ const UsersField = () => {
     onValue(userListRef, (snapshot) => {
       let arr = [];
       snapshot.forEach((item) => {
-        arr.push(item.val());
+        if (item.key !== auth.currentUser.uid) {
+          arr.push({ ...item.val(), id: item.key });
+          console.log(arr);
+        }
       });
       setUsersList(arr);
     });
   }, []);
+
+  const handleFriendReq = (item) => {
+    
+  };
 
   return (
     <div className="w-full py-3 px-3 relative bg-white drop-shadow-[0px_6px_3px_rgba(0,0,0,0.25)] h-[47%] rounded-lg">
@@ -31,19 +40,19 @@ const UsersField = () => {
         style={{ maxHeight: 369 }}
         className="flex flex-col px-2"
       >
-        {usersList.map((user) => (
+        {usersList.map((item) => (
           <ChatDisplayMin
-            avatarPath={user.profile_picture}
+            avatarPath={item.profile_picture}
             avatarAlt={"friend_avatar_3"}
-            chatName={user.fullName}
-            email={user.email}
+            chatName={item.fullName}
+            email={item.email}
             btnText={"+"}
             classAvatar={"w-[17%] mr-1"}
-            classTextBox={"w-[72%] pl-3"}
+            classTextBox={"w-[80%] pl-3"}
             classChtName={"text-[15.9px] pb-[2px]"}
             classMsg={"!text-[13px] truncate"}
-            classLink={"w-[5%]"}
-            classBtn={"!text-[24px] !px-2.5 !py-[0px]"}
+            classBtn={"w-[15%] !text-[24px] !px-2.5 !py-[0px]"}
+            clickAct={() => handleFriendReq(item)}
           />
         ))}
       </SimpleBar>

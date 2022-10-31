@@ -29,7 +29,7 @@ module.exports = {
       keyframes: {
         popUp: {
           "0%": { opacity: "0", transform: "scale(10%)" },
-          "80%": { opacity: ".9", transform: "scale(110%)" },
+          "70%": { opacity: ".9", transform: "scale(110%)" },
           "100%": { opacity: "1", transform: "scale(100%)" },
         },
         popUpY: {

@@ -343,7 +343,7 @@ const Login = () => {
                 className="relative w-2/5 bg-white text-center py-12 px-6 rounded-lg animate-[slideX_.4s_ease_1]"
                 ref={refForgotPass}
               >
-                <h2 className="text-primaryTwo text-4xl leading-none  font-bold mb-12">
+                <h2 className="text-primaryTwo text-4xl leading-none  font-semibold mb-12">
                   Forgot Password?
                 </h2>
                 <p className="mb-9 font-semibold text-lg text-[#341a91]">
@@ -373,7 +373,7 @@ const Login = () => {
                     </p>
                   )}
                   <AiOutlineCloseCircle
-                    className="text-[38px] mr-[6px] mt-[7px] text-primaryTwo/70 hover:text-primaryTwo linear duration-300 rounded-full font-semibold cursor-pointer absolute top-0 right-0"
+                    className="text-[40px] mr-[6px] mt-[7px] text-primaryTwo/50 hover:text-primaryTwo/80 linear duration-300 rounded-full font-bold cursor-pointer absolute top-0 right-0"
                     onClick={() => {
                       setErrForgot("");
                       setFErrForgot("");

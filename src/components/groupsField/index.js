@@ -19,10 +19,11 @@ const GroupsField = () => {
           message={"Go there quickly!"}
           btnText={""}
           classAvatar={"w-[17%] mr-1"}
-          classTextBox={"w-[57%] pl-3"}
+          classTextBox={"w-[66%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classLink={"hidden"}
+          classBtn={"hidden"}
+          classTime={"pr-1 justify-self-end"}
           subText={"34 Members"}
         />
         <ChatDisplayMin
@@ -32,10 +33,11 @@ const GroupsField = () => {
           message={"Long time no see.."}
           btnText={""}
           classAvatar={"w-[17%] mr-1"}
-          classTextBox={"w-[57%] pl-3"}
+          classTextBox={"w-[66%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classLink={"hidden"}
+          classBtn={"hidden"}
+          classTime={"pr-1 justify-self-end"}
           subText={"21 Members"}
         />
         <ChatDisplayMin
@@ -45,10 +47,11 @@ const GroupsField = () => {
           message={"Lunch?"}
           btnText={""}
           classAvatar={"w-[17%] mr-1"}
-          classTextBox={"w-[57%] pl-3"}
+          classTextBox={"w-[66%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classLink={"hidden"}
+          classBtn={"hidden"}
+          classTime={"pr-1 justify-self-end"}
           subText={"11 Members"}
         />
         <ChatDisplayMin
@@ -58,12 +61,12 @@ const GroupsField = () => {
           message={"Coming today?"}
           btnText={""}
           classAvatar={"w-[17%] mr-1"}
-          classTextBox={"w-[57%] pl-3"}
+          classTextBox={"w-[66%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classLink={"hidden"}
+          classBtn={"hidden"}
+          classTime={"pr-1 justify-self-end"}
           subText={"22 Members"}
-          classTime={"justify-self-end"}
         />
         <ChatDisplayMin
           avatarPath={"images/frnd_avatar_1.png"}
@@ -74,10 +77,11 @@ const GroupsField = () => {
           btnLink="#"
           chatLink="#"
           classAvatar={"w-[17%] mr-1"}
-          classTextBox={"w-[57%] pl-3"}
+          classTextBox={"w-[66%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classLink={"hidden"}
+          classBtn={"hidden"}
+          classTime={"pr-1 justify-self-end"}
           subText={"8 Members"}
         />
         <ChatDisplayMin
@@ -87,12 +91,12 @@ const GroupsField = () => {
           message={"Coming today?"}
           btnText={""}
           classAvatar={"w-[17%] mr-1"}
-          classTextBox={"w-[57%] pl-3"}
+          classTextBox={"w-[66%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classLink={"hidden"}
+          classBtn={"hidden"}
+          classTime={"pr-1 justify-self-end"}
           subText={"22 Members"}
-          classTime={"justify-self-end"}
         />
         <ChatDisplayMin
           avatarPath={"images/frnd_avatar_1.png"}
@@ -103,10 +107,11 @@ const GroupsField = () => {
           btnLink="#"
           chatLink="#"
           classAvatar={"w-[17%] mr-1"}
-          classTextBox={"w-[57%] pl-3"}
+          classTextBox={"w-[66%] pl-3"}
           classChtName={"text-base pb-[2px]"}
           classMsg={"text-xs"}
-          classLink={"hidden"}
+          classBtn={"hidden"}
+          classTime={"pr-1 justify-self-end"}
           subText={"8 Members"}
         />
       </SimpleBar>

@@ -18,6 +18,7 @@ const JoinGroupField = () => {
           chatName={"Rocking Friends"}
           message={"Hi Guys, Wassup!"}
           classTextBox={"w-[72%]"}
+          classImg={"!h-[72px] !w-[72px]"}
           btnText={"Join"}
           btnLink="#"
           chatLink="#"
@@ -29,6 +30,7 @@ const JoinGroupField = () => {
           chatName={"Lifetime Friends"}
           message={"Good to see you."}
           classTextBox={"w-[72%]"}
+          classImg={"!h-[72px] !w-[72px]"}
           btnText={"Join"}
           btnLink="#"
           chatLink="#"
@@ -40,6 +42,7 @@ const JoinGroupField = () => {
           chatName={"Crazy Guyzz"}
           message={"What plans today?"}
           classTextBox={"w-[72%]"}
+          classImg={"!h-[72px] !w-[72px]"}
           btnText={"Join"}
           btnLink="#"
           chatLink="#"
@@ -51,6 +54,7 @@ const JoinGroupField = () => {
           chatName={"Rocking Friends"}
           message={"Hi Guys, Wassup!"}
           classTextBox={"w-[72%]"}
+          classImg={"!h-[72px] !w-[72px]"}
           btnText={"Join"}
           btnLink="#"
           chatLink="#"
@@ -62,6 +66,7 @@ const JoinGroupField = () => {
           chatName={"Lifetime Friends"}
           message={"Good to see you."}
           classTextBox={"w-[72%]"}
+          classImg={"!h-[72px] !w-[72px]"}
           btnText={"Join"}
           btnLink="#"
           chatLink="#"

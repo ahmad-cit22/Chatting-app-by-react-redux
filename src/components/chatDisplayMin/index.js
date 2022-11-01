@@ -6,9 +6,10 @@ const ChatDisplayMin = ({
   avatarAlt,
   chatName,
   chatLink,
-  email,
+  message,
   btnText,
   classAvatar,
+  classImg,
   classTextBox,
   classChtName,
   classMsg,
@@ -20,8 +21,15 @@ const ChatDisplayMin = ({
   return (
     <div className="py-[14px] flex items-center border-b-[.5px] border-b-slate-300 last:border-none justify-start">
       <Link to={""} className={`w-1/5 ${classAvatar}`}>
-        <picture>
-          <img src={avatarPath} loading="lazy" alt={avatarAlt} />
+        <picture
+          className={`rounded-full overflow-hidden h-[65px] w-[65px] border-[2px] border-photoUp flex justify-center items-center bg-white ${classImg}`}
+        >
+          <img
+            src={avatarPath}
+            className={"w-full"}
+            loading="lazy"
+            alt={avatarAlt}
+          />
         </picture>
       </Link>
       <div className="flex justify-between w-4/5 items-center">
@@ -33,7 +41,7 @@ const ChatDisplayMin = ({
               {chatName}
             </p>
           </Link>
-          <p className={`opacity-70 text-sm ${classMsg}`}>{email}</p>
+          <p className={`opacity-70 text-sm ${classMsg}`}>{message}</p>
         </div>
         <button
           className={`w-1/5 justify-self-end bg-primary/90 hover:bg-primary linear duration-300 text-[17px] font-semibold text-white px-3 py-1 rounded-md ${classBtn}`}

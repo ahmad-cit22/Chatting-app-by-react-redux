@@ -3,7 +3,7 @@ import { HiOutlineDotsVertical } from "react-icons/hi";
 import ChatDisplayMin from "../chatDisplayMin";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
-import { getDatabase, ref, onValue } from "firebase/database";
+import { getDatabase, ref, onValue, set, push } from "firebase/database";
 import { getAuth } from "firebase/auth";
 
 const UsersField = () => {
@@ -18,7 +18,6 @@ const UsersField = () => {
       snapshot.forEach((item) => {
         if (item.key !== auth.currentUser.uid) {
           arr.push({ ...item.val(), id: item.key });
-          console.log(arr);
         }
       });
       setUsersList(arr);
@@ -26,7 +25,18 @@ const UsersField = () => {
   }, []);
 
   const handleFriendReq = (item) => {
-    
+    const friendReqRef = ref(db, "friendRequests/");
+    set(push(friendReqRef), {
+      senderId: auth.currentUser.uid,
+      senderName: auth.currentUser.displayName,
+      senderEmail: auth.currentUser.email,
+      senderImg: auth.currentUser.photoURL,
+      receiverId: item.id,
+      receiverName: item.fullName,
+      receiverEmail: item.email,
+    }).then(() => {
+      console.log("done");
+    });
   };
 
   return (
@@ -45,11 +55,11 @@ const UsersField = () => {
             avatarPath={item.profile_picture}
             avatarAlt={"friend_avatar_3"}
             chatName={item.fullName}
-            email={item.email}
+            message={item.email}
             btnText={"+"}
             classAvatar={"w-[17%] mr-1"}
             classTextBox={"w-[80%] pl-3"}
-            classChtName={"text-[15.9px] pb-[2px]"}
+            classChtName={"text-[15.9px]"}
             classMsg={"!text-[13px] truncate"}
             classBtn={"w-[15%] !text-[24px] !px-2.5 !py-[0px]"}
             clickAct={() => handleFriendReq(item)}

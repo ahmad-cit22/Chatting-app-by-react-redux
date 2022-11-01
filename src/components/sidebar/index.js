@@ -164,8 +164,8 @@ const Sidebar = ({ activePage }) => {
   return (
     <div className="w-[13%] py-10 bg-primary h-full rounded-lg flex flex-col gap-y-[78px]">
       <div className="w-full overflow-hidden gap-y-8 flex flex-col items-center justify-start group">
-        <div className="pb-10 flex flex-col items-center gap-y-4 relative">
-          <picture className="rounded-full relative overflow-hidden h-[100px] border-[3.4px] border-white flex justify-center items-center bg-white">
+        <div className="pb-10 flex flex-col items-center gap-y-4 relative w-full">
+          <picture className="rounded-full overflow-hidden h-[100px] border-[3.4px] border-white flex justify-center items-center bg-white">
             <img
               width={100}
               height={100}
@@ -175,7 +175,7 @@ const Sidebar = ({ activePage }) => {
             />
           </picture>
           <button
-            className="absolute bottom-[82px] z-10 right-[34px] bg-white rounded-full inline-block p-[6px] border-[2.5px] border-photoUp text-primaryTwo hover:bg-primary hover:border-white hover:text-white linear duration-300 hidden group-hover:block animate-[popUp_.3s_ease_1]"
+            className="absolute bottom-[82px] z-10 right-10 bg-white rounded-full inline-block p-[6px] border-[2.5px] border-photoUp text-primaryTwo hover:bg-primary hover:border-white hover:text-white linear duration-300  group-hover:block animate-[popUp_.3s_ease_1]"
             onClick={photoUploadShow}
           >
             <ImCamera className="text-sm" />

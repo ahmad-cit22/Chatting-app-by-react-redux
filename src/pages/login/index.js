@@ -14,10 +14,12 @@ import {
   updateProfile,
   sendPasswordResetEmail,
 } from "firebase/auth";
+import { getDatabase, ref, set, push } from "firebase/database";
 
 const Login = () => {
-  const auth = getAuth();
   const provider = new GoogleAuthProvider();
+  const auth = getAuth();
+  const db = getDatabase();
 
   const navigate = useNavigate();
 
@@ -158,7 +160,15 @@ const Login = () => {
       updateProfile(auth.currentUser, {
         photoURL: "images/default_avatar.png",
       }).then(() => {
-        navigate("/");
+        const user = auth.currentUser;
+        let userRef = ref(db, "users/" + user.uid);
+        set(userRef, {
+          fullName: user.displayName,
+          email: user.email,
+          profile_picture: user.photoURL,
+        }).then(() => {
+          navigate("/");
+        });
       });
     });
   };

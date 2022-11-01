@@ -3,131 +3,113 @@ import { HiOutlineDotsVertical } from "react-icons/hi";
 import ChatDisplayMin from "../chatDisplayMin";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
+import { getAuth } from "firebase/auth";
+import { getDatabase, onValue, ref } from "firebase/database";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const FriendsField = () => {
+  const auth = getAuth();
+  const db = getDatabase();
+  let [friendList, setFriendList] = useState([]);
+  let [friendEmpty, setFriendEmpty] = useState(false);
+  let friendsRef = ref(db, "friends/");
+
+  useEffect(() => {
+    onValue(friendsRef, (snapshot) => {
+      let arr = [];
+      snapshot.forEach((item) => {
+        if (
+          auth.currentUser.uid === item.val().receiverId ||
+          auth.currentUser.uid === item.val().senderId
+        ) {
+          arr.push({ ...item.val(), id: item.key });
+        }
+      });
+      setFriendList(arr);
+    });
+  }, []);
+
   return (
     <div className="w-full py-3 px-3 relative bg-white drop-shadow-[0px_6px_3px_rgba(0,0,0,0.25)] h-[47%] rounded-lg">
-      <div className="flex justify-between items-center pb-4">
+      <div className="flex justify-between items-center pb-4 mb-1 border-b-[3px]">
         <h3 className="text-xl font-semibold px-2">Friends</h3>
         <HiOutlineDotsVertical className="text-[22px] mr-1 !text-primaryTwo z-[2] text-black/80 cursor-pointer" />
       </div>
       <SimpleBar style={{ maxHeight: 369 }} className="flex flex-col px-2">
-        <ChatDisplayMin
-          avatarPath={"images/frnd_avatar_3.png"}
-          avatarAlt={"frnd_avatar_3"}
-          chatName={"Jimmy"}
-          message={"Go there quickly!"}
-          btnText={""}
-          classAvatar={"w-[17%] mr-1"}
-          classTextBox={"w-[57%] pl-3"}
-          classChtName={"text-base pb-[2px]"}
-          classMsg={"text-xs"}
-          classBtn={"hidden"}
-          classTime={"justify-self-end pr-1"}
-          subText={"Today, 8:56pm"}
-        />
-        <ChatDisplayMin
-          avatarPath={"images/frnd_avatar_2.png"}
-          avatarAlt={"frnd_avatar_2"}
-          chatName={"Helena James"}
-          message={"Long time no see.."}
-          btnText={""}
-          classAvatar={"w-[17%] mr-1"}
-          classTextBox={"w-[57%] pl-3"}
-          classChtName={"text-base pb-[2px]"}
-          classMsg={"text-xs"}
-          classBtn={"hidden"}
-          classTime={"justify-self-end pr-1"}
-          subText={"Today, 8:56pm"}
-        />
-        <ChatDisplayMin
-          avatarPath={"images/frnd_avatar_1.png"}
-          avatarAlt={"frnd_avatar_3"}
-          chatName={"Kavin Rock"}
-          message={"Lunch?"}
-          btnText={""}
-          classAvatar={"w-[17%] mr-1"}
-          classTextBox={"w-[57%] pl-3"}
-          classChtName={"text-base pb-[2px]"}
-          classMsg={"text-xs"}
-          classBtn={"hidden"}
-          classTime={"justify-self-end pr-1"}
-          subText={"Yesterday, 8:56pm"}
-        />
-        <ChatDisplayMin
-          avatarPath={"images/frnd_avatar_4.png"}
-          avatarAlt={"frnd_avatar_3"}
-          chatName={"Rail Parker"}
-          message={"Coming today?"}
-          btnText={""}
-          classAvatar={"w-[17%] mr-1"}
-          classTextBox={"w-[57%] pl-3"}
-          classChtName={"text-base pb-[2px]"}
-          classMsg={"text-xs"}
-          classBtn={"hidden"}
-          classTime={"justify-self-end pr-1"}
-          subText={"Wednesday, 8:56pm"}
-        />
-        <ChatDisplayMin
-          avatarPath={"images/frnd_avatar_1.png"}
-          avatarAlt={"frnd_avatar_1"}
-          chatName={"John Dill"}
-          message={"Hey bro, Wassup!"}
-          btnText={""}
-          btnLink="#"
-          chatLink="#"
-          classAvatar={"w-[17%] mr-1"}
-          classTextBox={"w-[57%] pl-3"}
-          classChtName={"text-base pb-[2px]"}
-          classMsg={"text-xs"}
-          classBtn={"hidden"}
-          classTime={"justify-self-end pr-1"}
-          subText={"28 Jun, 8:56pm"}
-        />
-        <ChatDisplayMin
-          avatarPath={"images/frnd_avatar_1.png"}
-          avatarAlt={"frnd_avatar_3"}
-          chatName={"Kavin Rock"}
-          message={"Lunch?"}
-          btnText={""}
-          classAvatar={"w-[17%] mr-1"}
-          classTextBox={"w-[57%] pl-3"}
-          classChtName={"text-base pb-[2px]"}
-          classMsg={"text-xs"}
-          classBtn={"hidden"}
-          classTime={"justify-self-end pr-1"}
-          subText={"Yesterday, 8:56pm"}
-        />
-        <ChatDisplayMin
-          avatarPath={"images/frnd_avatar_4.png"}
-          avatarAlt={"frnd_avatar_3"}
-          chatName={"Rail Parker"}
-          message={"Coming today?"}
-          btnText={""}
-          classAvatar={"w-[17%] mr-1"}
-          classTextBox={"w-[57%] pl-3"}
-          classChtName={"text-base pb-[2px]"}
-          classMsg={"text-xs"}
-          classBtn={"hidden"}
-          classTime={"justify-self-end pr-1"}
-          subText={"Wednesday, 8:56pm"}
-        />
-        <ChatDisplayMin
-          avatarPath={"images/frnd_avatar_1.png"}
-          avatarAlt={"frnd_avatar_1"}
-          chatName={"John Dill"}
-          message={"Hey bro, Wassup!"}
-          btnText={""}
-          btnLink="#"
-          chatLink="#"
-          classAvatar={"w-[17%] mr-1"}
-          classTextBox={"w-[57%] pl-3"}
-          classChtName={"text-base pb-[2px]"}
-          classMsg={"text-xs"}
-          classBtn={"hidden"}
-          classTime={"justify-self-end pr-1"}
-          subText={"28 Jun, 8:56pm"}
-        />
+        {friendList.length < 1 ? (
+          <p className="p-4 text-center bg-[red]/20 mt-8 text-[red]/90 rounded-md">
+            Currently, you've no friends.
+          </p>
+        ) : (
+          friendList.map((item) =>
+            auth.currentUser.uid === item.senderId ? (
+              <ChatDisplayMin
+                avatarPath={item.receiverImg}
+                chatName={item.receiverName}
+                message={item.receiverEmail}
+                avatarAlt={"frnd_avatar_3"}
+                subText={item.friendshipDate}
+                btnText={""}
+                classAvatar={"w-[17%] mr-1"}
+                classTextBox={"w-[62%] pl-3"}
+                classChtName={"text-[15.9px]"}
+                classMsg={"!text-[13px] truncate"}
+                classBtn={"hidden"}
+                classTime={"!justify-self-end pr-1 !text-[11px]"}
+              />
+            ) : (
+              <ChatDisplayMin
+                avatarPath={item.senderImg}
+                chatName={item.senderName}
+                message={item.senderEmail}
+                avatarAlt={"frnd_avatar_3"}
+                subText={item.friendshipDate}
+                btnText={""}
+                classAvatar={"w-[17%] mr-1"}
+                classTextBox={"w-[62%] pl-3"}
+                classChtName={"text-[15.9px]"}
+                classMsg={"!text-[13px] truncate"}
+                classBtn={"hidden"}
+                classTime={"!justify-self-end pr-1 !text-[11px]"}
+              />
+            )
+          )
+        )}
+
+        {/* {friendList.map((item) =>
+          auth.currentUser.uid === item.senderId ? (
+            <ChatDisplayMin
+              avatarPath={item.receiverImg}
+              chatName={item.receiverName}
+              message={item.receiverEmail}
+              avatarAlt={"frnd_avatar_3"}
+              subText={item.friendshipDate}
+              btnText={""}
+              classAvatar={"w-[17%] mr-1"}
+              classTextBox={"w-[62%] pl-3"}
+              classChtName={"text-[15.9px]"}
+              classMsg={"!text-[13px] truncate"}
+              classBtn={"hidden"}
+              classTime={"!justify-self-end pr-1 !text-[11px]"}
+            />
+          ) : (
+            <ChatDisplayMin
+              avatarPath={item.senderImg}
+              chatName={item.senderName}
+              message={item.senderEmail}
+              avatarAlt={"frnd_avatar_3"}
+              subText={item.friendshipDate}
+              btnText={""}
+              classAvatar={"w-[17%] mr-1"}
+              classTextBox={"w-[62%] pl-3"}
+              classChtName={"text-[15.9px]"}
+              classMsg={"!text-[13px] truncate"}
+              classBtn={"hidden"}
+              classTime={"!justify-self-end pr-1 !text-[11px]"}
+            />
+          )
+        )} */}
       </SimpleBar>
     </div>
   );

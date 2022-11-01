@@ -17,12 +17,13 @@ const ChatDisplayMin = ({
   classTime,
   subText,
   clickAct,
+  disableBtn
 }) => {
   return (
     <div className="py-[14px] flex items-center border-b-[.5px] border-b-slate-300 last:border-none justify-start">
       <Link to={""} className={`w-1/5 ${classAvatar}`}>
         <picture
-          className={`rounded-full overflow-hidden h-[65px] w-[65px] border-[2px] border-photoUp flex justify-center items-center bg-white ${classImg}`}
+          className={`rounded-full overflow-hidden h-[65px] w-[65px] border-[0px] border-photoUp flex justify-center items-center bg-white ${classImg}`}
         >
           <img
             src={avatarPath}
@@ -44,8 +45,9 @@ const ChatDisplayMin = ({
           <p className={`opacity-70 text-sm ${classMsg}`}>{message}</p>
         </div>
         <button
-          className={`w-1/5 justify-self-end bg-primary/90 hover:bg-primary linear duration-300 text-[17px] font-semibold text-white px-3 py-1 rounded-md ${classBtn}`}
+          className={`w-1/5 !justify-self-end bg-primary/90 hover:bg-primary linear duration-300 text-[17px] font-semibold text-white px-3 py-1 rounded-md active:scale-[90%] ${classBtn}`}
           onClick={clickAct}
+          disabled={disableBtn}
         >
           {btnText}
         </button>

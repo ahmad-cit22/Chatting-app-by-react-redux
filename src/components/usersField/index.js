@@ -3,20 +3,32 @@ import { HiOutlineDotsVertical } from "react-icons/hi";
 import ChatDisplayMin from "../chatDisplayMin";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
-import { getDatabase, ref, onValue, set, push } from "firebase/database";
+import {
+  getDatabase,
+  ref,
+  onValue,
+  set,
+  push,
+  remove,
+} from "firebase/database";
 import { getAuth } from "firebase/auth";
 
 const UsersField = () => {
   const auth = getAuth();
   const db = getDatabase();
+  const friendReqRef = ref(db, "friendRequests/");
+  const friendsRef = ref(db, "friends/");
+  const currentId = auth.currentUser.uid;
   let [usersList, setUsersList] = useState([]);
+  let [friendReqList, setFriendReqList] = useState([]);
+  let [friendList, setFriendList] = useState([]);
 
   useEffect(() => {
     let userListRef = ref(db, "users/");
     onValue(userListRef, (snapshot) => {
       let arr = [];
       snapshot.forEach((item) => {
-        if (item.key !== auth.currentUser.uid) {
+        if (item.key !== currentId) {
           arr.push({ ...item.val(), id: item.key });
         }
       });
@@ -24,16 +36,71 @@ const UsersField = () => {
     });
   }, []);
 
+  useEffect(() => {
+    let friendReqRef = ref(db, "friendRequests/");
+    onValue(friendReqRef, (snapshot) => {
+      let arr = [];
+      snapshot.forEach((item) => {
+        arr.push(item.val().senderId + item.val().receiverId);
+      });
+      setFriendReqList(arr);
+    });
+  }, []);
+
+  useEffect(() => {
+    let friendsRef = ref(db, "friends/");
+    onValue(friendsRef, (snapshot) => {
+      let arr = [];
+      snapshot.forEach((item) => {
+        arr.push(item.val().senderId + item.val().receiverId);
+      });
+      setFriendList(arr);
+    });
+  }, []);
+
+  // const handleFriendReqAcceptU = (sender) => {
+  //   onValue(friendReqRef, (snapshot) => {
+  //     let reqId = "";
+  //     snapshot.forEach((item) => {
+  //       if (
+  //         sender.id === item.val().senderId &&
+  //         currentId === item.val().receiverId
+  //       ) {
+  //         reqId = item.key;
+  //         console.log("user");
+  //         set(push(friendsRef), {
+  //           senderId: item.val().senderId,
+  //           senderName: item.val().senderName,
+  //           senderEmail: item.val().senderEmail,
+  //           senderImg: item.val().senderImg,
+  //           receiverId: item.val().receiverId,
+  //           receiverName: item.val().receiverName,
+  //           receiverEmail: item.val().receiverEmail,
+  //           receiverImg: item.val().receiverImg,
+  //           friendshipDate: `${new Date().getDate()}/${
+  //             new Date().getMonth() + 1
+  //           }/${new Date().getFullYear()}`,
+  //         }).then(() => {
+  //           remove(ref(db, "friendRequests/" + reqId)).then(() => {
+  //             console.log("req accepted");
+  //           });
+  //         });
+  //       }
+  //     });
+  //   });
+  // };
+
   const handleFriendReq = (item) => {
     const friendReqRef = ref(db, "friendRequests/");
     set(push(friendReqRef), {
-      senderId: auth.currentUser.uid,
+      senderId: currentId,
       senderName: auth.currentUser.displayName,
       senderEmail: auth.currentUser.email,
       senderImg: auth.currentUser.photoURL,
       receiverId: item.id,
       receiverName: item.fullName,
       receiverEmail: item.email,
+      receiverImg: item.profile_picture,
     }).then(() => {
       console.log("done");
     });
@@ -41,8 +108,13 @@ const UsersField = () => {
 
   return (
     <div className="w-full py-3 px-3 relative bg-white drop-shadow-[0px_6px_3px_rgba(0,0,0,0.25)] h-[47%] rounded-lg">
-      <div className="flex justify-between items-center pb-4">
-        <h3 className="text-xl font-semibold px-2">Users</h3>
+      <div className="flex justify-between items-center pb-4 mb-1 border-b-[3px]">
+        <h3 className="text-xl font-semibold px-2">
+          Users{" "}
+          <span className="text-primaryTwo/80 text-base ml-4">
+            {usersList.length}
+          </span>
+        </h3>
         <HiOutlineDotsVertical className="text-[22px] mr-1 !text-primaryTwo z-[2] text-black/80 cursor-pointer" />
       </div>
       <SimpleBar
@@ -56,13 +128,37 @@ const UsersField = () => {
             avatarAlt={"friend_avatar_3"}
             chatName={item.fullName}
             message={item.email}
-            btnText={"+"}
             classAvatar={"w-[17%] mr-1"}
-            classTextBox={"w-[80%] pl-3"}
+            classTextBox={"!w-[55%] pl-3"}
             classChtName={"text-[15.9px]"}
             classMsg={"!text-[13px] truncate"}
-            classBtn={"w-[15%] !text-[24px] !px-2.5 !py-[0px]"}
-            clickAct={() => handleFriendReq(item)}
+            classBtn={
+              "!justify-self-end !w-[39%] ml-4 !text-[15px] !px-1 !py-1"
+            }
+            btnText={`${
+              friendReqList.includes(currentId + item.id)
+                ? "Added"
+                : friendReqList.includes(item.id + currentId)
+                ? "Accept"
+                : friendList.includes(currentId + item.id) ||
+                  friendList.includes(item.id + currentId)
+                ? "Friends"
+                : "Add Friend"
+            }`}
+            disableBtn={
+              friendReqList.includes(currentId + item.id) ||
+              friendList.includes(currentId + item.id) ||
+              friendList.includes(item.id + currentId) ||
+              friendReqList.includes(item.id + currentId)
+                ? true
+                : false
+            }
+            clickAct={() =>
+              // friendReqList.includes(item.id + currentId)
+              //   ? handleFriendReqAcceptU(item)
+              // :
+              handleFriendReq(item)
+            }
           />
         ))}
       </SimpleBar>

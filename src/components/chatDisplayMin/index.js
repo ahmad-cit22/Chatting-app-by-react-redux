@@ -14,13 +14,14 @@ const ChatDisplayMin = ({
   classChtName,
   classMsg,
   classBtn,
+  classBtnBox,
   classTime,
   subText,
   clickAct,
-  disableBtn
+  disableBtn,
 }) => {
   return (
-    <div className="py-[14px] flex items-center border-b-[.5px] border-b-slate-300 last:border-none justify-start">
+    <div className="py-[14px] flex items-center border-b-[.5px] border-b-slate-300 last:border-none justify-start pr-3">
       <Link to={""} className={`w-1/5 ${classAvatar}`}>
         <picture
           className={`rounded-full overflow-hidden h-[65px] w-[65px] border-[0px] border-photoUp flex justify-center items-center bg-white ${classImg}`}
@@ -37,20 +38,24 @@ const ChatDisplayMin = ({
         <div className={`w-3/5 pl-2 ${classTextBox}`}>
           <Link to={chatLink}>
             <p
-              className={`text-lg font-semibold hover:text-primaryTwo cursor-pointer linear duration-300 ${classChtName}`}
+              className={`text-[15.8px] font-semibold hover:text-primaryTwo cursor-pointer linear duration-300 ${classChtName}`}
             >
               {chatName}
             </p>
           </Link>
-          <p className={`opacity-70 text-sm ${classMsg}`}>{message}</p>
+          <p className={`opacity-70 text-sm truncate ${classMsg}`}>{message}</p>
         </div>
-        <button
-          className={`w-1/5 !justify-self-end bg-primary/90 hover:bg-primary linear duration-300 text-[17px] font-semibold text-white px-3 py-1 rounded-md active:scale-[90%] ${classBtn}`}
-          onClick={clickAct}
-          disabled={disableBtn}
+        <div
+          className={`flex justify-end w-1/5 !justify-self-end text-[17px] font-semibold text-white ${classBtnBox}`}
         >
-          {btnText}
-        </button>
+          <button
+            className={`bg-primary/90 hover:bg-primary linear duration-300 text-[14.5px] px-3 py-1 rounded-md active:scale-[90%] ${classBtn}`}
+            onClick={clickAct}
+            disabled={disableBtn}
+          >
+            {btnText}
+          </button>
+        </div>
         <p
           className={`text-[10px] font-semibold opacity-50 last:justify-self-end ${classTime}`}
         >

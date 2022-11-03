@@ -4,11 +4,11 @@ import SearchBar from "../../components/searchBar";
 import JoinGroupField from "../../components/joinGroupField";
 import FriendReqField from "../../components/friendReqField";
 import FriendsField from "../../components/friendsField";
-import GroupsField from "../../components/groupsField";
 import UsersField from "../../components/usersField";
 import BlockField from "../../components/blockField";
 import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import MyGroupsField from "../../components/myGroupsField";
 
 const Home = () => {
   const auth = getAuth();
@@ -36,7 +36,7 @@ const Home = () => {
         </div>
         <div className="w-[29%] flex flex-col justify-between">
           <FriendsField />
-          <GroupsField />
+          <MyGroupsField />
         </div>
         <div className="w-[29%] flex flex-col justify-between">
           <UsersField />

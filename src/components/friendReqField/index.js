@@ -40,7 +40,6 @@ const FriendReqField = () => {
 
   // console.log(friendReqList);
   const handleFriendReqAccept = (item) => {
-    console.log('ffld');
     set(push(friendsRef), {
       senderId: item.senderId,
       senderName: item.senderName,
@@ -73,7 +72,7 @@ const FriendReqField = () => {
       </div>
       <SimpleBar style={{ maxHeight: 383 }} className="flex flex-col px-2">
         {friendReqList.length < 1 ? (
-          <p className="p-4 text-center bg-[red]/20 mt-8 text-[red]/90 rounded-md">
+          <p className="p-4 text-center bg-[red]/20 mt-8 text-sm text-[red]/90 rounded-md">
             Currently, you've no friend requests.
           </p>
         ) : (
@@ -81,13 +80,14 @@ const FriendReqField = () => {
             <ChatDisplayMin
               avatarPath={item.senderImg}
               avatarAlt={"req_avatar_1"}
+              classAvatar={""}
               chatName={item.senderName}
               message={item.senderEmail}
               classImg={"!h-[72px] !w-[72px]"}
-              classTextBox={"w-[63%] ml-1"}
+              classTextBox={"w-[63%]"}
               classMsg={"truncate text-[12px]"}
               btnText={"Accept"}
-              classBtn={"!w-[28%]"}
+              classBtnBox={"!w-[28%]"}
               clickAct={() => handleFriendReqAccept(item)}
             />
           ))

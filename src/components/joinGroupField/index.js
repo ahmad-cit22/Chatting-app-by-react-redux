@@ -15,62 +15,15 @@ const JoinGroupField = () => {
         <ChatDisplayMin
           avatarPath={"images/grp_avatar_1.png"}
           avatarAlt={"grp_avatar_1"}
+          classAvatar={""}
           chatName={"Rocking Friends"}
           message={"Hi Guys, Wassup!"}
-          classTextBox={"w-[72%]"}
+          classTextBox={"w-[78%]"}
+          classChtName={"!text-lg"}
           classImg={"!h-[72px] !w-[72px]"}
           btnText={"Join"}
-          btnLink="#"
+          classBtn={"!text-base"}
           chatLink="#"
-          classLink={"w-[11%]"}
-        />
-        <ChatDisplayMin
-          avatarPath={"images/grp_avatar_2.png"}
-          avatarAlt={"grp_avatar_2"}
-          chatName={"Lifetime Friends"}
-          message={"Good to see you."}
-          classTextBox={"w-[72%]"}
-          classImg={"!h-[72px] !w-[72px]"}
-          btnText={"Join"}
-          btnLink="#"
-          chatLink="#"
-          classLink={"w-[11%]"}
-        />
-        <ChatDisplayMin
-          avatarPath={"images/grp_avatar_2.png"}
-          avatarAlt={"grp_avatar_3"}
-          chatName={"Crazy Guyzz"}
-          message={"What plans today?"}
-          classTextBox={"w-[72%]"}
-          classImg={"!h-[72px] !w-[72px]"}
-          btnText={"Join"}
-          btnLink="#"
-          chatLink="#"
-          classLink={"w-[11%]"}
-        />
-        <ChatDisplayMin
-          avatarPath={"images/grp_avatar_1.png"}
-          avatarAlt={"grp_avatar_1"}
-          chatName={"Rocking Friends"}
-          message={"Hi Guys, Wassup!"}
-          classTextBox={"w-[72%]"}
-          classImg={"!h-[72px] !w-[72px]"}
-          btnText={"Join"}
-          btnLink="#"
-          chatLink="#"
-          classLink={"w-[11%]"}
-        />
-        <ChatDisplayMin
-          avatarPath={"images/grp_avatar_2.png"}
-          avatarAlt={"grp_avatar_2"}
-          chatName={"Lifetime Friends"}
-          message={"Good to see you."}
-          classTextBox={"w-[72%]"}
-          classImg={"!h-[72px] !w-[72px]"}
-          btnText={"Join"}
-          btnLink="#"
-          chatLink="#"
-          classLink={"w-[11%]"}
         />
       </SimpleBar>
     </div>

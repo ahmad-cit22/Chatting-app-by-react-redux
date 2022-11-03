@@ -16,15 +16,17 @@ import { getAuth } from "firebase/auth";
 const UsersField = () => {
   const auth = getAuth();
   const db = getDatabase();
+  const userListRef = ref(db, "users/");
   const friendReqRef = ref(db, "friendRequests/");
   const friendsRef = ref(db, "friends/");
+  const blockedUsersRef = ref(db, "blockedUsers/");
   const currentId = auth.currentUser.uid;
-  let [usersList, setUsersList] = useState([]);
-  let [friendReqList, setFriendReqList] = useState([]);
-  let [friendList, setFriendList] = useState([]);
+  const [usersList, setUsersList] = useState([]);
+  const [friendReqList, setFriendReqList] = useState([]);
+  const [friendList, setFriendList] = useState([]);
+  const [blockList, setBlockList] = useState(false);
 
   useEffect(() => {
-    let userListRef = ref(db, "users/");
     onValue(userListRef, (snapshot) => {
       let arr = [];
       snapshot.forEach((item) => {
@@ -37,7 +39,6 @@ const UsersField = () => {
   }, []);
 
   useEffect(() => {
-    let friendReqRef = ref(db, "friendRequests/");
     onValue(friendReqRef, (snapshot) => {
       let arr = [];
       snapshot.forEach((item) => {
@@ -48,13 +49,22 @@ const UsersField = () => {
   }, []);
 
   useEffect(() => {
-    let friendsRef = ref(db, "friends/");
     onValue(friendsRef, (snapshot) => {
       let arr = [];
       snapshot.forEach((item) => {
         arr.push(item.val().senderId + item.val().receiverId);
       });
       setFriendList(arr);
+    });
+  }, []);
+
+  useEffect(() => {
+    onValue(blockedUsersRef, (snapshot) => {
+      let arr = [];
+      snapshot.forEach((item) => {
+        arr.push(item.val().blockedId + item.val().blockedById);
+      });
+      setBlockList(arr);
     });
   }, []);
 
@@ -128,13 +138,19 @@ const UsersField = () => {
             avatarAlt={"friend_avatar_3"}
             chatName={item.fullName}
             message={item.email}
-            classAvatar={"w-[17%] mr-1"}
-            classTextBox={"!w-[55%] pl-3"}
-            classChtName={"text-[15.9px]"}
+            classAvatar={"mr-1"}
+            classTextBox={"!w-[59%] pl-3"}
+            classChtName={""}
             classMsg={"!text-[13px] truncate"}
-            classBtn={
-              "!justify-self-end !w-[39%] ml-4 !text-[15px] !px-1 !py-1"
-            }
+            classBtnBox={"!w-[42%] !text-[15px]"}
+            classBtn={`${
+              friendReqList.includes(currentId + item.id) ||
+              friendList.includes(currentId + item.id) ||
+              friendList.includes(item.id + currentId) ||
+              blockList.includes(currentId + item.id)
+                ? "!bg-white text-primaryTwo"
+                : ""
+            } !px-2 !py-1`}
             btnText={`${
               friendReqList.includes(currentId + item.id)
                 ? "Added"
@@ -143,13 +159,19 @@ const UsersField = () => {
                 : friendList.includes(currentId + item.id) ||
                   friendList.includes(item.id + currentId)
                 ? "Friends"
+                : blockList.includes(currentId + item.id)
+                ? "Blocked"
+                : blockList.includes(item.id + currentId)
+                ? "Unblock"
                 : "Add Friend"
             }`}
             disableBtn={
               friendReqList.includes(currentId + item.id) ||
               friendList.includes(currentId + item.id) ||
               friendList.includes(item.id + currentId) ||
-              friendReqList.includes(item.id + currentId)
+              friendReqList.includes(item.id + currentId) ||
+              blockList.includes(currentId + item.id) ||
+              blockList.includes(item.id + currentId)
                 ? true
                 : false
             }

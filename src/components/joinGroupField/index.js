@@ -65,17 +65,17 @@ const JoinGroupField = () => {
     e.preventDefault();
     if (!grpName) {
       setGrpNameErrMsg("You must enter a name for your group!");
-    } else if (grpName.length > 15) {
-      setGrpNameErrMsg("Group name can't contain more than 15 characters!");
+    } else if (grpName.length > 25) {
+      setGrpNameErrMsg("Group name can't contain more than 25 characters!");
     }
 
     if (!grpTag) {
       setGrpTagErrMsg("You must enter your group tag!");
-    } else if (grpTag.length > 15) {
-      setGrpNameErrMsg("Group tag can't contain more than 15 characters!");
+    } else if (grpTag.length > 35) {
+      setGrpTagErrMsg("Group tag can't contain more than 35 characters!");
     }
 
-    if (grpName && grpTag && grpName.length < 16 && grpTag.length < 16) {
+    if (grpName && grpTag && grpName.length < 26 && grpTag.length < 36) {
       setLoading(true);
       set(push(groupsRef), {
         grpName: grpName,
@@ -92,14 +92,16 @@ const JoinGroupField = () => {
           setIsCompleted(true);
           setTimeout(() => {
             setShowModal(false);
+            setGrpName("");
+            setGrpTag("");
             setGrpNameErrMsg("");
             setGrpNameFErrMsg("");
             setGrpTagErrMsg("");
             setGrpTagFErrMsg("");
             setGrpSuccessMsg("");
-            refCreateGroupFrom.current.reset();
             setIsCompleted(false);
             setLoading(false);
+            refCreateGroupFrom.current.reset();
           }, 1500);
         })
         .catch((err) => {

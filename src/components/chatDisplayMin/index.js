@@ -19,6 +19,11 @@ const ChatDisplayMin = ({
   subText,
   clickAct,
   disableBtn,
+  messageFooter,
+  classBtnTwo,
+  clickActTwo,
+  disableBtnTwo,
+  btnTwoText,
 }) => {
   return (
     <div className="py-[14px] flex items-center border-b-[.5px] border-b-slate-300 last:border-none justify-start pr-3">
@@ -44,16 +49,24 @@ const ChatDisplayMin = ({
             </p>
           </Link>
           <p className={`opacity-70 text-sm truncate ${classMsg}`}>{message}</p>
+          <p className={`text-[13px] truncate ${classMsg}`}>{messageFooter}</p>
         </div>
         <div
           className={`flex justify-end w-1/5 !justify-self-end text-[17px] font-semibold text-white ${classBtnBox}`}
         >
           <button
-            className={`bg-primary/90 hover:bg-primary linear duration-300 text-[14.5px] px-3 py-1 rounded-md active:scale-[90%] ${classBtn}`}
+            className={`bg-primary/90 hover:bg-primary linear duration-300 text-[14.5px] px-2 py-1 rounded-md active:scale-[90%] ${classBtn}`}
             onClick={clickAct}
             disabled={disableBtn}
           >
             {btnText}
+          </button>
+          <button
+            className={`ml-1.5 bg-primary/90 hover:bg-primary linear duration-300 text-[14.5px] px-2 py-1 rounded-md active:scale-[90%] ${classBtnTwo}`}
+            onClick={clickActTwo}
+            disabled={disableBtnTwo}
+          >
+            {btnTwoText}
           </button>
         </div>
         <p

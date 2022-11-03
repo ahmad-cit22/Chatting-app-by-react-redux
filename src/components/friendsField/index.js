@@ -18,6 +18,7 @@ import { useEffect } from "react";
 const FriendsField = () => {
   const auth = getAuth();
   const db = getDatabase();
+  const currentId = auth.currentUser.uid;
   const [friendList, setFriendList] = useState([]);
   const [friendEmpty, setFriendEmpty] = useState(false);
   const friendsRef = ref(db, "friends/");
@@ -28,8 +29,8 @@ const FriendsField = () => {
       let arr = [];
       snapshot.forEach((item) => {
         if (
-          auth.currentUser.uid === item.val().receiverId ||
-          auth.currentUser.uid === item.val().senderId
+          currentId === item.val().receiverId ||
+          currentId === item.val().senderId
         ) {
           arr.push({ ...item.val(), id: item.key });
         }
@@ -39,7 +40,7 @@ const FriendsField = () => {
   }, []);
 
   const handleBlock = (item) => {
-    auth.currentUser.uid === item.senderId
+    currentId === item.senderId
       ? set(push(blockedUsersRef), {
           blockedId: item.receiverId,
           blockedName: item.receiverName,
@@ -52,6 +53,8 @@ const FriendsField = () => {
           blockingDate: `${new Date().getDate()}/${
             new Date().getMonth() + 1
           }/${new Date().getFullYear()}`,
+          reqSender: currentId,
+          friendshipDate: item.friendshipDate,
         }).then(() => {
           remove(ref(db, "friends/" + item.id)).then(() => {
             console.log("block done");
@@ -69,6 +72,8 @@ const FriendsField = () => {
           blockingDate: `${new Date().getDate()}/${
             new Date().getMonth() + 1
           }/${new Date().getFullYear()}`,
+          reqSender: item.senderId,
+          friendshipDate: item.friendshipDate,
         }).then(() => {
           remove(ref(db, "friends/" + item.id)).then(() => {
             console.log("block done");
@@ -94,7 +99,7 @@ const FriendsField = () => {
           </p>
         ) : (
           friendList.map((item) =>
-            auth.currentUser.uid === item.senderId ? (
+            currentId === item.senderId ? (
               <ChatDisplayMin
                 avatarPath={item.receiverImg}
                 chatName={item.receiverName}
@@ -107,6 +112,7 @@ const FriendsField = () => {
                 classChtName={""}
                 classMsg={"!text-[13px] truncate"}
                 classBtnBox={"!w-1/6 !justify-end"}
+                classBtnTwo={"hidden"}
                 classTime={"!justify-self-end !hidden pr-1 !text-[11px]"}
                 clickAct={() => handleBlock(item)}
               />
@@ -123,6 +129,7 @@ const FriendsField = () => {
                 classChtName={""}
                 classMsg={"!text-[13px] truncate"}
                 classBtnBox={"!w-1/6"}
+                classBtnTwo={"hidden"}
                 classTime={"!justify-self-end !hidden pr-1 !text-[11px]"}
                 clickAct={() => handleBlock(item)}
               />
@@ -131,7 +138,7 @@ const FriendsField = () => {
         )}
 
         {/* {friendList.map((item) =>
-          auth.currentUser.uid === item.senderId ? (
+          currentId === item.senderId ? (
             <ChatDisplayMin
               avatarPath={item.receiverImg}
               chatName={item.receiverName}

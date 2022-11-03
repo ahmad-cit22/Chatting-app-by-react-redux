@@ -175,7 +175,7 @@ const Sidebar = ({ activePage }) => {
             />
           </picture>
           <button
-            className="absolute bottom-[82px] z-10 right-10 bg-white rounded-full inline-block p-[6px] border-[2.5px] border-photoUp text-primaryTwo hover:bg-primary hover:border-white hover:text-white linear duration-300  group-hover:block animate-[popUp_.3s_ease_1]"
+            className="absolute bottom-[82px] z-10 right-10 bg-white rounded-full inline-block p-[6px] border-[2.5px] border-photoUp text-primaryTwo hover:bg-primary hover:border-white hover:text-white linear duration-300 hidden group-hover:block animate-[popUp_.3s_ease_1]"
             onClick={photoUploadShow}
           >
             <ImCamera className="text-sm" />
@@ -316,7 +316,7 @@ const Sidebar = ({ activePage }) => {
           </form>
         </div>
       </div>
-      {/* ========== forgot pass modal ends ========== */}
+      {/* ========== photo upload modal ends ========== */}
     </div>
   );
 };

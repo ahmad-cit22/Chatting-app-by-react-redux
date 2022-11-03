@@ -1,32 +1,254 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { HiOutlineDotsVertical } from "react-icons/hi";
-import ChatDisplayMin from "../chatDisplayMin";
+import { RiCloseFill } from "react-icons/ri";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
+import { getAuth } from "firebase/auth";
+import { getDatabase, onValue, push, ref, set } from "firebase/database";
+import Button from "../button";
+import ChatDisplayMin from "../chatDisplayMin";
+import { BeatLoader } from "react-spinners";
+import { useEffect } from "react";
 
 const JoinGroupField = () => {
+  const auth = getAuth();
+  const db = getDatabase();
+  const currentId = auth.currentUser.uid;
+  const groupsRef = ref(db, "groups/");
+
+  const refCreateGroupModal = useRef(null);
+  const refCreateGroupFrom = useRef(null);
+
+  const [showModal, setShowModal] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(false);
+
+  const [grpNameErrMsg, setGrpNameErrMsg] = useState("");
+  const [grpTagErrMsg, setGrpTagErrMsg] = useState("");
+  const [grpNameFErrMsg, setGrpNameFErrMsg] = useState("");
+  const [grpTagFErrMsg, setGrpTagFErrMsg] = useState("");
+  const [grpSuccessMsg, setGrpSuccessMsg] = useState("");
+
+  const [groupList, setGroupList] = useState([]);
+
+  const [grpName, setGrpName] = useState("");
+  const [grpTag, setGrpTag] = useState("");
+
+  const handleShowCreateGroup = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setGrpNameErrMsg("");
+    setGrpNameFErrMsg("");
+    setGrpTagErrMsg("");
+    setGrpTagFErrMsg("");
+    setGrpSuccessMsg("");
+  };
+
+  const handleGName = (e) => {
+    setGrpName(e.target.value);
+    setGrpNameErrMsg("");
+    setGrpNameFErrMsg("");
+    setGrpSuccessMsg("");
+  };
+
+  const handleGTag = (e) => {
+    setGrpTag(e.target.value);
+    setGrpTagErrMsg("");
+    setGrpTagFErrMsg("");
+    setGrpSuccessMsg("");
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (!grpName) {
+      setGrpNameErrMsg("You must enter a name for your group!");
+    } else if (grpName.length > 15) {
+      setGrpNameErrMsg("Group name can't contain more than 15 characters!");
+    }
+
+    if (!grpTag) {
+      setGrpTagErrMsg("You must enter your group tag!");
+    } else if (grpTag.length > 15) {
+      setGrpNameErrMsg("Group tag can't contain more than 15 characters!");
+    }
+
+    if (grpName && grpTag && grpName.length < 16 && grpTag.length < 16) {
+      setLoading(true);
+      set(push(groupsRef), {
+        grpName: grpName,
+        grpTag: grpTag,
+        adminId: currentId,
+        adminName: auth.currentUser.displayName,
+        createdAt: `${new Date().getDate()}/${
+          new Date().getMonth() + 1
+        }/${new Date().getFullYear()}`,
+      })
+        .then(() => {
+          console.log("done g");
+          setGrpSuccessMsg("Done! Group successfully created.");
+          setIsCompleted(true);
+          setTimeout(() => {
+            setShowModal(false);
+            setGrpNameErrMsg("");
+            setGrpNameFErrMsg("");
+            setGrpTagErrMsg("");
+            setGrpTagFErrMsg("");
+            setGrpSuccessMsg("");
+            refCreateGroupFrom.current.reset();
+            setIsCompleted(false);
+            setLoading(false);
+          }, 1500);
+        })
+        .catch((err) => {
+          console.log(err.code);
+          setGrpTagFErrMsg(err.code);
+        });
+    }
+  };
+
+  useEffect(() => {
+    onValue(groupsRef, (snapshot) => {
+      let arr = [];
+      snapshot.forEach((item) => {
+        if (currentId !== item.val().adminId) {
+          arr.push({ ...item.val(), id: item.key });
+        }
+      });
+      setGroupList(arr);
+    });
+  }, []);
+
   return (
-    <div className="w-full py-1 px-3 relative bg-white drop-shadow-[0px_6px_4px_rgba(0,0,0,0.25)] h-[36%] rounded-lg">
-      <div className="flex justify-between items-center pb-5 mb-1 border-b-[3px]">
-        <h3 className="text-xl font-semibold px-2">Join Groups</h3>
-        <HiOutlineDotsVertical className="text-[22px] mr-1 !text-primaryTwo z-[2] text-black/80 cursor-pointer" />
+    <>
+      <div className="w-full py-1 px-3 relative bg-white drop-shadow-[0px_6px_4px_rgba(0,0,0,0.25)] h-[36%] rounded-lg">
+        <div className="flex justify-between items-center pb-5 mb-1 border-b-[3px] pr-2">
+          <h3 className="text-xl font-semibold px-2">Join Groups</h3>
+          <button
+            className={`bg-primary/90 hover:bg-primary linear duration-300 text-[14.5px] text-white font-semibold px-3 py-1 rounded-md active:scale-[90%]`}
+            onClick={handleShowCreateGroup}
+          >
+            Create Group
+          </button>
+          {/* <HiOutlineDotsVertical className="text-[22px] mr-1 !text-primaryTwo z-[2] text-black/80 cursor-pointer" /> */}
+        </div>
+        <SimpleBar style={{ maxHeight: 271 }} className="flex flex-col px-2">
+          {groupList.length < 1 ? (
+            <p className="p-4 text-center bg-primary/20 mt-8 text-sm text-black rounded-md">
+              Groups created by others will be shown here.
+            </p>
+          ) : (
+            groupList.map((item) => (
+              <ChatDisplayMin
+                avatarPath={"images/grp_avatar_1.png"}
+                avatarAlt={"grp_avatar_1"}
+                classAvatar={""}
+                chatName={item.grpName}
+                message={item.grpTag}
+                messageFooter={`Admin: ${item.adminName}`}
+                classTextBox={"w-[78%]"}
+                classChtName={"!text-lg"}
+                classImg={"!h-[72px] !w-[72px]"}
+                btnText={"Join"}
+                classBtn={"!text-base"}
+                classBtnTwo={"hidden"}
+                chatLink="#"
+              />
+            ))
+          )}
+        </SimpleBar>
       </div>
-      <SimpleBar style={{ maxHeight: 271 }} className="flex flex-col px-2">
-        <ChatDisplayMin
-          avatarPath={"images/grp_avatar_1.png"}
-          avatarAlt={"grp_avatar_1"}
-          classAvatar={""}
-          chatName={"Rocking Friends"}
-          message={"Hi Guys, Wassup!"}
-          classTextBox={"w-[78%]"}
-          classChtName={"!text-lg"}
-          classImg={"!h-[72px] !w-[72px]"}
-          btnText={"Join"}
-          classBtn={"!text-base"}
-          chatLink="#"
-        />
-      </SimpleBar>
-    </div>
+
+      {/* ========== Create Group modal starts ========== */}
+      <div
+        className={`fixed top-0 left-0 w-[100vw] h-[100vh] bg-black/70 z-[22] ${
+          showModal ? "block" : "hidden"
+        } animate-[smooth.3s_ease_1] grid place-items-center`}
+      >
+        <div
+          className="relative w-2/5 bg-white text-center py-10 px-6 rounded-md animate-[popUp_.3s_ease_1]"
+          ref={refCreateGroupModal}
+        >
+          <h2 className="text-primaryTwo text-[34px] leading-none font-semibold mb-12">
+            Create New Group
+          </h2>
+          {/* <div className="flex pl-16 items-center gap-x-6">
+              <p className="text-lg font-semibold text-primary">
+                Preview Image :
+              </p>
+              <div className="rounded-full overflow-hidden h-[100px] w-[100px] border-[1px] border-photoUp p-0 grid justify-center items-center">
+                <picture>
+                  {img ? (
+                    <img src={previewImg} loading={"lazy"} />
+                  ) : (
+                    <img src={auth.currentUser.photoURL} loading={"lazy"} />
+                  )}
+                </picture>
+              </div>
+            </div> */}
+          <form className="w-4/5 m-auto" ref={refCreateGroupFrom}>
+            <input
+              type={"text"}
+              className="w-full md:py-3 md:px-4 rounded-md border-[1.5px] border-primary text-lg text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
+              placeholder="Group Name"
+              onChange={handleGName}
+            />
+            {grpNameErrMsg !== "" && (
+              <p className="pt-[2px] pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1] text-left">
+                {grpNameErrMsg}
+              </p>
+            )}
+            {grpNameFErrMsg !== "" && (
+              <p className="pt-[2px] pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1] text-left">
+                {grpNameFErrMsg}
+              </p>
+            )}
+
+            <input
+              type={"text"}
+              className="w-full mt-4 md:py-3 md:px-4 rounded-md border-[1.5px] border-primary text-lg text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
+              placeholder="Group Tag"
+              onChange={handleGTag}
+            />
+
+            {grpTagErrMsg !== "" && (
+              <p className="pt-[2px] pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1] text-left">
+                {grpTagErrMsg}
+              </p>
+            )}
+            {grpTagFErrMsg !== "" && (
+              <p className="pt-[2px] pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1] text-left">
+                {grpTagFErrMsg}
+              </p>
+            )}
+            {grpSuccessMsg !== "" && (
+              <p className="pt-[3px] pl-1 text-lg text-[green] font-semibold animate-[popDown_.4s_ease_1] text-left">
+                {grpSuccessMsg}
+              </p>
+            )}
+            <RiCloseFill
+              className={
+                "text-[40px] mr-[1px] mt-[2px] text-primaryTwo/70 hover:text-primaryTwo linear duration-300 rounded-full font-semibold cursor-pointer absolute top-0 right-0"
+              }
+              onClick={closeModal}
+            />
+            <Button
+              customClass={
+                "py-2 mt-8 w-[50%] text-xl leading-[40px] rounded-md font-semibold"
+              }
+              text={`${isCompleted ? "Done" : "Create Group"}`}
+              btnDisable={loading}
+              clickAct={handleSubmit}
+              Loader={BeatLoader}
+              loadingStatus={false}
+            />
+          </form>
+        </div>
+      </div>
+      {/* // ========== Create Group modal ends ==========  */}
+    </>
   );
 };
 

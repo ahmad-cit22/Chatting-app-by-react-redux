@@ -88,6 +88,7 @@ const FriendReqField = () => {
               classMsg={"truncate text-[12px]"}
               btnText={"Accept"}
               classBtnBox={"!w-[28%]"}
+              classBtnTwo={"hidden"}
               clickAct={() => handleFriendReqAccept(item)}
             />
           ))

@@ -3,14 +3,7 @@ import { HiOutlineDotsVertical } from "react-icons/hi";
 import ChatDisplayMin from "../chatDisplayMin";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
-import {
-  getDatabase,
-  ref,
-  onValue,
-  set,
-  push,
-  remove,
-} from "firebase/database";
+import { getDatabase, ref, onValue, set, push } from "firebase/database";
 import { getAuth } from "firebase/auth";
 
 const UsersField = () => {
@@ -24,7 +17,7 @@ const UsersField = () => {
   const [usersList, setUsersList] = useState([]);
   const [friendReqList, setFriendReqList] = useState([]);
   const [friendList, setFriendList] = useState([]);
-  const [blockList, setBlockList] = useState(false);
+  const [blockList, setBlockList] = useState([]);
 
   useEffect(() => {
     onValue(userListRef, (snapshot) => {
@@ -134,10 +127,10 @@ const UsersField = () => {
             chatName={item.fullName}
             message={item.email}
             classAvatar={"mr-1"}
-            classTextBox={"!w-[59%] pl-3"}
+            classTextBox={"pl-3"}
             classChtName={""}
-            classMsg={"!text-[13px] truncate"}
-            classBtnBox={"!w-[42%] !text-[15px]"}
+            classMsg={"!text-[13px]"}
+            classBtnBox={""}
             classBtn={`${
               friendReqList.includes(currentId + item.id) ||
               friendList.includes(currentId + item.id) ||
@@ -145,7 +138,7 @@ const UsersField = () => {
               blockList.includes(currentId + item.id)
                 ? "!bg-white text-primaryTwo"
                 : ""
-            } !px-2 !py-1`}
+            }`}
             classBtnTwo={"hidden"}
             btnText={`${
               friendReqList.includes(currentId + item.id)

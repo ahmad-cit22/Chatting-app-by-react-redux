@@ -94,7 +94,7 @@ const FriendsField = () => {
       </div>
       <SimpleBar style={{ maxHeight: 369 }} className="flex flex-col px-2">
         {friendList.length < 1 ? (
-          <p className="p-4 text-center bg-[red]/20 mt-8 text-sm text-[red]/90 rounded-md">
+          <p className="p-4 text-center bg-[red]/20 mt-8 text-[15px] text-[red] rounded-md">
             Currently, you've no friends.
           </p>
         ) : (
@@ -108,10 +108,10 @@ const FriendsField = () => {
                 subText={item.friendshipDate}
                 btnText={"Block"}
                 classAvatar={"mr-1"}
-                classTextBox={"!w-[65%] pl-3"}
+                classTextBox={"pl-3"}
                 classChtName={""}
                 classMsg={"!text-[13px] truncate"}
-                classBtnBox={"!w-1/6 !justify-end"}
+                // classBtnBox={"ml-1"}
                 classBtnTwo={"hidden"}
                 classTime={"!justify-self-end !hidden pr-1 !text-[11px]"}
                 clickAct={() => handleBlock(item)}
@@ -125,10 +125,10 @@ const FriendsField = () => {
                 subText={item.friendshipDate}
                 btnText={"Block"}
                 classAvatar={"mr-1"}
-                classTextBox={"!w-[65%] pl-3"}
+                classTextBox={"pl-3"}
                 classChtName={""}
                 classMsg={"!text-[13px] truncate"}
-                classBtnBox={"!w-1/6"}
+                // classBtnBox={"ml-1"}
                 classBtnTwo={"hidden"}
                 classTime={"!justify-self-end !hidden pr-1 !text-[11px]"}
                 clickAct={() => handleBlock(item)}

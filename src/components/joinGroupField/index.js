@@ -4,7 +4,14 @@ import { RiCloseFill } from "react-icons/ri";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import { getAuth } from "firebase/auth";
-import { getDatabase, onValue, push, ref, set } from "firebase/database";
+import {
+  getDatabase,
+  onValue,
+  push,
+  ref,
+  remove,
+  set,
+} from "firebase/database";
 import Button from "../button";
 import ChatDisplayMin from "../chatDisplayMin";
 import { BeatLoader } from "react-spinners";
@@ -15,6 +22,7 @@ const JoinGroupField = () => {
   const db = getDatabase();
   const currentId = auth.currentUser.uid;
   const groupsRef = ref(db, "groups/");
+  const groupRequestsRef = ref(db, "groupRequests/");
 
   const refCreateGroupModal = useRef(null);
   const refCreateGroupFrom = useRef(null);
@@ -30,6 +38,7 @@ const JoinGroupField = () => {
   const [grpSuccessMsg, setGrpSuccessMsg] = useState("");
 
   const [groupList, setGroupList] = useState([]);
+  const [grpReqList, setGrpReqList] = useState([]);
 
   const [grpName, setGrpName] = useState("");
   const [grpTag, setGrpTag] = useState("");
@@ -82,6 +91,8 @@ const JoinGroupField = () => {
         grpTag: grpTag,
         adminId: currentId,
         adminName: auth.currentUser.displayName,
+        adminEmail: auth.currentUser.email,
+        adminImg: auth.currentUser.photoURL,
         createdAt: `${new Date().getDate()}/${
           new Date().getMonth() + 1
         }/${new Date().getFullYear()}`,
@@ -111,6 +122,52 @@ const JoinGroupField = () => {
     }
   };
 
+  const handleGroupReq = (item) => {
+    set(push(groupRequestsRef), {
+      senderId: currentId,
+      senderName: auth.currentUser.displayName,
+      senderEmail: auth.currentUser.email,
+      senderImg: auth.currentUser.photoURL,
+      grpId: item.id,
+      grpName: item.grpName,
+      grpTag: item.grpTag,
+      adminId: item.adminId,
+      adminName: item.adminName,
+      adminEmail: item.adminEmail,
+      adminImg: item.adminImg,
+      createdAt: item.createdAt,
+    }).then(() => {
+      console.log("done reg grp");
+    });
+  };
+
+  // const cancelGroupReq = (item) => {
+  //   onValue(groupRequestsRef, (snapshot) => {
+  //     snapshot.forEach((grpReq) => {
+  //       if (
+  //         grpReq.val().grpId === item.id &&
+  //         grpReq.val().senderId === currentId
+  //       ) {
+  //         remove(ref(db, "groupRequests/" + grpReq.key)).then(() => {
+  //           console.log("reqasdasd del");
+  //         });
+  //       }
+  //     });
+  //   });
+  // };
+
+  useEffect(() => {
+    onValue(groupRequestsRef, (snapshot) => {
+      let arr = [];
+      snapshot.forEach((item) => {
+        if (item.val().senderId === currentId) {
+          arr.push(item.val().grpId + item.val().senderId);
+        }
+      });
+      setGrpReqList(arr);
+    });
+  }, []);
+
   useEffect(() => {
     onValue(groupsRef, (snapshot) => {
       let arr = [];
@@ -138,7 +195,7 @@ const JoinGroupField = () => {
         </div>
         <SimpleBar style={{ maxHeight: 271 }} className="flex flex-col px-2">
           {groupList.length < 1 ? (
-            <p className="p-4 text-center bg-primary/20 mt-8 text-sm text-black rounded-md">
+            <p className="p-4 text-center bg-primary/20 mt-8 text-[15px] text-black rounded-md">
               Groups created by others will be shown here.
             </p>
           ) : (
@@ -146,17 +203,30 @@ const JoinGroupField = () => {
               <ChatDisplayMin
                 avatarPath={"images/grp_avatar_1.png"}
                 avatarAlt={"grp_avatar_1"}
-                classAvatar={""}
+                classAvatar={"!mr-1"}
                 chatName={item.grpName}
                 message={item.grpTag}
                 messageFooter={`Admin: ${item.adminName}`}
-                classTextBox={"w-[78%]"}
+                classTextBox={"!w-[57%]"}
                 classChtName={"!text-lg"}
                 classImg={"!h-[72px] !w-[72px]"}
-                btnText={"Join"}
-                classBtn={"!text-base"}
+                btnText={`${
+                  grpReqList.includes(item.id + currentId)
+                    ? "Request Sent"
+                    : "Join"
+                }`}
+                classBtn={`${
+                  grpReqList.includes(item.id + currentId)
+                    ? "!bg-white text-primaryTwo"
+                    : ""
+                }`}
+                classBtnBox={"!w-[43%]"}
                 classBtnTwo={"hidden"}
                 chatLink="#"
+                disableBtn={
+                  grpReqList.includes(item.id + currentId) ? true : false
+                }
+                clickAct={() => handleGroupReq(item)}
               />
             ))
           )}
@@ -173,7 +243,7 @@ const JoinGroupField = () => {
           className="relative w-2/5 bg-white text-center py-10 px-6 rounded-md animate-[popUp_.3s_ease_1]"
           ref={refCreateGroupModal}
         >
-          <h2 className="text-primaryTwo text-[34px] leading-none font-semibold mb-12">
+          <h2 className="text-primaryTwo text-[32px] leading-none font-semibold mb-12">
             Create New Group
           </h2>
           {/* <div className="flex pl-16 items-center gap-x-6">
@@ -210,7 +280,7 @@ const JoinGroupField = () => {
 
             <input
               type={"text"}
-              className="w-full mt-4 md:py-3 md:px-4 rounded-md border-[1.5px] border-primary text-lg text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
+              className="w-full mt-4 md:py-3 md:px-4 rounded-md border-[1.5px] border-primary text-lg text-primary outline-0 focus:border-focus linear duration-300 z-10"
               placeholder="Group Tag"
               onChange={handleGTag}
             />
@@ -237,9 +307,9 @@ const JoinGroupField = () => {
               onClick={closeModal}
             />
             <Button
-              customClass={
-                "py-2 mt-8 w-[50%] text-xl leading-[40px] rounded-md font-semibold"
-              }
+              customClass={`${
+                loading ? "opacity-70 hover:bg-primary" : ""
+              } py-2 mt-8 w-[50%] text-xl leading-[40px] rounded-md font-semibold`}
               text={`${isCompleted ? "Done" : "Create Group"}`}
               btnDisable={loading}
               clickAct={handleSubmit}

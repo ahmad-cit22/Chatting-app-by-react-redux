@@ -102,7 +102,7 @@ const BlockField = () => {
         className="flex flex-col px-2"
       >
         {blockList.length < 1 ? (
-          <p className="p-4 text-center bg-primary/20 mt-8 text-sm text-black rounded-md">
+          <p className="p-4 text-center bg-primary/20 mt-6 text-[15px] text-black rounded-md">
             Currently, blocklist is empty.
           </p>
         ) : (

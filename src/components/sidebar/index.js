@@ -83,6 +83,7 @@ const Sidebar = ({ activePage }) => {
     reader.readAsDataURL(files[0]);
     setImgName(files[0].name);
   };
+  
   const handlePhotoUpload = (e) => {
     const storageRef = ref(storage, imgName);
     e.preventDefault();

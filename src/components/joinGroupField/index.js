@@ -23,6 +23,7 @@ const JoinGroupField = () => {
   const currentId = auth.currentUser.uid;
   const groupsRef = ref(db, "groups/");
   const groupRequestsRef = ref(db, "groupRequests/");
+  const groupMembersRef = ref(db, "groupMembers/");
 
   const refCreateGroupModal = useRef(null);
   const refCreateGroupFrom = useRef(null);
@@ -39,6 +40,7 @@ const JoinGroupField = () => {
 
   const [groupList, setGroupList] = useState([]);
   const [grpReqList, setGrpReqList] = useState([]);
+  const [grpMemberList, setGrpMemberList] = useState([]);
 
   const [grpName, setGrpName] = useState("");
   const [grpTag, setGrpTag] = useState("");
@@ -157,18 +159,6 @@ const JoinGroupField = () => {
   // };
 
   useEffect(() => {
-    onValue(groupRequestsRef, (snapshot) => {
-      let arr = [];
-      snapshot.forEach((item) => {
-        if (item.val().senderId === currentId) {
-          arr.push(item.val().grpId + item.val().senderId);
-        }
-      });
-      setGrpReqList(arr);
-    });
-  }, []);
-
-  useEffect(() => {
     onValue(groupsRef, (snapshot) => {
       let arr = [];
       snapshot.forEach((item) => {
@@ -178,11 +168,32 @@ const JoinGroupField = () => {
       });
       setGroupList(arr);
     });
+
+    onValue(groupRequestsRef, (snapshot) => {
+      let arr = [];
+      snapshot.forEach((item) => {
+        if (item.val().senderId === currentId) {
+          arr.push(item.val().grpId + item.val().senderId);
+        }
+      });
+      setGrpReqList(arr);
+    });
+
+    onValue(groupMembersRef, (snapshot) => {
+      let arr = [];
+      snapshot.forEach((item) => {
+        if (currentId === item.val().memberId) {
+          arr.push(item.val().grpId + item.val().memberId);
+        }
+      });
+      setGrpMemberList(arr);
+      console.log(grpMemberList);
+    });
   }, []);
 
   return (
     <>
-      <div className="w-full py-1 px-3 relative bg-white drop-shadow-[0px_6px_4px_rgba(0,0,0,0.25)] h-[36%] rounded-lg">
+      <div className="w-full overflow-hidden py-1 px-3 relative bg-white drop-shadow-[0px_6px_4px_rgba(0,0,0,0.25)] h-[36%] rounded-lg">
         <div className="flex justify-between items-center pb-5 mb-1 border-b-[3px] pr-2">
           <h3 className="text-xl font-semibold px-2">Join Groups</h3>
           <button
@@ -195,7 +206,7 @@ const JoinGroupField = () => {
         </div>
         <SimpleBar style={{ maxHeight: 271 }} className="flex flex-col px-2">
           {groupList.length < 1 ? (
-            <p className="p-4 text-center bg-primary/20 mt-8 text-[15px] text-black rounded-md">
+            <p className="p-4 text-center bg-primary/20 mt-8 font-semibold text-[15px] text-black rounded-md">
               Groups created by others will be shown here.
             </p>
           ) : (
@@ -213,10 +224,13 @@ const JoinGroupField = () => {
                 btnText={`${
                   grpReqList.includes(item.id + currentId)
                     ? "Request Sent"
+                    : grpMemberList.includes(item.id + currentId)
+                    ? "Joined"
                     : "Join"
                 }`}
                 classBtn={`${
-                  grpReqList.includes(item.id + currentId)
+                  grpReqList.includes(item.id + currentId) ||
+                  grpMemberList.includes(item.id + currentId)
                     ? "!bg-white text-primaryTwo"
                     : ""
                 }`}
@@ -224,7 +238,10 @@ const JoinGroupField = () => {
                 classBtnTwo={"hidden"}
                 chatLink="#"
                 disableBtn={
-                  grpReqList.includes(item.id + currentId) ? true : false
+                  grpReqList.includes(item.id + currentId) ||
+                  grpMemberList.includes(item.id + currentId)
+                    ? true
+                    : false
                 }
                 clickAct={() => handleGroupReq(item)}
               />

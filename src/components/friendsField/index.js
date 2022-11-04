@@ -94,7 +94,7 @@ const FriendsField = () => {
       </div>
       <SimpleBar style={{ maxHeight: 369 }} className="flex flex-col px-2">
         {friendList.length < 1 ? (
-          <p className="p-4 text-center bg-[red]/20 mt-8 text-[15px] text-[red] rounded-md">
+          <p className="p-4 text-center bg-[red]/20 mt-8 text-[15px] font-semibold text-[red] rounded-md">
             Currently, you've no friends.
           </p>
         ) : (

@@ -4,7 +4,14 @@ import ChatDisplayMin from "../chatDisplayMin";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import { getAuth } from "firebase/auth";
-import { getDatabase, onValue, push, ref, set } from "firebase/database";
+import {
+  getDatabase,
+  onValue,
+  push,
+  ref,
+  remove,
+  set,
+} from "firebase/database";
 import { useEffect, useState } from "react";
 
 const MyGroupsField = () => {
@@ -16,14 +23,13 @@ const MyGroupsField = () => {
   const groupMembersRef = ref(db, "groupMembers/");
 
   const [myGroupList, setMyGroupList] = useState([]);
-  const [grpReqList, setGrpReqList] = useState([]);
+  const [groupReqList, setGroupReqList] = useState([]);
+  const [groupMemberList, setGroupMemberList] = useState([]);
 
-  const [grpReqListSorted, setGrpReqListSorted] = useState([]);
-
-  const [grpId, setGrpId] = useState("");
   const [grpName, setGrpName] = useState("");
 
   const [showInfo, setShowInfo] = useState(false);
+  const [showMembers, setShowMembers] = useState(false);
 
   useEffect(() => {
     onValue(groupsRef, (snapshot) => {
@@ -37,30 +43,31 @@ const MyGroupsField = () => {
     });
   }, []);
 
-  useEffect(() => {
-    onValue(groupRequestsRef, (snapshot) => {
-      let arr = [];
-      snapshot.forEach((item) => {
-        if (currentId === item.val().adminId) {
-          arr.push({ ...item.val(), id: item.key });
-        }
-      });
-      setGrpReqList(arr);
-      console.log(grpReqList);
-    });
-  }, []);
-
   const handleGrpInfo = (item) => {
     setShowInfo(true);
-    setGrpId(item.id);
     setGrpName(item.grpName);
+    onValue(groupRequestsRef, (snapshot) => {
+      let arr = [];
+      snapshot.forEach((reqItem) => {
+        if (reqItem.val().grpId === item.id) {
+          arr.push({ ...reqItem.val(), id: reqItem.key });
+        }
+      });
+      setGroupReqList(arr);
+    });
+  };
 
-    let arr = [];
-    grpReqList.map((reqItem) => {
-      if (reqItem.grpId === grpId) {
-        arr.push(reqItem);
-      }
-      setGrpReqListSorted(arr);
+  const handleGrpMembers = (item) => {
+    setShowMembers(true);
+    setGrpName(item.grpName);
+    onValue(groupMembersRef, (snapshot) => {
+      let arr = [];
+      snapshot.forEach((memberItem) => {
+        if (memberItem.val().grpId === item.id) {
+          arr.push({ ...memberItem.val(), id: memberItem.key });
+        }
+      });
+      setGroupMemberList(arr);
     });
   };
 
@@ -71,7 +78,6 @@ const MyGroupsField = () => {
       memberEmail: item.senderEmail,
       memberImg: item.senderImg,
       grpId: item.grpId,
-      grpReqId: item.id,
       grpName: item.grpName,
       grpTag: item.grpTag,
       adminId: item.adminId,
@@ -83,26 +89,41 @@ const MyGroupsField = () => {
         new Date().getMonth() + 1
       }/${new Date().getFullYear()}`,
     }).then(() => {
-      console.log("done new mem");
+      remove(ref(db, "groupRequests/" + item.id)).then(() => {
+        console.log("done req dlt");
+      });
+    });
+  };
+
+  const handleGrpReqDecline = (item) => {
+    remove(ref(db, "groupRequests/" + item.id)).then(() => {
+      console.log("done req dlt");
     });
   };
 
   return (
     <div className="w-full py-3 px-3 relative bg-white drop-shadow-[0px_6px_3px_rgba(0,0,0,0.25)] h-[48%] rounded-lg">
       <div className="flex justify-between items-center cursor-pointer pb-4 mb-1 border-b-[3px]">
-        <h3
-          className="text-xl font-semibold px-2"
-          onClick={() => setShowInfo(false)}
-        >
-          My Groups
-          <span className="text-primaryTwo/80 text-base ml-4">
-            {myGroupList.length}
-          </span>
+        {/* heading starts */}
+        <h3 className="text-xl font-semibold px-2">
+          {showInfo || showMembers ? grpName : "My Groups"}
+          {!showInfo && !showMembers && (
+            <span className="text-primaryTwo/80 text-base ml-4">
+              {myGroupList.length}
+            </span>
+          )}
         </h3>
-        {showInfo ? (
+
+        {showInfo || showMembers ? (
           <button
             className={`bg-primary/90 hover:bg-primary linear duration-300 text-[14.5px] text-white mr-3 font-semibold px-2 py-1 rounded-md active:scale-[90%]`}
-            onClick={() => setShowInfo(false)}
+            onClick={() =>
+              showInfo
+                ? setShowInfo(false)
+                : showMembers
+                ? setShowMembers(false)
+                : ""
+            }
           >
             Go Back
           </button>
@@ -110,6 +131,9 @@ const MyGroupsField = () => {
           <HiOutlineDotsVertical className="text-[22px] mr-1 !text-primaryTwo z-[2] text-black/80 cursor-pointer" />
         )}
       </div>
+      {/* header ends */}
+
+      {/* main contents starts */}
       <SimpleBar style={{ maxHeight: 379 }} className="flex flex-col px-2">
         {myGroupList.length < 1 ? (
           <p className="p-4 text-center bg-primary/20 mt-8 text-sm text-black rounded-md">
@@ -117,38 +141,74 @@ const MyGroupsField = () => {
           </p>
         ) : showInfo ? (
           <>
-            <p className="font-semibold text-primaryTwo text-[22px] mb-4 text-center mt-1">
-              {grpName}
-            </p>
             <p className="font-semibold text-[17px] text-primary">
-              Group Requests
+              Group Requests{" "}
+              <span className="text-primaryTwo/80 text-base ml-5">
+                {groupReqList.length > 0 && groupReqList.length}
+              </span>
             </p>
-            {grpReqList.map(
-              (item) =>
-                item.grpId === grpId && (
-                  <ChatDisplayMin
-                    avatarPath={item.senderImg}
-                    avatarAlt={"frnd_avatar_3"}
-                    chatName={item.senderName}
-                    message={item.senderEmail}
-                    classAvatar={"mr-1"}
-                    classTextBox={"pl-3"}
-                    classChtName={""}
-                    classMsg={"!text-[13px] truncate"}
-                    btnText={"Accept"}
-                    classBtn={""}
-                    btnTwoText={"Decline"}
-                    classBtnTwo={"!bg-[red]"}
-                    classTime={"pr-1 justify-self-end hidden"}
-                    subText={""}
-                    clickAct={() => handleGrpReqAccept(item)}
-                  />
-                )
-              // : (
-              //   <p className="p-4 text-center bg-[red]/20 mt-8 text-[15px] text-[red] rounded-md">
-              //     No requests found.
-              //   </p>
-              // )
+
+            {groupReqList.length < 1 ? (
+              <p className="p-4 text-center bg-primary/20 mt-8 text-[15px] font-semibold text-black rounded-md">
+                No join requests.
+              </p>
+            ) : (
+              groupReqList.map((item) => (
+                <ChatDisplayMin
+                  avatarPath={item.senderImg}
+                  avatarAlt={"frnd_avatar_3"}
+                  chatName={item.senderName}
+                  message={item.senderEmail}
+                  classAvatar={"mr-1"}
+                  classTextBox={"pl-3"}
+                  classChtName={""}
+                  classMsg={"!text-[13px] truncate"}
+                  btnText={"Accept"}
+                  classBtn={""}
+                  btnTwoText={"Decline"}
+                  classBtnTwo={"!bg-[red]/80 hover:!bg-[red]"}
+                  classTime={"pr-1 justify-self-end hidden"}
+                  subText={""}
+                  clickAct={() => handleGrpReqAccept(item)}
+                  clickActTwo={() => handleGrpReqDecline(item)}
+                />
+              ))
+            )}
+          </>
+        ) : showMembers ? (
+          <>
+            <p className="font-semibold text-[17px] text-primary">
+              Group Members{" "}
+              <span className="text-primaryTwo/80 text-base ml-5">
+                {groupMemberList.length > 0 && groupMemberList.length}
+              </span>
+            </p>
+
+            {groupMemberList.length < 1 ? (
+              <p className="p-4 text-center bg-primary/20 mt-8 text-[15px] font-semibold text-black rounded-md">
+                Group members will be shown here.
+              </p>
+            ) : (
+              groupMemberList.map((item) => (
+                <ChatDisplayMin
+                  avatarPath={item.memberImg}
+                  avatarAlt={"frnd_avatar_3"}
+                  chatName={item.memberName}
+                  message={item.memberEmail}
+                  classAvatar={"mr-1"}
+                  classTextBox={"pl-3"}
+                  classChtName={""}
+                  classMsg={"!text-[13px] truncate"}
+                  btnText={"Message"}
+                  classBtn={""}
+                  btnTwoText={"Remove"}
+                  classBtnTwo={"!bg-[red]/80 hover:!bg-[red]"}
+                  classTime={"pr-1 justify-self-end hidden"}
+                  subText={""}
+                  clickAct={() => handleGrpReqAccept(item)}
+                  clickActTwo={() => handleGrpReqDecline(item)}
+                />
+              ))
             )}
           </>
         ) : (
@@ -168,10 +228,12 @@ const MyGroupsField = () => {
               classTime={"pr-1 justify-self-end hidden"}
               subText={""}
               clickAct={() => handleGrpInfo(item)}
+              clickActTwo={() => handleGrpMembers(item)}
             />
           ))
         )}
       </SimpleBar>
+      {/* main contents ends */}
     </div>
   );
 };

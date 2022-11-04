@@ -136,7 +136,7 @@ const UsersField = () => {
               friendList.includes(currentId + item.id) ||
               friendList.includes(item.id + currentId) ||
               blockList.includes(currentId + item.id)
-                ? "!bg-white text-primaryTwo"
+                ? "!bg-white text-primaryTwo drop-shadow-lg"
                 : ""
             }`}
             classBtnTwo={"hidden"}

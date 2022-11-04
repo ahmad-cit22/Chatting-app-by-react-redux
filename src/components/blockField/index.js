@@ -133,7 +133,7 @@ const BlockField = () => {
               classBtnBox={"!w-[40%] !text-[16px]"}
               classBtn={`${
                 currentId !== item.blockedById
-                  ? "!bg-white text-primaryTwo"
+                  ? "!bg-white text-primaryTwo drop-shadow-lg"
                   : ""
               } !px-2 !py-1`}
               classBtnTwo={"hidden"}

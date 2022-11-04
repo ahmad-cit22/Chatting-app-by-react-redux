@@ -231,7 +231,7 @@ const JoinGroupField = () => {
                 classBtn={`${
                   grpReqList.includes(item.id + currentId) ||
                   grpMemberList.includes(item.id + currentId)
-                    ? "!bg-white text-primaryTwo"
+                    ? "!bg-white text-primaryTwo drop-shadow-lg"
                     : ""
                 }`}
                 classBtnBox={"!w-[43%]"}

@@ -121,7 +121,7 @@ const MyGroupsField = () => {
               {grpName}
             </p>
             <p className="font-semibold text-[17px] text-primary">
-              Group Requests
+              Group Request
             </p>
             {grpReqList.map(
               (item) =>

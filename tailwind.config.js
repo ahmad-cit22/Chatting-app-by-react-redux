@@ -49,13 +49,6 @@ module.exports = {
           "100%": { opacity: "1", display: "block" },
         },
       },
-      screens: {
-        sm: "320px",
-        sml: "560px",
-        md: "768px",
-        lg: "1000px",
-        xl: "1280px",
-      },
       borderRadius: {
         lg: "20px",
       },

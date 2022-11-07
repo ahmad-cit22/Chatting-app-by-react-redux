@@ -259,16 +259,16 @@ const Registration = () => {
 
   return (
     <div className="flex items-center font-nunito">
-      <div className="sml:w-[52%] h-screen flex flex-col justify-center sml:items-end">
-        <div className="md:mt-12 sml:mr-[30px] lg:!mr-[70px]">
-          <h1 className="text-[22px] md:text-[24px] lg:text-[27px] xl:text-[34px] text-center md:text-left text-primary font-bold">
+      <div className="w-full lg:w-[52%] h-screen flex flex-col justify-center lg:items-end">
+        <div className="lg:mt-12 lg:!mr-[70px]">
+          <h1 className="text-[22px] md:text-4xl  lg:text-[27px] xl:text-[34px] text-center lg:text-left text-primary font-bold">
             Get started with easily register
           </h1>
-          <p className="text-sm md:text-lg lg:text-xl text-center sml:text-left text-primary opacity-70 mt-1 mb-6 sml:mb-10">
+          <p className="text-sm md:text-[22px] lg:text-xl text-center lg:text-left text-primary opacity-70 mt-1 md:max-lg:mt-3 xl:mt-2 mb-6 md:mb-12 lg:max-xl:mb-10">
             Free register and you can enjoy it!
           </p>
 
-          <div className="md:w-[368px] text-primary">
+          <div className="lg:w-[368px] text-primary">
             {successMsg !== "" && (
               <p className="mb-8 px-2 py-1 text-[green] bg-[green]/20 border-[1px] border-[green] rounded-md text-lg font-semibold animate-[popDown_.4s_ease_1]">
                 {successMsg}
@@ -280,7 +280,7 @@ const Registration = () => {
               <form
                 action="#"
                 method="POST"
-                className="flex flex-col md:gap-10 w-[380px] mb-6"
+                className="flex flex-col gap-4 lg:gap-10 w-3/4 md:w-3/5 m-auto lg:w-[380px] mb-3 md:mb-4 lg:mb-6"
               >
                 <div className="relative" onClick={handleFocusEmail}>
                   <input
@@ -400,7 +400,7 @@ const Registration = () => {
           </div>
         </div>
       </div>
-      <div className="w-[48%] hidden sml:block h-screen">
+      <div className="w-[48%] hidden lg:block h-screen">
         <picture className="w-full h-full">
           <img
             className="h-screen w-full object-cover"

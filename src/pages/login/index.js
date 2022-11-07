@@ -159,7 +159,7 @@ const Login = () => {
     signInWithPopup(auth, provider).then(() => {
       updateProfile(auth.currentUser, {
         photoURL: "images/default_avatar.png",
-      }).then(() => {
+      }).then(() => { 
         const user = auth.currentUser;
         let userRef = ref(db, "users/" + user.uid);
         set(userRef, {

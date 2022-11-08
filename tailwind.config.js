@@ -26,6 +26,9 @@ module.exports = {
         primary: "#5F35F5",
         hoverPrimary: "#4212EF",
       },
+      // backgroundImage: {
+      //   "reg-img": "url('/images/signup.webp')",
+      // },
       keyframes: {
         popUp: {
           "0%": { opacity: "0", transform: "scale(10%)" },

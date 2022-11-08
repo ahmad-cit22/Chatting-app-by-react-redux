@@ -9,7 +9,7 @@ import {
   sendEmailVerification,
   updateProfile,
 } from "firebase/auth";
-import { getDatabase, ref, set, push } from "firebase/database";
+import { getDatabase, ref, set } from "firebase/database";
 import { BeatLoader } from "react-spinners";
 
 const Registration = () => {
@@ -58,7 +58,7 @@ const Registration = () => {
 
   useEffect(() => {
     document.activeElement === refEmail.current && setIsFocusedEmail(true);
-  });
+  }, []);
 
   const handleFocusName = () => {
     setIsFocusedName(true);
@@ -256,15 +256,14 @@ const Registration = () => {
     // setSuccessMsg("Registration done!");
     //  }
   };
-
   return (
     <div className="flex items-center font-nunito">
-      <div className="w-full lg:w-[52%] h-screen flex flex-col justify-center lg:items-end">
+      <div className="w-full relative lg:w-[52%] bg-reg-img h-screen flex flex-col justify-center lg:items-end">
         <div className="lg:mt-12 lg:!mr-[70px]">
-          <h1 className="text-[22px] md:text-4xl  lg:text-[27px] xl:text-[34px] text-center lg:text-left text-primary font-bold">
+          <h1 className="text-[22px] md:text-4xl lg:text-[27px] xl:text-[34px] text-center lg:text-left text-primary font-bold">
             Get started with easily register
           </h1>
-          <p className="text-sm md:text-[22px] lg:text-xl text-center lg:text-left text-primary opacity-70 mt-1 md:max-lg:mt-3 xl:mt-2 mb-6 md:mb-12 lg:max-xl:mb-10">
+          <p className="md:text-[22px] lg:text-xl text-center lg:text-left text-primary opacity-70 mt- md:max-lg:mt-3 xl:mt-2 mb-8 md:mb-12 lg:max-xl:mb-10">
             Free register and you can enjoy it!
           </p>
 
@@ -280,12 +279,12 @@ const Registration = () => {
               <form
                 action="#"
                 method="POST"
-                className="flex flex-col gap-4 lg:gap-10 w-3/4 md:w-3/5 m-auto lg:w-[380px] mb-3 md:mb-4 lg:mb-6"
+                className="flex flex-col gap-y-6 md:gap-y-10 w-3/4 md:w-3/5 m-auto lg:w-[380px] mb-3 md:mb-4 lg:mb-6"
               >
                 <div className="relative" onClick={handleFocusEmail}>
                   <input
                     type={"email"}
-                    className="w-full md:py-6 md:px-12 rounded-lg border-[2.5px] border-primary text-[19px] text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
+                    className="w-full py-3.5 md:py-6 px-[28.5px] md:px-12 rounded-[15px] md:rounded-lg border-[2.5px] border-primary text-[15px] md:text-[19px] text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
                     ref={refEmail}
                     onBlur={handleBlurEmail}
                     onChange={handleEmail}
@@ -294,8 +293,8 @@ const Registration = () => {
                   <p
                     className={`${
                       isFocusedEmail
-                        ? "top-[-10px] left-[30px] text-sm px-5 bg-white"
-                        : "opacity-60 px-0 text-lg top-[25px] left-[49px]"
+                        ? "top-[-8px] md:top-[-10px] left-[20px] md:left-[30px] text-xs md:text-sm px-3 md:px-5 bg-white"
+                        : "opacity-60 px-0 text-[15px] md:text-lg top-[14.5px] md:top-[25px] left-[28.5px] md:left-[49px]"
                     } text-primary font-semibold absolute linear duration-300`}
                   >
                     Email Address
@@ -315,7 +314,7 @@ const Registration = () => {
                 <div className="relative" onClick={handleFocusName}>
                   <input
                     type={"text"}
-                    className="w-full md:py-6 md:px-12 rounded-lg border-[2.5px] border-primary text-[19px] text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
+                    className="w-full py-3.5 md:py-6 px-[28.5px] md:px-12 rounded-[15px] md:rounded-lg border-[2.5px] border-primary text-[15px] md:text-[19px] text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
                     ref={refName}
                     onBlur={handleBlurName}
                     onChange={handleName}
@@ -323,8 +322,8 @@ const Registration = () => {
                   <p
                     className={`${
                       isFocusedName
-                        ? "top-[-10px] left-[30px] text-sm px-5 bg-white"
-                        : "opacity-60 px-0 text-lg top-[25px] left-[49px]"
+                        ? "top-[-8px] md:top-[-10px] left-[20px] md:left-[30px] text-xs md:text-sm px-3 md:px-5 bg-white"
+                        : "opacity-60 px-0 text-[15px] md:text-lg top-[14.5px] md:top-[25px] left-[28.5px] md:left-[49px]"
                     } text-primary font-semibold absolute linear duration-300`}
                   >
                     Full Name
@@ -343,27 +342,27 @@ const Registration = () => {
                 >
                   <input
                     type={`${passVisibility ? "text" : "password"}`}
-                    className="w-full md:py-6 md:pl-12 md:pr-14 rounded-lg border-[2.5px] border-primary text-[19px] text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
+                    className="w-full py-3.5 md:py-6 pl-[28.5px] pr-[42px] md:pl-12 md:pr-[58px] rounded-[15px] md:rounded-lg border-[2.5px] border-primary text-[15px] md:text-[19px] text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
                     ref={refPass}
                     onChange={handlePass}
                   />
                   <p
                     className={`${
                       isFocusedPass
-                        ? "top-[-10px] left-[30px] text-sm px-5 bg-white"
-                        : "opacity-60 px-0 text-lg top-[25px] left-[49px]"
+                        ? "top-[-8px] md:top-[-10px] left-[20px] md:left-[30px] text-xs md:text-sm px-3 md:px-5 bg-white"
+                        : "opacity-60 px-0 text-[15px] md:text-lg top-[14.5px] md:top-[25px] left-[28.5px] md:left-[49px]"
                     } text-primary font-semibold absolute linear duration-300`}
                   >
                     Password
                   </p>
                   {passVisibility ? (
                     <RiEyeFill
-                      className="absolute top-7 right-6 text-[26px] opacity-60 cursor-pointer hover:opacity-80 linear duration-300"
+                      className="absolute top-[18px] md:top-7 right-4 md:right-6 text-[20px] md:text-[26px] opacity-60 cursor-pointer hover:opacity-80 linear duration-300"
                       onClick={passShowHide}
                     />
                   ) : (
                     <RiEyeCloseLine
-                      className="absolute top-7 right-6 text-[26px] opacity-60 cursor-pointer hover:opacity-80 linear duration-300"
+                      className="absolute top-[18px] md:top-7 right-4 md:right-6 text-[20px] md:text-[26px] opacity-60 cursor-pointer hover:opacity-80 linear duration-300"
                       onClick={passShowHide}
                     />
                   )}
@@ -375,7 +374,7 @@ const Registration = () => {
                 </div>
                 <div>
                   <Button
-                    customClass={`py-5 w-full text-xl rounded-[86px] font-semibold mb-3 ${
+                    customClass={`py-3 md:py-5 w-full text- md:text-xl rounded-[86px] font-semibold mb-1 md:mb-3 ${
                       loading && "pt-6 pb-4"
                     }`}
                     text={!loading && "Sign up"}
@@ -391,7 +390,7 @@ const Registration = () => {
               {/* ========== Registration form ends ========== */}
             </div>
 
-            <p className="text-center text-secondary text-[16.5px]">
+            <p className="text-center text-secondary text-xs md:text-[16.5px]">
               Already have an account ?{" "}
               <Link to="/login" className="text-yellow font-semibold">
                 Sign In

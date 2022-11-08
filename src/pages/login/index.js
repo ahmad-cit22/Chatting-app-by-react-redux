@@ -66,7 +66,7 @@ const Login = () => {
 
   useEffect(() => {
     document.activeElement === refEmail.current && setIsFocusedEmail(true);
-  });
+  }, []);
 
   const handleFocusPass = () => {
     setIsFocusedPass(true);

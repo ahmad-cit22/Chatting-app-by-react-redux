@@ -258,7 +258,15 @@ const Registration = () => {
   };
   return (
     <div className="flex items-center font-nunito">
-      <div className="w-full relative lg:w-[52%] bg-reg-img h-screen flex flex-col justify-center lg:items-end lg:scale-90 xl:scale-100">
+      <div className="w-full relative lg:w-[52%] h-screen flex flex-col justify-center lg:items-end lg:scale-90 xl:scale-100">
+        <picture className="w-[80px] h-[80px] border !border-1 mb-8 rounded-full border-photoUp p-2 pr-3 pt-3 self-center">
+          <img
+            className="w-full h-full object-cover"
+            src="images/logo.png"
+            loading="lazy"
+            alt=""
+          />
+        </picture>
         <div className="lg:mt-12 lg:!mr-[70px]">
           <h1 className="text-[22px] md:text-[40px] lg:text-[28px] xl:text-[34px] text-center lg:text-left text-primary font-bold">
             Get started with easily register

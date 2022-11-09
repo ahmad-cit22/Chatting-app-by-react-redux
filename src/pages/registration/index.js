@@ -302,7 +302,7 @@ const Registration = () => {
                     className={`${
                       isFocusedEmail
                         ? "top-[-8px] md:top-[-10px] left-[20px] md:left-[41px] lg:left-[30px] text-xs md:text-sm px-3 md:px-5 bg-white"
-                        : "opacity-60 px-0 text-[15px] md:text-lg top-[14.5px] md:top-[25px] lg:top-[22px] left-[28.5px] md:left-[61px] lg:left-[49px]"
+                        : "opacity-60 px-0 text-[15px] md:text-lg top-[15.5px] md:top-[25px] lg:top-[22px] left-[28.5px] md:left-[61px] lg:left-[49px]"
                     } text-primary font-semibold absolute linear duration-300`}
                   >
                     Email Address
@@ -331,7 +331,7 @@ const Registration = () => {
                     className={`${
                       isFocusedName
                         ? "top-[-8px] md:top-[-10px] left-[20px] md:left-[41px] lg:left-[30px] text-xs md:text-sm px-3 md:px-5 bg-white"
-                        : "opacity-60 px-0 text-[15px] md:text-lg top-[14.5px] md:top-[25px] lg:top-[22px] left-[28.5px] md:left-[61px] lg:left-[49px]"
+                        : "opacity-60 px-0 text-[15px] md:text-lg top-[15.5px] md:top-[25px] lg:top-[22px] left-[28.5px] md:left-[61px] lg:left-[49px]"
                     } text-primary font-semibold absolute linear duration-300`}
                   >
                     Full Name
@@ -358,7 +358,7 @@ const Registration = () => {
                     className={`${
                       isFocusedPass
                         ? "top-[-8px] md:top-[-10px] left-[20px] md:left-[41px] lg:left-[30px] text-xs md:text-sm px-3 md:px-5 bg-white"
-                        : "opacity-60 px-0 text-[15px] md:text-lg top-[14.5px] md:top-[25px] lg:top-[22px] left-[28.5px] md:left-[61px] lg:left-[49px]"
+                        : "opacity-60 px-0 text-[15px] md:text-lg top-[15.5px] md:top-[25px] lg:top-[22px] left-[28.5px] md:left-[61px] lg:left-[49px]"
                     } text-primary font-semibold absolute linear duration-300`}
                   >
                     Password

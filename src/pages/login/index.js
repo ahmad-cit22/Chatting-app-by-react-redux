@@ -221,8 +221,8 @@ const Login = () => {
 
   return (
     <div className="flex items-center font-open">
-      <div className="w-full lg:scale-90 xl:scale-100 text-secondary h-screen flex flex-col justify-center items-center">
-        <picture className="w-[75px] h-[75px] md:scale-[160%] border !border-1 mb-8 md:mb-[70px] lg:hidden rounded-full border-photoUp/70 p-2.5 pr-4 pt-4 self-center">
+      <div className="w-full lg:w-[52%] lg:scale-90 xl:scale-100 text-secondary h-screen flex flex-col justify-center items-center">
+        <picture className="w-[75px] h-[75px] md:scale-[160%] border !border-1 mb-8 md:mb-[80px] lg:hidden rounded-full border-photoUp/70 p-2.5 pr-4 pt-4 self-center">
           <img
             className="w-full h-full"
             src="images/logo.png"
@@ -230,28 +230,29 @@ const Login = () => {
             alt=""
           />
         </picture>
-        <div className="lg:mt-12 lg:!mr-[70px]">
-          <h1 className="text-[22px] md:text-[40px] lg:text-[28px] xl:text-[34px] text-center lg:text-left font-bold">
+        <div className="lg:mt-12 flex flex-col items-center">
+          <h1 className="text-2xl md:text-[40px] lg:text-[28px] xl:text-[34px] text-center lg:text-left font-bold lg:self-start">
             Login to your account!
           </h1>
 
           {/* google login button */}
           <a
-            className="text-sm font-semibold mt-9 mb-10 inline-block pl-6 pr-10 py-5 rounded-lg border-2 border-secondary/20 hover:border-secondary/60 linear duration-300 cursor-pointer"
+            className="text-[11px] md:text-sm font-semibold mt-5 md:mt-9 lg:mt-7 xl:mt-9 mb-8 md:mb-12 lg:mb-8 xl:mb-10 inline-block pl-3.5 md:pl-6 lg:pl-5 xl:pl-6 pr-5 md:pr-8 lg:pr-7 xl:pr-8 py-2.5 md:py-5 lg:py-4 xl:py-5 rounded-[11px] md:rounded-lg lg:self-start border-2 border-secondary/20 hover:border-secondary/60 linear duration-300 cursor-pointer"
             onClick={handleGoogleSignIn}
           >
             <button className="flex items-center gap-2">
-              <FcGoogle className="text-[22px]" /> Login with Google
+              <FcGoogle className="text-base md:text-[22px]" /> Login with
+              Google
             </button>
           </a>
           {/* google login button */}
 
-          <div className="md:w-[380px] lg:w-[420px] flex flex-col m-auto items-center lg:items-start">
+          <div className="w-[95%] md:w-[380px] lg:w-[420px] flex flex-col m-auto items-center lg:items-start">
             {/* ========== login form starts ========== */}
             <form
               action="#"
               method="POST"
-              className="flex flex-col gap-y-9 md:gap-y-10 lg:gap-y-8 xl:gap-y-10 w-full lg:w-[370px] xl:w-[380px] mb-3.5 md:mb-4 lg:mb-3 xl:mb-12"
+              className="flex flex-col gap-y-9 md:gap-y-10 lg:gap-y-8 xl:gap-y-10 w-full lg:w-[370px] xl:w-[380px] mb-3.5 md:mb-4 lg:mb-3 xl:mb-6"
             >
               <div className="relative" onClick={handleFocusEmail}>
                 <input
@@ -332,8 +333,8 @@ const Login = () => {
               </div>
 
               <Button
-                customClass={`py-7 w-full text-xl rounded-lg font-semibold ${
-                  loading && "pt-8 pb-6"
+                customClass={`py-3.5 md:py-6 lg:py-5 lg:py-5 w-full lg:w-[95%] block lg:w-full text-[15px] md:text-xl lg:text-lg xl:text-xl rounded-[10px] font-semibold mb-1 md:mb-3 lg:mt-2 xl:mt-0 ${
+                  loading && "!pt-[14px] !pb-[10px] md:!pt-6 md:!pb-4"
                 }`}
                 goTo={"#"}
                 text={!loading && "Login to Continue"}
@@ -349,7 +350,7 @@ const Login = () => {
             {/* ========== login form ends ========== */}
 
             <p
-              className="text-yellow font-semibold text-center cursor-pointer hover:text-yellowHover linear duration-300 self-center lg:mr-12"
+              className="text-yellow font-semibold text-[13px] md:text-base text-center cursor-pointer hover:text-yellowHover linear duration-300 self-center lg:mr-16"
               onClick={handleShowForgot}
               ref={refForgotPassToggler}
             >
@@ -421,7 +422,7 @@ const Login = () => {
             </div>
             {/* ========== forgot pass modal ends ========== */}
 
-            <p className="text-secondary text-[15px] text-center mt-4 self-center lg:mr-12">
+            <p className="text-secondary text-[13px] md:text-[15px] text-center mt-4 self-center lg:mr-16">
               Don’t have an account ?{" "}
               <Link
                 to="/registration"

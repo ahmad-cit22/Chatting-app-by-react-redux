@@ -159,7 +159,7 @@ const Login = () => {
     signInWithPopup(auth, provider).then(() => {
       updateProfile(auth.currentUser, {
         photoURL: "images/default_avatar.png",
-      }).then(() => { 
+      }).then(() => {
         const user = auth.currentUser;
         let userRef = ref(db, "users/" + user.uid);
         set(userRef, {
@@ -221,9 +221,21 @@ const Login = () => {
 
   return (
     <div className="flex items-center font-open">
-      <div className="w-[52%] text-secondary h-screen flex flex-col justify-center items-center">
-        <div className="mt-12">
-          <h1 className="text-[34px] font-bold">Login to your account!</h1>
+      <div className="w-full lg:scale-90 xl:scale-100 text-secondary h-screen flex flex-col justify-center items-center">
+        <picture className="w-[75px] h-[75px] md:scale-[160%] border !border-1 mb-8 md:mb-[70px] lg:hidden rounded-full border-photoUp/70 p-2.5 pr-4 pt-4 self-center">
+          <img
+            className="w-full h-full"
+            src="images/logo.png"
+            loading="lazy"
+            alt=""
+          />
+        </picture>
+        <div className="lg:mt-12 lg:!mr-[70px]">
+          <h1 className="text-[22px] md:text-[40px] lg:text-[28px] xl:text-[34px] text-center lg:text-left font-bold">
+            Login to your account!
+          </h1>
+
+          {/* google login button */}
           <a
             className="text-sm font-semibold mt-9 mb-10 inline-block pl-6 pr-10 py-5 rounded-lg border-2 border-secondary/20 hover:border-secondary/60 linear duration-300 cursor-pointer"
             onClick={handleGoogleSignIn}
@@ -232,18 +244,19 @@ const Login = () => {
               <FcGoogle className="text-[22px]" /> Login with Google
             </button>
           </a>
+          {/* google login button */}
 
-          <div className="w-[420px] ">
+          <div className="md:w-[380px] lg:w-[420px] flex flex-col m-auto items-center lg:items-start">
             {/* ========== login form starts ========== */}
             <form
               action="#"
               method="POST"
-              className="flex flex-col gap-14 mb-12"
+              className="flex flex-col gap-y-9 md:gap-y-10 lg:gap-y-8 xl:gap-y-10 w-full lg:w-[370px] xl:w-[380px] mb-3.5 md:mb-4 lg:mb-3 xl:mb-12"
             >
               <div className="relative" onClick={handleFocusEmail}>
                 <input
                   type={"email"}
-                  className="w-[90%] px-1 py-5 border-b-[2px] border-focusSec text-xl font-semibold outline-0 focus:border-secondary linear duration-300 z-10"
+                  className="w-full lg:w-[90%] py-3.5 md:py-6 lg:py-5 px-[2px] md:px-1 text-[15px] md:text-xl border-b-[2px] border-focusSec font-semibold outline-0 focus:border-secondary linear duration-300 z-10"
                   ref={refEmail}
                   onBlur={handleBlurEmail}
                   onChange={handleEmail}
@@ -252,9 +265,9 @@ const Login = () => {
                 <p
                   className={`${
                     isFocusedEmail
-                      ? "opacity-80 top-[-10px] text-sm"
-                      : "opacity-50 px-0 text-lg top-[19px]"
-                  }  font-semibold absolute left-[4px] linear duration-300`}
+                      ? "opacity-80 top-[-12px] md:top-[-8px] text-[11px] md:text-sm"
+                      : "opacity-50 text-[15px] md:text-lg top-[14px] md:top-[19px]"
+                  }  font-semibold absolute left-[2px] md:left-[4px] linear duration-300`}
                 >
                   Email Address
                 </p>
@@ -277,27 +290,27 @@ const Login = () => {
               >
                 <input
                   type={`${passVisibility ? "text" : "password"}`}
-                  className="w-[90%] px-1 py-5 pr-12 border-b-[2px] border-focusSec text-xl font-semibold outline-0 focus:border-secondary linear duration-300 z-10"
+                  className="w-full lg:w-[90%] py-3.5 md:py-6 lg:py-5 px-[2px] md:px-1 text-[15px] md:text-xl pr-9 md:pr-[50px] lg:pr-12 border-b-[2px] border-focusSec font-semibold outline-0 focus:border-secondary linear duration-300 z-10"
                   ref={refPass}
                   onChange={handlePass}
                 />
                 <p
                   className={`${
                     isFocusedPass
-                      ? "opacity-80 top-[-10px] text-sm"
-                      : "opacity-50 px-0 text-lg top-[19px]"
-                  }  font-semibold absolute left-[4px] linear duration-300`}
+                      ? "opacity-80 top-[-12px] md:top-[-8px] text-[11px] md:text-sm"
+                      : "opacity-50 text-[15px] md:text-lg top-[14px] md:top-[19px]"
+                  }  font-semibold absolute left-[2px] md:left-[4px] linear duration-300`}
                 >
                   Password
                 </p>
                 {passVisibility ? (
                   <RiEyeFill
-                    className="absolute top-5 right-12 text-[26px] opacity-60 cursor-pointer hover:opacity-80 linear duration-300"
+                    className="absolute top-[16px] md:top-6 lg:top-5 right-2 md:right-3 lg:right-12 text-[22px] md:text-[28px] opacity-60 cursor-pointer hover:opacity-80 linear duration-300"
                     onClick={passShowHide}
                   />
                 ) : (
                   <RiEyeCloseLine
-                    className="absolute top-5 right-12 text-[26px] opacity-60 cursor-pointer hover:opacity-80 linear duration-300"
+                    className="absolute top-[16px] md:top-6 lg:top-5 right-2 md:right-3 lg:right-12 text-[22px] md:text-[28px] opacity-60 cursor-pointer hover:opacity-80 linear duration-300"
                     onClick={passShowHide}
                   />
                 )}
@@ -336,7 +349,7 @@ const Login = () => {
             {/* ========== login form ends ========== */}
 
             <p
-              className=" text-yellow font-semibold text-center cursor-pointer hover:text-yellowHover linear duration-300"
+              className="text-yellow font-semibold text-center cursor-pointer hover:text-yellowHover linear duration-300 self-center lg:mr-12"
               onClick={handleShowForgot}
               ref={refForgotPassToggler}
             >
@@ -408,7 +421,7 @@ const Login = () => {
             </div>
             {/* ========== forgot pass modal ends ========== */}
 
-            <p className="text-secondary text-[15px] text-center mt-4">
+            <p className="text-secondary text-[15px] text-center mt-4 self-center lg:mr-12">
               Don’t have an account ?{" "}
               <Link
                 to="/registration"
@@ -420,7 +433,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <div className="w-[48%] h-screen">
+      <div className="w-[48%]  hidden lg:block h-screen">
         <picture className="w-full h-full">
           <img
             className="h-screen w-full object-cover"

@@ -259,9 +259,9 @@ const Registration = () => {
   return (
     <div className="flex items-center font-nunito">
       <div className="w-full relative lg:w-[52%] h-screen flex flex-col justify-center lg:items-end lg:scale-90 xl:scale-100">
-        <picture className="w-[80px] h-[80px] border !border-1 mb-8 rounded-full border-photoUp p-2 pr-3 pt-3 self-center">
+        <picture className="w-[75px] h-[75px] md:scale-[160%] border !border-1 mb-8 md:mb-[70px] lg:hidden rounded-full border-photoUp/70 p-2.5 pr-4 pt-4 self-center">
           <img
-            className="w-full h-full object-cover"
+            className="w-full h-full"
             src="images/logo.png"
             loading="lazy"
             alt=""
@@ -292,7 +292,7 @@ const Registration = () => {
                 <div className="relative" onClick={handleFocusEmail}>
                   <input
                     type={"email"}
-                    className="w-full md:w-[95%] block m-auto lg:w-full py-3.5 md:py-6 lg:py-5 px-[28.5px] md:px-12 rounded-[15px] md:rounded-lg border-[2.5px] border-primary text-[15px] md:text-[19px] text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
+                    className="m-auto block w-full md:w-[95%] lg:w-full py-3.5 md:py-6 lg:py-5 px-[28.5px] md:px-12 rounded-[15px] md:rounded-lg text-[15px] md:text-[19px] border-[2.5px] text-primary border-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
                     ref={refEmail}
                     onBlur={handleBlurEmail}
                     onChange={handleEmail}

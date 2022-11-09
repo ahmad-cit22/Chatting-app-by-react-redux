@@ -221,7 +221,7 @@ const Login = () => {
 
   return (
     <div className="flex items-center font-open">
-      <div className="w-full lg:w-[52%] lg:scale-90 xl:scale-100 text-secondary h-screen flex flex-col justify-center items-center">
+      <div className="w-full lg:w-[52%] lg:scale-90 xl:scale-100 text-secondary h-[95vh] bg-black/40 lg:h-screen flex flex-col justify-center items-center">
         <picture className="w-[75px] h-[75px] md:scale-[160%] border !border-1 mb-8 md:mb-[80px] lg:hidden rounded-full border-photoUp/70 p-2.5 pr-4 pt-4 self-center">
           <img
             className="w-full h-full"
@@ -237,7 +237,7 @@ const Login = () => {
 
           {/* google login button */}
           <a
-            className="text-[11px] md:text-sm font-semibold mt-5 md:mt-9 lg:mt-7 xl:mt-9 mb-8 md:mb-12 lg:mb-8 xl:mb-10 inline-block pl-3.5 md:pl-6 lg:pl-5 xl:pl-6 pr-5 md:pr-8 lg:pr-7 xl:pr-8 py-2.5 md:py-5 lg:py-4 xl:py-5 rounded-[11px] md:rounded-lg lg:self-start border-2 border-secondary/20 hover:border-secondary/60 linear duration-300 cursor-pointer"
+            className="text-[11px] md:text-sm font-semibold mt-5 md:mt-9 lg:mt-7 xl:mt-9 mb-10 md:mb-12 lg:mb-8 xl:mb-10 inline-block pl-3.5 md:pl-6 lg:pl-5 xl:pl-6 pr-5 md:pr-8 lg:pr-7 xl:pr-8 py-2.5 md:py-5 lg:py-4 xl:py-5 rounded-[11px] md:rounded-lg lg:self-start border-2 border-secondary/20 hover:border-secondary/60 linear duration-300 cursor-pointer"
             onClick={handleGoogleSignIn}
           >
             <button className="flex items-center gap-2">
@@ -252,7 +252,7 @@ const Login = () => {
             <form
               action="#"
               method="POST"
-              className="flex flex-col gap-y-9 md:gap-y-10 lg:gap-y-8 xl:gap-y-10 w-full lg:w-[370px] xl:w-[380px] mb-3.5 md:mb-4 lg:mb-3 xl:mb-6"
+              className="flex flex-col gap-y-9 md:gap-y-10 lg:gap-y-8 xl:gap-y-10 w-full lg:w-[370px] xl:w-[380px] mb-4 xl:mb-6"
             >
               <div className="relative" onClick={handleFocusEmail}>
                 <input
@@ -273,12 +273,12 @@ const Login = () => {
                   Email Address
                 </p>
                 {errEmail != "" && (
-                  <p className="pt-[3px] text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                  <p className="pt-[2px] text-[13px] md:text-base lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                     {errEmail}
                   </p>
                 )}
                 {fErrEmail != "" && (
-                  <p className="pt-[3px] text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                  <p className="pt-[2px] text-[13px] md:text-base lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                     {fErrEmail}
                   </p>
                 )}
@@ -316,12 +316,12 @@ const Login = () => {
                   />
                 )}
                 {errPass != "" && (
-                  <p className="pt-[3px] text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                  <p className="pt-[2px] text-[13px] md:text-base lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                     {errPass}
                   </p>
                 )}
                 {fErrPass != "" && (
-                  <p className="pt-[3px] text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                  <p className="pt-[2px] text-[13px] md:text-base lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                     {fErrPass}
                   </p>
                 )}
@@ -333,7 +333,7 @@ const Login = () => {
               </div>
 
               <Button
-                customClass={`py-3.5 md:py-6 lg:py-5 lg:py-5 w-full lg:w-[95%] block lg:w-full text-[15px] md:text-xl lg:text-lg xl:text-xl rounded-[10px] font-semibold mb-1 md:mb-3 lg:mt-2 xl:mt-0 ${
+                customClass={`py-3.5 md:py-6 lg:py-5 lg:py-5 w-full lg:w-[95%] block lg:w-full text-[15px] md:text-xl lg:text-lg xl:text-xl rounded-[10px] font-semibold mb-2 md:mb-3 lg:mt-2 xl:mt-0 ${
                   loading && "!pt-[14px] !pb-[10px] md:!pt-6 md:!pb-4"
                 }`}
                 goTo={"#"}
@@ -350,7 +350,7 @@ const Login = () => {
             {/* ========== login form ends ========== */}
 
             <p
-              className="text-yellow font-semibold text-[13px] md:text-base text-center cursor-pointer hover:text-yellowHover linear duration-300 self-center lg:mr-16"
+              className="text-yellow font-semibold text-[13px] md:text-base lg:text-sm xl:text-base  text-center cursor-pointer hover:text-yellowHover linear duration-300 self-center lg:mr-16"
               onClick={handleShowForgot}
               ref={refForgotPassToggler}
             >
@@ -422,7 +422,7 @@ const Login = () => {
             </div>
             {/* ========== forgot pass modal ends ========== */}
 
-            <p className="text-secondary text-[13px] md:text-[15px] text-center mt-4 self-center lg:mr-16">
+            <p className="text-secondary text-[13px] md:text-[15px] lg:text-sm xl:text-[15px] text-center mt-2 xl:mt-4 self-center lg:mr-16">
               Don’t have an account ?{" "}
               <Link
                 to="/registration"
@@ -434,7 +434,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <div className="w-[48%]  hidden lg:block h-screen">
+      <div className="w-[48%] hidden lg:block h-screen">
         <picture className="w-full h-full">
           <img
             className="h-screen w-full object-cover"

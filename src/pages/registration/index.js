@@ -216,10 +216,10 @@ const Registration = () => {
                     profile_picture: user.photoURL,
                   }).then(() => {
                     console.log("done");
-                    setTimeout(() => {
-                      navigate("/login");
-                      setLoading(false);
-                    }, 1500);
+                    // setTimeout(() => {
+                    //   navigate("/login");
+                    //   setLoading(false);
+                    // }, 1500);
                   });
                 });
             })
@@ -258,18 +258,18 @@ const Registration = () => {
   };
   return (
     <div className="flex items-center font-nunito">
-      <div className="w-full relative lg:w-[52%] bg-reg-img h-screen flex flex-col justify-center lg:items-end">
+      <div className="w-full relative lg:w-[52%] bg-reg-img h-screen flex flex-col justify-center lg:items-end lg:scale-90 xl:scale-100">
         <div className="lg:mt-12 lg:!mr-[70px]">
-          <h1 className="text-[22px] md:text-4xl lg:text-[27px] xl:text-[34px] text-center lg:text-left text-primary font-bold">
+          <h1 className="text-[22px] md:text-[40px] lg:text-[28px] xl:text-[34px] text-center lg:text-left text-primary font-bold">
             Get started with easily register
           </h1>
-          <p className="md:text-[22px] lg:text-xl text-center lg:text-left text-primary opacity-70 mt- md:max-lg:mt-3 xl:mt-2 mb-8 md:mb-12 lg:max-xl:mb-10">
+          <p className="md:text-[22px] lg:text-[19px] xl:text-xl text-center lg:text-left text-primary opacity-70 md:mt-1 lg:mt-0 xl:mt-1 mb-8 md:mb-12 lg:mb-8 xl:mb-12 lg:max-xl:mb-10">
             Free register and you can enjoy it!
           </p>
 
           <div className="lg:w-[368px] text-primary">
             {successMsg !== "" && (
-              <p className="mb-8 px-2 py-1 text-[green] bg-[green]/20 border-[1px] border-[green] rounded-md text-lg font-semibold animate-[popDown_.4s_ease_1]">
+              <p className="px-2 w-[73%] md:w-[55%] lg:w-full m-auto mb-8 py-1 text-[green] bg-[green]/20 border-[1px] border-[green] rounded-md text-sm md:text-lg font-semibold animate-[popDown_.4s_ease_1]">
                 {successMsg}
               </p>
             )}
@@ -279,12 +279,12 @@ const Registration = () => {
               <form
                 action="#"
                 method="POST"
-                className="flex flex-col gap-y-6 md:gap-y-10 w-3/4 md:w-3/5 m-auto lg:w-[380px] mb-3 md:mb-4 lg:mb-6"
+                className="flex flex-col gap-y-6 md:gap-y-10 lg:gap-y-8 xl:gap-y-10 w-3/4 md:w-3/5 m-auto lg:w-[370px] xl:w-[380px] mb-3.5 md:mb-4 lg:mb-3 xl:mb-5"
               >
                 <div className="relative" onClick={handleFocusEmail}>
                   <input
                     type={"email"}
-                    className="w-full py-3.5 md:py-6 px-[28.5px] md:px-12 rounded-[15px] md:rounded-lg border-[2.5px] border-primary text-[15px] md:text-[19px] text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
+                    className="w-full md:w-[95%] block m-auto lg:w-full py-3.5 md:py-6 lg:py-5 px-[28.5px] md:px-12 rounded-[15px] md:rounded-lg border-[2.5px] border-primary text-[15px] md:text-[19px] text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
                     ref={refEmail}
                     onBlur={handleBlurEmail}
                     onChange={handleEmail}
@@ -293,19 +293,19 @@ const Registration = () => {
                   <p
                     className={`${
                       isFocusedEmail
-                        ? "top-[-8px] md:top-[-10px] left-[20px] md:left-[30px] text-xs md:text-sm px-3 md:px-5 bg-white"
-                        : "opacity-60 px-0 text-[15px] md:text-lg top-[14.5px] md:top-[25px] left-[28.5px] md:left-[49px]"
+                        ? "top-[-8px] md:top-[-10px] left-[20px] md:left-[41px] lg:left-[30px] text-xs md:text-sm px-3 md:px-5 bg-white"
+                        : "opacity-60 px-0 text-[15px] md:text-lg top-[14.5px] md:top-[25px] lg:top-[22px] left-[28.5px] md:left-[61px] lg:left-[49px]"
                     } text-primary font-semibold absolute linear duration-300`}
                   >
                     Email Address
                   </p>
                   {errEmail !== "" && (
-                    <p className="pt-[2px] pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                    <p className="pt-[1px] md:pt-[2px] text-[13px] md:text-lg lg:text-base pl-1 md:pl-4 lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                       {errEmail}
                     </p>
                   )}
                   {fErrEmail !== "" && (
-                    <p className="pt-[2px] pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                    <p className="pt-[1px] md:pt-[2px] text-[13px] md:text-lg lg:text-base pl-1 md:pl-4 lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                       {fErrEmail}
                     </p>
                   )}
@@ -314,7 +314,7 @@ const Registration = () => {
                 <div className="relative" onClick={handleFocusName}>
                   <input
                     type={"text"}
-                    className="w-full py-3.5 md:py-6 px-[28.5px] md:px-12 rounded-[15px] md:rounded-lg border-[2.5px] border-primary text-[15px] md:text-[19px] text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
+                    className="w-full md:w-[95%] block m-auto lg:w-full py-3.5 md:py-6 lg:py-5 px-[28.5px] md:px-12 rounded-[15px] md:rounded-lg border-[2.5px] border-primary text-[15px] md:text-[19px] text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
                     ref={refName}
                     onBlur={handleBlurName}
                     onChange={handleName}
@@ -322,14 +322,14 @@ const Registration = () => {
                   <p
                     className={`${
                       isFocusedName
-                        ? "top-[-8px] md:top-[-10px] left-[20px] md:left-[30px] text-xs md:text-sm px-3 md:px-5 bg-white"
-                        : "opacity-60 px-0 text-[15px] md:text-lg top-[14.5px] md:top-[25px] left-[28.5px] md:left-[49px]"
+                        ? "top-[-8px] md:top-[-10px] left-[20px] md:left-[41px] lg:left-[30px] text-xs md:text-sm px-3 md:px-5 bg-white"
+                        : "opacity-60 px-0 text-[15px] md:text-lg top-[14.5px] md:top-[25px] lg:top-[22px] left-[28.5px] md:left-[61px] lg:left-[49px]"
                     } text-primary font-semibold absolute linear duration-300`}
                   >
                     Full Name
                   </p>
                   {errName !== "" && (
-                    <p className="pt-[2px] pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                    <p className="pt-[1px] md:pt-[2px] text-[13px] md:text-lg lg:text-base pl-1 md:pl-4 lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                       {errName}
                     </p>
                   )}
@@ -342,40 +342,40 @@ const Registration = () => {
                 >
                   <input
                     type={`${passVisibility ? "text" : "password"}`}
-                    className="w-full py-3.5 md:py-6 pl-[28.5px] pr-[42px] md:pl-12 md:pr-[58px] rounded-[15px] md:rounded-lg border-[2.5px] border-primary text-[15px] md:text-[19px] text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
+                    className="w-full md:w-[95%] block m-auto lg:w-full py-3.5 md:py-6 lg:py-5 pl-[28.5px] pr-[42px] md:pl-12 md:pr-[58px] rounded-[15px] md:rounded-lg border-[2.5px] border-primary text-[15px] md:text-[19px] text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
                     ref={refPass}
                     onChange={handlePass}
                   />
                   <p
                     className={`${
                       isFocusedPass
-                        ? "top-[-8px] md:top-[-10px] left-[20px] md:left-[30px] text-xs md:text-sm px-3 md:px-5 bg-white"
-                        : "opacity-60 px-0 text-[15px] md:text-lg top-[14.5px] md:top-[25px] left-[28.5px] md:left-[49px]"
+                        ? "top-[-8px] md:top-[-10px] left-[20px] md:left-[41px] lg:left-[30px] text-xs md:text-sm px-3 md:px-5 bg-white"
+                        : "opacity-60 px-0 text-[15px] md:text-lg top-[14.5px] md:top-[25px] lg:top-[22px] left-[28.5px] md:left-[61px] lg:left-[49px]"
                     } text-primary font-semibold absolute linear duration-300`}
                   >
                     Password
                   </p>
                   {passVisibility ? (
                     <RiEyeFill
-                      className="absolute top-[18px] md:top-7 right-4 md:right-6 text-[20px] md:text-[26px] opacity-60 cursor-pointer hover:opacity-80 linear duration-300"
+                      className="absolute top-[17px] md:top-7 lg:top-6 right-4 md:right-8 lg:right-6 text-[22px] md:text-[28px] opacity-60 cursor-pointer hover:opacity-80 linear duration-300"
                       onClick={passShowHide}
                     />
                   ) : (
                     <RiEyeCloseLine
-                      className="absolute top-[18px] md:top-7 right-4 md:right-6 text-[20px] md:text-[26px] opacity-60 cursor-pointer hover:opacity-80 linear duration-300"
+                      className="absolute top-[17px] md:top-7 lg:top-6 right-4 md:right-8 lg:right-6 text-[22px] md:!text-[28px] opacity-60 cursor-pointer hover:opacity-80 linear duration-300"
                       onClick={passShowHide}
                     />
                   )}
                   {errPass !== "" && (
-                    <p className="pt-[2px] pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                    <p className="pt-[1px] md:pt-[2px] text-[13px] md:text-lg lg:text-base pl-1 md:pl-4 lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                       {errPass}
                     </p>
                   )}
                 </div>
                 <div>
                   <Button
-                    customClass={`py-3 md:py-5 w-full text- md:text-xl rounded-[86px] font-semibold mb-1 md:mb-3 ${
-                      loading && "pt-6 pb-4"
+                    customClass={`py-3.5 md:py-6 lg:py-5 lg:py-5 w-full md:w-[95%] block m-auto lg:w-full md:text-xl rounded-[86px] font-semibold mb-1 md:mb-3 ${
+                      loading && "!pt-[14px] !pb-[10px] md:!pt-6 md:!pb-4"
                     }`}
                     text={!loading && "Sign up"}
                     btnDisable={loading}
@@ -390,7 +390,7 @@ const Registration = () => {
               {/* ========== Registration form ends ========== */}
             </div>
 
-            <p className="text-center text-secondary text-xs md:text-[16.5px]">
+            <p className="text-center text-secondary text-xs md:text-[16.5px] lg:text-base">
               Already have an account ?{" "}
               <Link to="/login" className="text-yellow font-semibold">
                 Sign In

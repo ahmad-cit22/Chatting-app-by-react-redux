@@ -216,10 +216,10 @@ const Registration = () => {
                     profile_picture: user.photoURL,
                   }).then(() => {
                     console.log("done");
-                    // setTimeout(() => {
-                    //   navigate("/login");
-                    //   setLoading(false);
-                    // }, 1500);
+                    setTimeout(() => {
+                      navigate("/login");
+                      setLoading(false);
+                    }, 1500);
                   });
                 });
             })

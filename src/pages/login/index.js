@@ -221,7 +221,7 @@ const Login = () => {
 
   return (
     <div className="flex items-center font-open">
-      <div className="w-full lg:w-[52%] lg:scale-90 xl:scale-100 text-secondary h-[95vh] bg-black/40 lg:h-screen flex flex-col justify-center items-center">
+      <div className="w-full lg:w-[52%] lg:scale-90 xl:scale-100 text-secondary h-[90vh] lg:h-screen flex flex-col justify-center items-center">
         <picture className="w-[75px] h-[75px] md:scale-[160%] border !border-1 mb-8 md:mb-[80px] lg:hidden rounded-full border-photoUp/70 p-2.5 pr-4 pt-4 self-center">
           <img
             className="w-full h-full"

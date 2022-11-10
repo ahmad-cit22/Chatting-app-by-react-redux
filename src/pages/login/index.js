@@ -74,10 +74,10 @@ const Login = () => {
   };
 
   const handleBlurEmail = () => {
-    refEmail.current.value == "" && setIsFocusedEmail(false);
+    refEmail.current.value === "" && setIsFocusedEmail(false);
   };
   const handleBlurPass = () => {
-    refPass.current.value == "" && setIsFocusedPass(false);
+    refPass.current.value === "" && setIsFocusedPass(false);
   };
 
   const passShowHide = () => {
@@ -120,6 +120,8 @@ const Login = () => {
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
+    refEmail.current.value !== "" && setIsFocusedEmail(true);
+    refPass.current.value !== "" && setIsFocusedPass(true);
   }, []);
 
   const handleForgotSubmit = (e) => {

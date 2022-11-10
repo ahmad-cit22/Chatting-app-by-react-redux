@@ -58,6 +58,9 @@ const Registration = () => {
 
   useEffect(() => {
     document.activeElement === refEmail.current && setIsFocusedEmail(true);
+    refEmail.current.value !== "" && setIsFocusedEmail(true);
+    refName.current.value !== "" && setIsFocusedName(true);
+    refPass.current.value !== "" && setIsFocusedPass(true);
   }, []);
 
   const handleFocusName = () => {
@@ -258,8 +261,8 @@ const Registration = () => {
   };
   return (
     <div className="flex items-center font-nunito">
-      <div className="w-full relative lg:w-[52%] h-screen flex flex-col justify-center lg:items-end lg:scale-90 xl:scale-100">
-        <picture className="w-[75px] h-[75px] md:scale-[160%] border !border-1 mb-8 md:mb-[70px] lg:hidden rounded-full border-photoUp/70 p-2.5 pr-4 pt-4 self-center">
+      <div className="w-full relative lg:w-[52%] h-[90vh] lg:h-screen flex flex-col justify-center lg:items-end lg:scale-90 xl:scale-100">
+        <picture className="mt-16 md:mt-20 w-[75px] h-[75px] md:scale-[160%] border !border-1 mb-8 md:mb-[70px] lg:hidden rounded-full border-photoUp/70 p-2.5 pr-4 pt-4 self-center">
           <img
             className="w-full h-full"
             src="images/logo.png"

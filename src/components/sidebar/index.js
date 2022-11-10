@@ -163,10 +163,10 @@ const Sidebar = ({ activePage }) => {
   };
 
   return (
-    <div className="fixed lg:static z-[10] left-0 bottom-0 w-full lg:w-[13%] py-4 lg:py-10 bg-primary h-[12%] lg:h-full lg:rounded-lg flex lg:flex-col lg:gap-y-[78px]">
-      <div className="w-full overflow-hidden lg:gap-y-8 flex lg:flex-col items-center lg:justify-start group">
+    <div className="fixed lg:static z-[10] left-0 bottom-0 w-full lg:w-[12%] lg:py-10 bg-primary lg:h-full lg:rounded-lg flex lg:flex-col lg:gap-y-[78px]">
+      <div className="w-full overflow-hidden lg:gap-y-8 flex lg:flex-col items-center lg:justify-start group px-4 lg:px-0">
         <div className="lg:pb-10 flex lg:flex-col items-center lg:gap-y-4 relative w-full">
-          <picture className="rounded-full overflow-hidden h-[50px] lg:h-[100px] border-[3.4px] border-white flex justify-center items-center bg-white">
+          <picture className="rounded-full overflow-hidden h-[50px] w-[50px] lg:h-[100px] lg:w-[100px] border-[3.4px] border-white flex justify-center items-center bg-white">
             <img
               className="w-[50px] lg:w-[100px]"
               src={auth.currentUser.photoURL}
@@ -175,10 +175,10 @@ const Sidebar = ({ activePage }) => {
             />
           </picture>
           <button
-            className="absolute bottom-[82px] z-10 right-10 bg-white rounded-full inline-block p-[6px] border-[2.5px] border-photoUp text-primaryTwo hover:bg-primary hover:border-white hover:text-white linear duration-300 hidden group-hover:block animate-[popUp_.3s_ease_1]"
+            className="absolute bottom-[-2px] lg:bottom-[82px] z-10 right-1 lg:right-[43px] bg-white rounded-full inline-block p-[3px] pb-1 lg:pr-[7px] lg:p-[6px] border-[2px] lg:border-[2.5px] border-photoUp text-primaryTwo hover:bg-primary hover:border-white hover:text-white linear duration-300 lg:hidden group-hover:block animate-[popUp_.3s_ease_1] flex justify-center items-center"
             onClick={photoUploadShow}
           >
-            <ImCamera className="text-sm" />
+            <ImCamera className="text-xs lg:text-sm" />
           </button>
           <h3 className="text-white hidden lg:block text-xl font-semibold text-center">
             {auth.currentUser.displayName}
@@ -188,7 +188,7 @@ const Sidebar = ({ activePage }) => {
         <SidebarMenu
           customClass={`${
             active === "home"
-              ? "before:block after:block text-primaryTwo"
+              ? "before:lg:block after:lg:block text-primaryTwo"
               : "after:hidden before:hidden text-white/70 hover:text-white"
           }`}
           Icon={VscHome}
@@ -197,7 +197,7 @@ const Sidebar = ({ activePage }) => {
         <SidebarMenu
           customClass={`${
             active === "messages"
-              ? "before:block after:block text-primaryTwo"
+              ? "before:lg:block after:lg:block text-primaryTwo"
               : "after:hidden before:hidden text-white/70 hover:text-white"
           }`}
           Icon={TbMessageCircle}
@@ -206,7 +206,7 @@ const Sidebar = ({ activePage }) => {
         <SidebarMenu
           customClass={`${
             active === "notifications"
-              ? "before:block after:block text-primaryTwo"
+              ? "before:lg:block after:lg:block text-primaryTwo"
               : "after:hidden before:hidden text-white/70 hover:text-white"
           }`}
           Icon={BsBell}
@@ -215,7 +215,7 @@ const Sidebar = ({ activePage }) => {
         <SidebarMenu
           customClass={`${
             active === "settings"
-              ? "before:block after:block text-primaryTwo"
+              ? "before:lg:block after:lg:block text-primaryTwo"
               : "after:hidden before:hidden text-white/70 hover:text-white"
           }`}
           Icon={TbSettings}

@@ -83,7 +83,7 @@ const Sidebar = ({ activePage }) => {
     reader.readAsDataURL(files[0]);
     setImgName(files[0].name);
   };
-  
+
   const handlePhotoUpload = (e) => {
     const storageRef = ref(storage, imgName);
     e.preventDefault();
@@ -163,13 +163,12 @@ const Sidebar = ({ activePage }) => {
   };
 
   return (
-    <div className="w-[13%] py-10 bg-primary h-full rounded-lg flex flex-col gap-y-[78px]">
-      <div className="w-full overflow-hidden gap-y-8 flex flex-col items-center justify-start group">
-        <div className="pb-10 flex flex-col items-center gap-y-4 relative w-full">
-          <picture className="rounded-full overflow-hidden h-[100px] border-[3.4px] border-white flex justify-center items-center bg-white">
+    <div className="fixed lg:static z-[10] left-0 bottom-0 w-full lg:w-[13%] py-4 lg:py-10 bg-primary h-[12%] lg:h-full lg:rounded-lg flex lg:flex-col lg:gap-y-[78px]">
+      <div className="w-full overflow-hidden lg:gap-y-8 flex lg:flex-col items-center lg:justify-start group">
+        <div className="lg:pb-10 flex lg:flex-col items-center lg:gap-y-4 relative w-full">
+          <picture className="rounded-full overflow-hidden h-[50px] lg:h-[100px] border-[3.4px] border-white flex justify-center items-center bg-white">
             <img
-              width={100}
-              height={100}
+              className="w-[50px] lg:w-[100px]"
               src={auth.currentUser.photoURL}
               loading="lazy"
               alt="sidebar_avatar"
@@ -181,7 +180,7 @@ const Sidebar = ({ activePage }) => {
           >
             <ImCamera className="text-sm" />
           </button>
-          <h3 className="text-white text-xl font-semibold text-center">
+          <h3 className="text-white hidden lg:block text-xl font-semibold text-center">
             {auth.currentUser.displayName}
           </h3>
         </div>
@@ -223,7 +222,7 @@ const Sidebar = ({ activePage }) => {
           goTo={"/settings"}
         ></SidebarMenu>
         <button
-          className={`w-full z-10 relative py-[22px] text-[50px] flex justify-center cursor-pointer linear duration-300 after:w-[100%] after:h-full after:absolute after:bg-white after:content-[''] after:top-0 after:left-[14%] after:rounded-tl-[20px] after:rounded-bl-[20px] after:z-[-2] before:w-[22%] before:h-full before:absolute before:bg-primary before:content-[''] before:top-0 before:right-[-17%] before:rounded-tl-[12px] before:rounded-bl-[12px] before:z-[-1] before:shadow-[-2px_0_5px_0_rgba(0,0,0,.30)] !text-[47px] ml-2 mt-16 justify-self-end after:hidden before:hidden text-white/70 hover:text-white`}
+          className={`w-full z-10 relative py-[22px] text-3xl lg:text-[47px] flex justify-center cursor-pointer linear duration-300 after:w-[100%] after:h-full after:absolute after:bg-white after:content-[''] after:top-0 after:left-[14%] after:rounded-tl-[20px] after:rounded-bl-[20px] after:z-[-2] before:w-[22%] before:h-full before:absolute before:bg-primary before:content-[''] before:top-0 before:right-[-17%] before:rounded-tl-[12px] before:rounded-bl-[12px] before:z-[-1] before:shadow-[-2px_0_5px_0_rgba(0,0,0,.30)] lg:ml-2 mt-2 lg:mt-16 justify-self-end after:hidden before:hidden text-white/70 hover:text-white`}
         >
           <GoSignOut onClick={handleSignOut} />
         </button>

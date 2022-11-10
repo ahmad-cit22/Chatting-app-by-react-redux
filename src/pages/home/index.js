@@ -28,17 +28,17 @@ const Home = () => {
   return emailVerify ? (
     <div className="py-8 pl-7 pr-6 flex gap-x-10 h-screen font-pop">
       <Sidebar activePage={"home"} />
-      <div className="w-[85%] h-full flex justify-between">
-        <div className="w-[35%] flex flex-col justify-between">
+      <div className="w-full lg:w-[85%] h-full flex flex-col gap-y-6 lg:gap-y-0 lg:flex-row lg:justify-between">
+        <div className="w-full lg:w-[35%] flex flex-col gap-y-6 lg:gap-y-0  justify-between">
           <SearchBar />
           <JoinGroupField />
           <FriendReqField />
         </div>
-        <div className="w-[30%] flex flex-col justify-between">
+        <div className="w-full lg:w-[30%] flex flex-col gap-y-6 lg:gap-y-0  justify-between">
           <FriendsField />
           <MyGroupsField />
         </div>
-        <div className="w-[30%] flex flex-col justify-between">
+        <div className="w-full lg:w-[30%] flex flex-col gap-y-6 lg:gap-y-0  justify-between">
           <UsersField />
           <BlockField />
         </div>

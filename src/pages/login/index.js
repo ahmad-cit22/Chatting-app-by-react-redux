@@ -196,10 +196,10 @@ const Login = () => {
           setSuccessMsg(
             "Credentials matched successfully! We're redirecting you to the homepage..."
           );
-          // setTimeout(() => {
-          //   navigate("/");
-          //   setLoading(false);
-          // }, 1500);
+          setTimeout(() => {
+            navigate("/");
+            setLoading(false);
+          }, 1500);
         })
         .catch((error) => {
           setLoading(false);
@@ -223,7 +223,7 @@ const Login = () => {
     <div className="flex items-center font-open">
       <div className="w-full lg:w-[52%] lg:scale-90 xl:scale-100 text-secondary h-[90vh] lg:h-screen flex flex-col justify-center items-center">
         {/* logo */}
-        <picture className="w-[75px] h-[75px] mt-14 md:scale-[160%] border !border-1 mb-6 md:mb-[80px] lg:hidden rounded-full border-photoUp/70 p-2.5 pr-4 pt-4 self-center">
+        <picture className="w-[75px] h-[75px] mt-12 md:mt-14 md:scale-[160%] border !border-1 mb-6 md:mb-[80px] lg:hidden rounded-full border-photoUp/70 p-2.5 pr-4 pt-4 self-center">
           <img
             className="w-full h-full"
             src="images/logo.png"
@@ -366,40 +366,39 @@ const Login = () => {
               } animate-[smooth_.4s_ease_1] grid place-items-center`}
             >
               <div
-                className="relative lg:w-2/5 bg-white text-center py-12 px-6 rounded-lg animate-[slideX_.4s_ease_1]"
+                className="relative w-4/5 md:w-4/6 lg:w-[45%] xl:w-2/5 bg-white text-center py-8 md:py-10 lg:py-8 xl:py-12 px-6 md:px-12 rounded-lg animate-[slideX_.4s_ease_1]"
                 ref={refForgotPass}
               >
-                <h2 className="text-primaryTwo text-2xl md:text-4xl leading-none font-semibold mb-5 md:mb-12">
+                <h2 className="text-primaryTwo text-[22px] md:text-4xl lg:text-[28px] xl:text-4xl leading-none font-semibold mb-6 md:mb-8 xl:mb-10">
                   Forgot Password?
                 </h2>
-                <p className="mb-5 md:mb-9 font-semibold text-sm md:text-lg text-[#341a91]">
+                <p className="mb-5 md:mb-8 lg:mb-6 xl:mb-8 font-semibold text-[13px] md:text-lg lg:text-[16px] xl:text-lg text-[#341a91]">
                   To reset your password, enter your email address first.
                 </p>
-                <form className="w-4/5 m-auto">
+                <form className="m-auto">
                   <input
                     type={"email"}
-                    className="w-full px-1 py-3 md:py-5 border-b-[2px] border-focusSec text-[15px] md:text-xl font-semibold outline-0 focus:border-secondary linear duration-300 z-10 md:mb-1"
+                    className="w-full px-1 py-3 md:py-5 border-b-[2px] border-focusSec text-[15px] md:text-xl lg:text-lg xl:text-xl font-semibold outline-0 focus:border-secondary linear duration-300 z-10"
                     onChange={handleForgotEmail}
                     placeholder="Email Address"
                   />
                   {errForgot !== "" && (
-                    // <p className="pt-1 pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
-                    <p className="absolute md:left-[85px] text-[13px] md:text-base px-1 md:px-2 pb-1 rounded text-[red]/90 md:bg-[red]/20 md:border-2 border-[red] font-semibold animate-[popUp_.4s_ease_1]">
+                    <p className="pt-[1px] text-[13px] md:text-lg lg:text-sm xl:text-base lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1] text-left">
                       {errForgot}
                     </p>
                   )}
                   {fErrForgot !== "" && (
-                    <p className="text-[13px] md:text-base pt-1 pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                    <p className="pt-[1px] text-[13px] md:text-lg lg:text-sm xl:text-base lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1] text-left">
                       {fErrForgot}
                     </p>
                   )}
                   {successForgot !== "" && (
-                    <p className="mt-8 px-1 py-1 text-[green] bg-[green]/20 border-[1px] border-[green] rounded-md text-lg font-semibold animate-[popDown_.4s_ease_1]">
+                    <p className="mt-4 px-2 py-[2px] md:py-1 text-[green] bg-[green]/20 border-[1px] border-[green] rounded-md text-xs md:text-lg font-semibold animate-[popDown_.4s_ease_1]">
                       {successForgot}
                     </p>
                   )}
                   <AiOutlineCloseCircle
-                    className="text-[40px] mr-[6px] mt-[7px] text-primaryTwo/50 hover:text-primaryTwo/80 linear duration-300 rounded-full font-bold cursor-pointer absolute top-0 right-0"
+                    className="text-[26px] md:text-[40px] lg:text-4xl xl:text-[40px] mr-[6px] mt-[7px] text-primaryTwo/50 hover:text-primaryTwo/80 linear duration-300 rounded-full font-bold cursor-pointer absolute top-0 right-0"
                     onClick={() => {
                       setErrForgot("");
                       setFErrForgot("");
@@ -408,7 +407,7 @@ const Login = () => {
                   />
                   <Button
                     customClass={
-                      "py-6 mt-10 w-full text-[22px] rounded-lg font-semibold"
+                      "py-3.5 md:py-6 lg:py-5 lg:py-5 w-full lg:w-[95%] block lg:w-full text-[15px] md:text-xl lg:text-lg xl:text-xl rounded-[10px] font-semibold mt-6 md:mt-12"
                     }
                     text={!loadingForgot && "Next"}
                     btnDisable={loadingForgot}

@@ -234,7 +234,7 @@ const Login = () => {
         {/* logo */}
 
         <div className="lg:mt-12 flex flex-col items-center">
-          <h1 className="text-2xl md:text-[40px] lg:text-[28px] xl:text-[34px] text-center lg:text-left font-bold lg:self-start">
+          <h1 className="text-2xl md:text-[40px] lg:text-[28px] xl:text-[34px] text-center lg:text-left font-semibold lg:self-start">
             Login to your account!
           </h1>
 

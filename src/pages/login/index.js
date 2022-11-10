@@ -196,10 +196,10 @@ const Login = () => {
           setSuccessMsg(
             "Credentials matched successfully! We're redirecting you to the homepage..."
           );
-          setTimeout(() => {
-            navigate("/");
-            setLoading(false);
-          }, 1500);
+          // setTimeout(() => {
+          //   navigate("/");
+          //   setLoading(false);
+          // }, 1500);
         })
         .catch((error) => {
           setLoading(false);
@@ -222,7 +222,8 @@ const Login = () => {
   return (
     <div className="flex items-center font-open">
       <div className="w-full lg:w-[52%] lg:scale-90 xl:scale-100 text-secondary h-[90vh] lg:h-screen flex flex-col justify-center items-center">
-        <picture className="w-[75px] h-[75px] md:scale-[160%] border !border-1 mb-8 md:mb-[80px] lg:hidden rounded-full border-photoUp/70 p-2.5 pr-4 pt-4 self-center">
+        {/* logo */}
+        <picture className="w-[75px] h-[75px] mt-14 md:scale-[160%] border !border-1 mb-6 md:mb-[80px] lg:hidden rounded-full border-photoUp/70 p-2.5 pr-4 pt-4 self-center">
           <img
             className="w-full h-full"
             src="images/logo.png"
@@ -230,6 +231,8 @@ const Login = () => {
             alt=""
           />
         </picture>
+        {/* logo */}
+
         <div className="lg:mt-12 flex flex-col items-center">
           <h1 className="text-2xl md:text-[40px] lg:text-[28px] xl:text-[34px] text-center lg:text-left font-bold lg:self-start">
             Login to your account!
@@ -237,7 +240,7 @@ const Login = () => {
 
           {/* google login button */}
           <a
-            className="text-[11px] md:text-sm font-semibold mt-5 md:mt-9 lg:mt-7 xl:mt-9 mb-10 md:mb-12 lg:mb-8 xl:mb-10 inline-block pl-3.5 md:pl-6 lg:pl-5 xl:pl-6 pr-5 md:pr-8 lg:pr-7 xl:pr-8 py-2.5 md:py-5 lg:py-4 xl:py-5 rounded-[11px] md:rounded-lg lg:self-start border-2 border-secondary/20 hover:border-secondary/60 linear duration-300 cursor-pointer"
+            className="text-[11px] md:text-sm font-semibold mt-5 md:mt-9 lg:mt-7 xl:mt-9 mb-10 md:mb-12 lg:mb-8 xl:mb-10 inline-block pl-3 md:pl-6 lg:pl-5 xl:pl-6 pr-4 md:pr-8 lg:pr-7 xl:pr-8 py-2.5 md:py-5 lg:py-4 xl:py-5 rounded-[14px] md:rounded-lg lg:self-start border-2 border-secondary/20 hover:border-secondary/60 linear duration-300 cursor-pointer"
             onClick={handleGoogleSignIn}
           >
             <button className="flex items-center gap-2">
@@ -247,17 +250,17 @@ const Login = () => {
           </a>
           {/* google login button */}
 
-          <div className="w-[95%] md:w-[380px] lg:w-[420px] flex flex-col m-auto items-center lg:items-start">
+          <div className="w-[255px] md:w-[380px] lg:w-[420px] flex flex-col m-auto items-center lg:items-start">
             {/* ========== login form starts ========== */}
             <form
               action="#"
               method="POST"
-              className="flex flex-col gap-y-9 md:gap-y-10 lg:gap-y-8 xl:gap-y-10 w-full lg:w-[370px] xl:w-[380px] mb-4 xl:mb-6"
+              className="flex flex-col gap-y-8 md:gap-y-10 lg:gap-y-8 xl:gap-y-10 w-full lg:w-[370px] xl:w-[380px] mb-4 xl:mb-6"
             >
               <div className="relative" onClick={handleFocusEmail}>
                 <input
                   type={"email"}
-                  className="w-full lg:w-[90%] py-3.5 md:py-6 lg:py-5 px-[2px] md:px-1 text-[15px] md:text-xl border-b-[2px] border-focusSec font-semibold outline-0 focus:border-secondary linear duration-300 z-10"
+                  className="!w-full lg:w-[90%] py-3.5 md:py-6 lg:py-5 px-[2px] md:px-1 text-[15px] md:text-xl border-b-[2px] border-focusSec font-semibold outline-0 focus:border-secondary linear duration-300 z-10"
                   ref={refEmail}
                   onBlur={handleBlurEmail}
                   onChange={handleEmail}
@@ -326,14 +329,14 @@ const Login = () => {
                   </p>
                 )}
                 {successMsg != "" && (
-                  <p className="mt-8 px-2 py-1 text-[green] bg-[green]/20 border-[1px] border-[green] rounded-md text-lg font-semibold animate-[popDown_.4s_ease_1]">
+                  <p className="mt-4 md:mt-8 px-2 py-[2px] md:py-1 text-[green] bg-[green]/20 border-[1px] border-[green] rounded-md text-xs md:text-lg font-semibold animate-[popDown_.4s_ease_1]">
                     {successMsg}
                   </p>
                 )}
               </div>
 
               <Button
-                customClass={`py-3.5 md:py-6 lg:py-5 lg:py-5 w-full lg:w-[95%] block lg:w-full text-[15px] md:text-xl lg:text-lg xl:text-xl rounded-[10px] font-semibold mb-2 md:mb-3 lg:mt-2 xl:mt-0 ${
+                customClass={`py-3.5 md:py-6 lg:py-5 lg:py-5 w-full lg:w-[95%] block lg:w-full text-[15px] md:text-xl lg:text-lg xl:text-xl rounded-[10px] font-semibold mb-2 md:mb-5 lg:mt-2 xl:mt-0 ${
                   loading && "!pt-[14px] !pb-[10px] md:!pt-6 md:!pb-4"
                 }`}
                 goTo={"#"}
@@ -342,7 +345,6 @@ const Login = () => {
                 clickAct={handleSubmit}
                 Loader={PulseLoader}
                 loaderColor="#fff"
-                loaderCss={`fontSize: '110px'`}
                 loadingStatus={loading}
                 loaderMargin={3}
               />
@@ -350,7 +352,7 @@ const Login = () => {
             {/* ========== login form ends ========== */}
 
             <p
-              className="text-yellow font-semibold text-[13px] md:text-base lg:text-sm xl:text-base  text-center cursor-pointer hover:text-yellowHover linear duration-300 self-center lg:mr-16"
+              className="text-yellow font-semibold text-[13px] md:text-[17px] lg:text-sm xl:text-base  text-center cursor-pointer hover:text-yellowHover linear duration-300 self-center lg:mr-16"
               onClick={handleShowForgot}
               ref={refForgotPassToggler}
             >
@@ -359,35 +361,35 @@ const Login = () => {
 
             {/* ========== forgot pass modal starts ========== */}
             <div
-              className={`fixed top-0 left-0 w-full h-full bg-black/70 z-10 ${
+              className={`fixed top-0 left-0 lg:left-4 xl:left-0 w-screen lg:scale-[114%] xl:scale-[100%] h-full bg-black/70 z-10 ${
                 showForgot ? "block" : "hidden"
               } animate-[smooth_.4s_ease_1] grid place-items-center`}
             >
               <div
-                className="relative w-2/5 bg-white text-center py-12 px-6 rounded-lg animate-[slideX_.4s_ease_1]"
+                className="relative lg:w-2/5 bg-white text-center py-12 px-6 rounded-lg animate-[slideX_.4s_ease_1]"
                 ref={refForgotPass}
               >
-                <h2 className="text-primaryTwo text-4xl leading-none  font-semibold mb-12">
+                <h2 className="text-primaryTwo text-2xl md:text-4xl leading-none font-semibold mb-5 md:mb-12">
                   Forgot Password?
                 </h2>
-                <p className="mb-9 font-semibold text-lg text-[#341a91]">
+                <p className="mb-5 md:mb-9 font-semibold text-sm md:text-lg text-[#341a91]">
                   To reset your password, enter your email address first.
                 </p>
                 <form className="w-4/5 m-auto">
                   <input
                     type={"email"}
-                    className="w-full px-1 py-5 border-b-[2px] border-focusSec text-xl font-semibold outline-0 focus:border-secondary linear duration-300 z-10 mb-1"
+                    className="w-full px-1 py-3 md:py-5 border-b-[2px] border-focusSec text-[15px] md:text-xl font-semibold outline-0 focus:border-secondary linear duration-300 z-10 md:mb-1"
                     onChange={handleForgotEmail}
                     placeholder="Email Address"
                   />
                   {errForgot !== "" && (
                     // <p className="pt-1 pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
-                    <p className="absolute left-[85px] bg-[red]/20 border-2 border-[red] px-2 pb-1 rounded opacity- text-[red]/90 font-semibold animate-[popUp_.4s_ease_1]">
+                    <p className="absolute md:left-[85px] text-[13px] md:text-base px-1 md:px-2 pb-1 rounded text-[red]/90 md:bg-[red]/20 md:border-2 border-[red] font-semibold animate-[popUp_.4s_ease_1]">
                       {errForgot}
                     </p>
                   )}
                   {fErrForgot !== "" && (
-                    <p className="pt-1 pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                    <p className="text-[13px] md:text-base pt-1 pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                       {fErrForgot}
                     </p>
                   )}
@@ -422,7 +424,7 @@ const Login = () => {
             </div>
             {/* ========== forgot pass modal ends ========== */}
 
-            <p className="text-secondary text-[13px] md:text-[15px] lg:text-sm xl:text-[15px] text-center mt-2 xl:mt-4 self-center lg:mr-16">
+            <p className="text-secondary text-[13px] md:text-[17px] lg:text-sm xl:text-[15px] text-center mt-2 xl:mt-4 self-center lg:mr-16">
               Don’t have an account ?{" "}
               <Link
                 to="/registration"

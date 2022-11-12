@@ -46,12 +46,12 @@ const Home = () => {
     </div>
   ) : (
     user !== null && (
-      <div className="bg-primary/20 border-[3px] border-[#5F35F580] rounded-md mt-14 text-primaryTwo flex-col justify-center items-center p-10 pt-8 w-3/5 m-auto text-3xl font-semibold text-center animate-[popUp_.4s_ease_1]">
-        <p>
+      <div className="bg-primary/20 border-[1px] lg:border-[3px] border-[#5F35F580] rounded-md mt-14 text-primaryTwo flex-col justify-center items-center p-5 lg:p-10 lg:pt-8 w-4/5 lg:w-3/5 m-auto text-xl lg:text-[28px] font-semibold text-center animate-[popUp_.4s_ease_1]">
+        <p className="lg:leading-[34px]">
           Please verify your email address first in order to get access to your
           account.
         </p>
-        <p className="mt-3 text-2xl">
+        <p className="mt-2 lg:mt-3 text-lg lg:text-2xl">
           Check your email for the verification link.
         </p>
       </div>

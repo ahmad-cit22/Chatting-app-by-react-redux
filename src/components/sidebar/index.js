@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { VscHome } from "react-icons/vsc";
 import { TbMessageCircle, TbSettings } from "react-icons/tb";
 import { BsBell } from "react-icons/bs";
-import { GoSignOut } from "react-icons/go";
+import { FiLogOut } from "react-icons/fi";
 import { ImCamera } from "react-icons/im";
 import SidebarMenu from "../sidebarMenu";
 import { getAuth, signOut, updateProfile } from "firebase/auth";
@@ -188,8 +188,8 @@ const Sidebar = ({ activePage }) => {
         <SidebarMenu
           customClass={`${
             active === "home"
-              ? "before:lg:block after:lg:block text-primaryTwo"
-              : "after:hidden before:hidden text-white/70 hover:text-white"
+              ? "before:lg:block after:lg:block text-white lg:text-primaryTwo"
+              : "after:hidden before:hidden text-white/60 hover:text-white"
           }`}
           Icon={VscHome}
           goTo={"/"}
@@ -197,8 +197,8 @@ const Sidebar = ({ activePage }) => {
         <SidebarMenu
           customClass={`${
             active === "messages"
-              ? "before:lg:block after:lg:block text-primaryTwo"
-              : "after:hidden before:hidden text-white/70 hover:text-white"
+              ? "before:lg:block after:lg:block text-white lg:text-primaryTwo"
+              : "after:hidden before:hidden text-white/60 hover:text-white"
           }`}
           Icon={TbMessageCircle}
           goTo={"/messages"}
@@ -206,8 +206,8 @@ const Sidebar = ({ activePage }) => {
         <SidebarMenu
           customClass={`${
             active === "notifications"
-              ? "before:lg:block after:lg:block text-primaryTwo"
-              : "after:hidden before:hidden text-white/70 hover:text-white"
+              ? "before:lg:block after:lg:block text-white lg:text-primaryTwo"
+              : "after:hidden before:hidden text-white/60 hover:text-white"
           }`}
           Icon={BsBell}
           goTo={"/notifications"}
@@ -215,16 +215,16 @@ const Sidebar = ({ activePage }) => {
         <SidebarMenu
           customClass={`${
             active === "settings"
-              ? "before:lg:block after:lg:block text-primaryTwo"
-              : "after:hidden before:hidden text-white/70 hover:text-white"
+              ? "before:lg:block after:lg:block text-white lg:text-primaryTwo"
+              : "after:hidden before:hidden text-white/60 hover:text-white"
           }`}
           Icon={TbSettings}
           goTo={"/settings"}
         ></SidebarMenu>
         <button
-          className={`w-full z-10 relative py-[22px] text-3xl lg:text-[47px] flex justify-center cursor-pointer linear duration-300 after:w-[100%] after:h-full after:absolute after:bg-white after:content-[''] after:top-0 after:left-[14%] after:rounded-tl-[20px] after:rounded-bl-[20px] after:z-[-2] before:w-[22%] before:h-full before:absolute before:bg-primary before:content-[''] before:top-0 before:right-[-17%] before:rounded-tl-[12px] before:rounded-bl-[12px] before:z-[-1] before:shadow-[-2px_0_5px_0_rgba(0,0,0,.30)] lg:ml-2 mt-2 lg:mt-16 justify-self-end after:hidden before:hidden text-white/70 hover:text-white`}
+          className={`w-full z-10 relative py-[22px] text-[27.5px] md:text-[41px] lg:text-[40px] xl:text-[47px] flex justify-center cursor-pointer linear duration-300 lg:mt-14 justify-self-end text-white/60 hover:text-white`}
         >
-          <GoSignOut onClick={handleSignOut} />
+          <FiLogOut onClick={handleSignOut} />
         </button>
       </div>
 

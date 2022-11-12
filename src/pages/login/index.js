@@ -225,7 +225,7 @@ const Login = () => {
     <div className="flex items-center font-open">
       <div className="w-full lg:w-[52%] lg:scale-90 xl:scale-100 text-secondary h-[90vh] lg:h-screen flex flex-col justify-center items-center">
         {/* logo */}
-        <picture className="w-[75px] h-[75px] mt-12 md:mt-14 md:scale-[160%] border !border-1 mb-6 md:mb-[80px] lg:hidden rounded-full border-photoUp/70 p-2.5 pr-4 pt-4 self-center">
+        <picture className="w-[75px] h-[75px] mt-10 md:mt-14 md:scale-[160%] border !border-1 mb-6 md:mb-[80px] lg:hidden rounded-full border-photoUp/70 p-2.5 pr-4 pt-4 self-center">
           <img
             className="w-full h-full"
             src="images/logo.png"
@@ -257,12 +257,12 @@ const Login = () => {
             <form
               action="#"
               method="POST"
-              className="flex flex-col gap-y-8 md:gap-y-10 lg:gap-y-8 xl:gap-y-10 w-full lg:w-[370px] xl:w-[380px] mb-4 xl:mb-6"
+              className="flex flex-col gap-y-8 md:gap-y-12 lg:gap-y-8 xl:gap-y-10 w-full md:w-[400px] lg:w-[370px] xl:w-[380px] mb-4 xl:mb-6"
             >
               <div className="relative" onClick={handleFocusEmail}>
                 <input
                   type={"email"}
-                  className="!w-full lg:w-[90%] py-3.5 md:py-6 lg:py-5 px-[2px] md:px-1 text-[15px] md:text-xl border-b-[2px] border-focusSec font-semibold outline-0 focus:border-secondary linear duration-300 z-10"
+                  className="!w-full lg:w-[90%] py-3.5 md:py-6 lg:py-5 px-[2px] md:px-1 text-[15px] md:text-xl lg:text-lg xl:text-xl border-b-[2px] border-focusSec font-semibold outline-0 focus:border-secondary linear duration-300 z-10"
                   ref={refEmail}
                   onBlur={handleBlurEmail}
                   onChange={handleEmail}
@@ -278,12 +278,12 @@ const Login = () => {
                   Email Address
                 </p>
                 {errEmail != "" && (
-                  <p className="pt-[2px] text-[13px] md:text-base lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                  <p className="lg:pt-[1px] text-[13px] md:text-base lg:text-sm xl:text-base lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                     {errEmail}
                   </p>
                 )}
                 {fErrEmail != "" && (
-                  <p className="pt-[2px] text-[13px] md:text-base lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                  <p className="lg:pt-[1px] text-[13px] md:text-base lg:text-sm xl:text-base lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                     {fErrEmail}
                   </p>
                 )}
@@ -296,7 +296,7 @@ const Login = () => {
               >
                 <input
                   type={`${passVisibility ? "text" : "password"}`}
-                  className="w-full lg:w-[90%] py-3.5 md:py-6 lg:py-5 px-[2px] md:px-1 text-[15px] md:text-xl pr-9 md:pr-[50px] lg:pr-12 border-b-[2px] border-focusSec font-semibold outline-0 focus:border-secondary linear duration-300 z-10"
+                  className="w-full lg:w-[90%] py-3.5 md:py-6 lg:py-5 px-[2px] md:px-1 text-[15px] md:text-xl lg:text-lg xl:text-xl pr-9 md:pr-[50px] lg:pr-12 border-b-[2px] border-focusSec font-semibold outline-0 focus:border-secondary linear duration-300 z-10"
                   ref={refPass}
                   onChange={handlePass}
                 />
@@ -321,12 +321,12 @@ const Login = () => {
                   />
                 )}
                 {errPass != "" && (
-                  <p className="pt-[2px] text-[13px] md:text-base lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                  <p className="lg:pt-[1px] text-[13px] md:text-base lg:text-sm xl:text-base lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                     {errPass}
                   </p>
                 )}
                 {fErrPass != "" && (
-                  <p className="pt-[2px] text-[13px] md:text-base lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                  <p className="lg:pt-[1px] text-[13px] md:text-base lg:text-sm xl:text-base lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                     {fErrPass}
                   </p>
                 )}

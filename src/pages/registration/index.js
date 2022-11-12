@@ -262,7 +262,7 @@ const Registration = () => {
   return (
     <div className="flex items-center font-nunito">
       <div className="w-full relative lg:w-[52%] h-[90vh] lg:h-screen flex flex-col justify-center lg:items-end lg:scale-90 xl:scale-100">
-        <picture className="mt-16 md:mt-20 w-[75px] h-[75px] md:scale-[160%] border !border-1 mb-8 md:mb-[70px] lg:hidden rounded-full border-photoUp/70 p-2.5 pr-4 pt-4 self-center">
+        <picture className="mt-12 md:mt-20 w-[75px] h-[75px] md:scale-[160%] border !border-1 mb-8 md:mb-[70px] lg:hidden rounded-full border-photoUp/70 p-2.5 pr-4 pt-4 self-center">
           <img
             className="w-full h-full"
             src="images/logo.png"
@@ -270,7 +270,7 @@ const Registration = () => {
             alt=""
           />
         </picture>
-        <div className="lg:mt-12 lg:!mr-[55px] xl:!mr-[90px]">
+        <div className="lg:mt-12 lg:!mr-[55px] xl:!mr-[70px]">
           <h1 className="text-[22px] md:text-[40px] lg:text-[28px] xl:text-[34px] text-center lg:text-left text-primary font-bold">
             Get started with easily register
           </h1>
@@ -311,12 +311,12 @@ const Registration = () => {
                     Email Address
                   </p>
                   {errEmail !== "" && (
-                    <p className="pt-[1px] md:pt-[2px] text-[13px] md:text-lg lg:text-base pl-1 md:pl-4 lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                    <p className="xl:pt-[1px] text-[13px] md:text-lg lg:text-base pl-1 md:pl-4 lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                       {errEmail}
                     </p>
                   )}
                   {fErrEmail !== "" && (
-                    <p className="pt-[1px] md:pt-[2px] text-[13px] md:text-lg lg:text-base pl-1 md:pl-4 lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                    <p className="xl:pt-[1px] text-[13px] md:text-lg lg:text-base pl-1 md:pl-4 lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                       {fErrEmail}
                     </p>
                   )}
@@ -340,7 +340,7 @@ const Registration = () => {
                     Full Name
                   </p>
                   {errName !== "" && (
-                    <p className="pt-[1px] md:pt-[2px] text-[13px] md:text-lg lg:text-base pl-1 md:pl-4 lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                    <p className="xl:pt-[1px] text-[13px] md:text-lg lg:text-base pl-1 md:pl-4 lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                       {errName}
                     </p>
                   )}
@@ -378,7 +378,7 @@ const Registration = () => {
                     />
                   )}
                   {errPass !== "" && (
-                    <p className="pt-[1px] md:pt-[2px] text-[13px] md:text-lg lg:text-base pl-1 md:pl-4 lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
+                    <p className="xl:pt-[1px] text-[13px] md:text-lg lg:text-base pl-1 md:pl-4 lg:pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1]">
                       {errPass}
                     </p>
                   )}

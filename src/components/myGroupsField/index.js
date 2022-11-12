@@ -102,7 +102,7 @@ const MyGroupsField = () => {
   };
 
   return (
-    <div className="w-full py-3 px-3 relative bg-white drop-shadow-[0px_6px_3px_rgba(0,0,0,0.25)] h-[48%] rounded-lg">
+    <div className="w-full py-3 px-3 relative bg-white drop-shadow-[0px_6px_3px_rgba(0,0,0,0.25)] lg:h-[48%] rounded-lg">
       <div className="flex justify-between items-center cursor-pointer pb-4 mb-1 border-b-[3px]">
         {/* heading starts */}
         <h3 className="text-xl font-semibold px-2">
@@ -134,7 +134,7 @@ const MyGroupsField = () => {
       {/* header ends */}
 
       {/* main contents starts */}
-      <SimpleBar style={{ maxHeight: 379 }} className="flex flex-col px-2">
+      <SimpleBar className="flex flex-col px-2 max-h-[350px] lg:max-h-[370px]">
         {myGroupList.length < 1 ? (
           <p className="p-4 text-center bg-primary/20 mt-8 text-sm text-black rounded-md">
             Groups created by you will be shown here.

@@ -58,17 +58,17 @@ const ChatDisplayMin = ({
           </p>
         </div>
         <div
-          className={`w-[41%] flex flex-col gap-y-1 justify-center items-center font-semibold text-[12px] xl:text-[14px] text-white ${classBtnBox}`}
+          className={`w-[40%] flex flex-col gap-y-1 justify-center items-center font-semibold text-[12px] xl:text-[14px] text-white ${classBtnBox}`}
         >
           <button
-            className={`w-3/4 md:w-full break-words bg-primary/90 hover:bg-primary linear duration-300 px-[2px] xl:px-1 py-[2px] rounded-md active:scale-[90%] ${classBtn}`}
+            className={`w-3/4 md:w-full break-words bg-primary/90 hover:bg-primary linear duration-300 px-[2px] xl:px-[2px] py-[2px] rounded-md active:scale-[90%] ${classBtn}`}
             onClick={clickAct}
             disabled={disableBtn}
           >
             {btnText}
           </button>
           <button
-            className={`w-3/4 md:w-full break-words bg-primary/90 hover:bg-primary linear duration-300 px-[2px] xl:px-1 py-[2px] rounded-md active:scale-[90%] ${classBtnTwo}`}
+            className={`w-3/4 md:w-full break-words bg-primary/90 hover:bg-primary linear duration-300 px-[2px] xl:px-[2px] py-[2px] rounded-md active:scale-[90%] ${classBtnTwo}`}
             onClick={clickActTwo}
             disabled={disableBtnTwo}
           >

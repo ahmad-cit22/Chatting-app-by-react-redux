@@ -197,7 +197,7 @@ const JoinGroupField = () => {
         <div className="flex justify-between items-center pb-5 mb-1 border-b-[3px] pr-2">
           <h3 className="text-xl font-semibold px-2">Join Groups</h3>
           <button
-            className={`bg-primary/90 hover:bg-primary linear duration-300 text-[14.5px] text-white font-semibold px-3 py-1 rounded-md active:scale-[90%]`}
+            className={`bg-primary/90 hover:bg-primary linear duration-300 text-sm md:text-[14.5px] text-white font-semibold px-2 md:px-3 py-1 rounded-md active:scale-[90%]`}
             onClick={handleShowCreateGroup}
           >
             Create Group
@@ -206,7 +206,7 @@ const JoinGroupField = () => {
         </div>
         <SimpleBar className="flex flex-col px-2 max-h-[350px] lg:max-h-[199px] px-1">
           {groupList.length < 1 ? (
-            <p className="p-4 text-center bg-primary/20 mt-8 font-semibold text-[15px] text-black rounded-md">
+            <p className="p-3 mb-7 lg:mb-0 md:p-4 text-center bg-primary/20 mt-8 text-sm md:text-[15px] text-black rounded-md w-[85%] lg:w-full m-auto">
               Groups created by others will be shown here.
             </p>
           ) : (
@@ -233,9 +233,9 @@ const JoinGroupField = () => {
                   grpMemberList.includes(item.id + currentId)
                     ? "!bg-white text-primaryTwo drop-shadow-lg"
                     : ""
-                }`}
+                } !w-4/5 md:!w-full`}
                 classBtnBox={"!w-[43%]"}
-                classBtnTwo={"hidden"}
+                classBtnTwo={"hidden !w-4/5 md:!w-full"}
                 chatLink="#"
                 disableBtn={
                   grpReqList.includes(item.id + currentId) ||
@@ -260,23 +260,9 @@ const JoinGroupField = () => {
           className="relative w-2/5 bg-white text-center py-10 px-6 rounded-md animate-[popUp_.3s_ease_1]"
           ref={refCreateGroupModal}
         >
-          <h2 className="text-primaryTwo text-[32px] leading-none font-semibold mb-12">
+          <h2 className="text-primary text-2xl md:text-[32px] leading-none font-semibold mb-12">
             Create New Group
           </h2>
-          {/* <div className="flex pl-16 items-center gap-x-6">
-              <p className="text-lg font-semibold text-primary">
-                Preview Image :
-              </p>
-              <div className="rounded-full overflow-hidden h-[100px] w-[100px] border-[1px] border-photoUp p-0 grid justify-center items-center">
-                <picture>
-                  {img ? (
-                    <img src={previewImg} loading={"lazy"} />
-                  ) : (
-                    <img src={auth.currentUser.photoURL} loading={"lazy"} />
-                  )}
-                </picture>
-              </div>
-            </div> */}
           <form className="w-4/5 m-auto" ref={refCreateGroupFrom}>
             <input
               type={"text"}

@@ -136,7 +136,7 @@ const MyGroupsField = () => {
       {/* main contents starts */}
       <SimpleBar className="flex flex-col px-2 max-h-[350px] lg:max-h-[285px] px-1">
         {myGroupList.length < 1 ? (
-          <p className="p-4 text-center bg-primary/20 mt-8 text-sm text-black rounded-md">
+          <p className="p-3 mb-7 lg:mb-0 md:p-4 text-center bg-primary/20 mt-8 text-sm md:text-[15px] text-black rounded-md w-[85%] lg:w-full m-auto">
             Groups created by you will be shown here.
           </p>
         ) : showInfo ? (
@@ -149,7 +149,7 @@ const MyGroupsField = () => {
             </p>
 
             {groupReqList.length < 1 ? (
-              <p className="p-4 text-center bg-primary/20 mt-8 text-[15px] font-semibold text-black rounded-md">
+              <p className="p-3 mb-7 lg:mb-0 md:p-4 text-center bg-primary/20 mt-8 text-sm md:text-[15px] text-black rounded-md w-[85%] lg:w-full m-auto">
                 No join requests.
               </p>
             ) : (
@@ -185,7 +185,7 @@ const MyGroupsField = () => {
             </p>
 
             {groupMemberList.length < 1 ? (
-              <p className="p-4 text-center bg-primary/20 mt-8 text-[15px] font-semibold text-black rounded-md">
+              <p className="p-3 mb-7 lg:mb-0 md:p-4 text-center bg-primary/20 mt-8 text-sm md:text-[15px] text-black rounded-md w-[85%] lg:w-full m-auto">
                 Group members will be shown here.
               </p>
             ) : (

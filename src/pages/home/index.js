@@ -38,7 +38,7 @@ const Home = () => {
           <FriendsField />
           <MyGroupsField />
         </div>
-        <div className="w-full xl:w-[30%] flex flex-col lg:flex-row xl:flex-col gap-y-9 lg:gap-y-0  justify-between">
+        <div className="w-full xl:w-[30%] flex flex-col lg:flex-row xl:flex-col gap-y-9 lg:gap-y-0 lg:gap-x-9 xl:gap-x-0 justify-between">
           <UsersField />
           <BlockField />
         </div>

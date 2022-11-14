@@ -110,7 +110,7 @@ const UsersField = () => {
   };
 
   return (
-    <div className="w-full py-3 px-3 relative bg-white drop-shadow-[0px_6px_3px_rgba(0,0,0,0.25)] lg:h-[48%] rounded-lg">
+    <div className="w-full py-3 px-3 relative bg-white drop-shadow-[0px_6px_3px_rgba(0,0,0,0.25)] xl:h-[48%] rounded-lg lg:mb-3 xl:mb-0">
       <div className="flex justify-between items-center pb-4 mb-1 border-b-[3px]">
         <h3 className="text-xl md:text-2xl lg:text-xl font-semibold px-2">
           Users
@@ -119,7 +119,7 @@ const UsersField = () => {
       </div>
       <SimpleBar
         color="blue"
-        className="flex flex-col px-2 max-h-[350px] lg:max-h-[35vh] px-1"
+        className="flex flex-col px-2 max-h-[350px] xl:max-h-[35vh] lg:h-[350px] xl:h-auto px-1"
       >
         {usersList.map((item) => (
           <ChatDisplayMin

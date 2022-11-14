@@ -26,15 +26,15 @@ const Home = () => {
   }, []);
 
   return emailVerify ? (
-    <div className="py-6 px-3 lg:px-5 flex gap-x-8 h-screen font-pop">
+    <div className="py-6 px-3 md:px-10 lg:px-5 flex gap-x-8 h-screen font-pop">
       <Sidebar activePage={"home"} />
-      <div className="w-full lg:ml-[130px] xl:ml-0 lg:w-[85%] h-full flex flex-col gap-y-9 lg:gap-y-0 lg:flex-row lg:justify-between lg:flex-wrap xl:flex-nowrap">
-        <div className="w-full lg:w-[50%] xl:w-[35%] flex flex-col gap-y-9 lg:gap-y-0  justify-between">
+      <div className="w-full lg:ml-[130px] xl:ml-0 lg:w-[85%] h-full flex flex-col gap-y-9 lg:gap-y-8 xl:gap-y-0 lg:gap-x-4 lg:flex-row lg:justify-between lg:flex-wrap xl:flex-nowrap">
+        <div className="w-full lg:w-[47%] xl:w-[35%] flex flex-col gap-y-9 lg:gap-y-8 xl:gap-y-0  justify-between">
           <SearchBar />
           <JoinGroupField />
           <FriendReqField />
         </div>
-        <div className="w-full lg:w-[50%] xl:w-[30%] flex flex-col gap-y-9 lg:gap-y-0  justify-between">
+        <div className="w-full lg:w-[47%] xl:w-[30%] flex flex-col gap-y-9 lg:gap-y-8 xl:gap-y-0  justify-between">
           <FriendsField />
           <MyGroupsField />
         </div>

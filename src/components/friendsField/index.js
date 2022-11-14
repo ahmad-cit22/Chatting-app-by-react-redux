@@ -82,7 +82,7 @@ const FriendsField = () => {
   };
 
   return (
-    <div className="w-full py-3 px-3 relative bg-white drop-shadow-[0px_6px_3px_rgba(0,0,0,0.25)] h-[47%] rounded-lg">
+    <div className="w-full py-3 px-3 relative bg-white drop-shadow-[0px_6px_3px_rgba(0,0,0,0.25)] lg:h-[48%] rounded-lg">
       <div className="flex justify-between items-center pb-4 mb-1 border-b-[3px]">
         <h3 className="text-xl font-semibold px-2">
           Friends{" "}
@@ -92,7 +92,7 @@ const FriendsField = () => {
         </h3>
         <HiOutlineDotsVertical className="text-[22px] mr-1 !text-primaryTwo z-[2] text-black/80 cursor-pointer" />
       </div>
-      <SimpleBar style={{ maxHeight: 369 }} className="flex flex-col px-2">
+      <SimpleBar className="flex flex-col px-2 max-h-[350px] lg:max-h-[285px] px-1">
         {friendList.length < 1 ? (
           <p className="p-4 text-center bg-[red]/20 mt-8 text-[15px] font-semibold text-[red] rounded-md">
             Currently, you've no friends.

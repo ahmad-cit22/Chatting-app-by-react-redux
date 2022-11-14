@@ -134,7 +134,7 @@ const MyGroupsField = () => {
       {/* header ends */}
 
       {/* main contents starts */}
-      <SimpleBar className="flex flex-col px-2 max-h-[350px] lg:max-h-[370px]">
+      <SimpleBar className="flex flex-col px-2 max-h-[350px] lg:max-h-[285px] px-1">
         {myGroupList.length < 1 ? (
           <p className="p-4 text-center bg-primary/20 mt-8 text-sm text-black rounded-md">
             Groups created by you will be shown here.

@@ -86,7 +86,7 @@ const BlockField = () => {
   };
 
   return (
-    <div className="w-full py-3 px-3 relative bg-white drop-shadow-[0px_6px_3px_rgba(0,0,0,0.25)] h-[47%] rounded-lg">
+    <div className="w-full py-3 px-3 mb-20 md:mb-24 lg:mb-0 relative bg-white drop-shadow-[0px_6px_3px_rgba(0,0,0,0.25)] lg:h-[48%] rounded-lg">
       <div className="flex justify-between items-center pb-4 mb-1 border-b-[3px]">
         <h3 className="text-xl font-semibold px-2">
           Blocked Users
@@ -98,8 +98,7 @@ const BlockField = () => {
       </div>
       <SimpleBar
         color="blue"
-        style={{ maxHeight: 369 }}
-        className="flex flex-col px-2"
+        className="flex flex-col px-2 max-h-[350px] lg:max-h-[285px] px-1"
       >
         {blockList.length < 1 ? (
           <p className="p-4 text-center bg-primary/20 mt-6 font-semibold text-[15px] text-black rounded-md">
@@ -130,7 +129,7 @@ const BlockField = () => {
               classAvatar={"mr-1"}
               classChtName={""}
               classMsg={"!text-[13px] truncate"}
-              classBtnBox={"!w-[40%] !text-[16px]"}
+              classBtnBox={"!w-[40%] md:!text-[16px]"}
               classBtn={`${
                 currentId !== item.blockedById
                   ? "!bg-white text-primaryTwo drop-shadow-lg"

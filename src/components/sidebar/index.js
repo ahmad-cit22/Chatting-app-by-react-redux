@@ -165,7 +165,7 @@ const Sidebar = ({ activePage }) => {
   return (
     <div className="fixed lg:static z-[10] left-0 bottom-0 w-full lg:w-[12%] lg:px-1 lg:py-8 bg-primary lg:h-full lg:rounded-lg flex lg:flex-col">
       <div className="w-full overflow-hidden lg:gap-y-[2.5vh] flex lg:flex-col items-center lg:justify-start group px-4 lg:px-0">
-        <div className="lg:pb-6 flex lg:flex-col items-center lg:gap-y-2 w-full md:justify-center">
+        <div className="lg:pb-6 flex lg:flex-col items-center lg:gap-y-2 w-full justify-between md:justify-center">
           <div className="relative">
             <picture className="rounded-full overflow-hidden h-[35px] w-[35px] md:h-[55px] md:w-[55px] lg:h-[70px] lg:w-[70px] border-[3px] border-white flex justify-center items-center bg-white">
               <img
@@ -176,7 +176,7 @@ const Sidebar = ({ activePage }) => {
               />
             </picture>
             <button
-              className="absolute bottom-[-2.5px] lg:bottom-[-2px] xl:bottom-[-2px] z-10 right-[-5px] md:right-[-6px] lg:right-[-5px] xl:right-[-5px] bg-white rounded-full inline-block p-[3px] md:p-[5px] lg:p-[4px] xl:p-[5px] border-[2px] lg:border-[2.5px] border-photoUp text-primaryTwo hover:bg-primary hover:border-white hover:text-white linear duration-300 lg:hidden group-hover:block animate-[popUp_.3s_ease_1] flex justify-center items-center"
+              className="absolute bottom-[-2.5px] lg:bottom-[-2px] xl:bottom-[-2px] z-10 right-[-6px] md:right-[-6px] lg:right-[-5px] xl:right-[-5px] bg-white rounded-full inline-block p-[3px] md:p-[5px] lg:p-[4px] xl:p-[5px] border-[2px] lg:border-[2.5px] border-photoUp text-primaryTwo hover:bg-primary hover:border-white hover:text-white linear duration-300 lg:hidden group-hover:block animate-[popUp_.3s_ease_1] flex justify-center items-center"
               onClick={photoUploadShow}
             >
               <ImCamera className="text-[10px] md:text-sm" />

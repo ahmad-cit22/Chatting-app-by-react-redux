@@ -236,7 +236,7 @@ const Login = () => {
         {/* logo */}
 
         <div className="lg:mt-12 flex flex-col items-center">
-          <h1 className="text-2xl md:text-[40px] lg:text-[28px] xl:text-[34px] text-center lg:text-left font-bold lg:self-start">
+          <h1 className="text-2xl md:text-[40px] lg:text-3xl xl:text-[34px] text-center lg:text-left font-bold lg:self-start">
             Login to your account!
           </h1>
 
@@ -252,17 +252,17 @@ const Login = () => {
           </a>
           {/* google login button */}
 
-          <div className="w-[255px] md:w-[380px] lg:w-[420px] flex flex-col m-auto items-center lg:items-start">
+          <div className="w-[255px] md:w-[380px] lg:w-[400px] flex flex-col m-auto items-center lg:items-start">
             {/* ========== login form starts ========== */}
             <form
               action="#"
               method="POST"
-              className="flex flex-col gap-y-8 md:gap-y-12 lg:gap-y-8 xl:gap-y-10 w-full md:w-[400px] lg:w-[370px] xl:w-[380px] mb-4 xl:mb-6"
+              className="flex flex-col gap-y-8 md:gap-y-12 lg:gap-y-8 xl:gap-y-10 w-full md:w-[400px] lg:w-[360px] xl:w-[380px] mb-4 xl:mb-6"
             >
               <div className="relative" onClick={handleFocusEmail}>
                 <input
                   type={"email"}
-                  className="!w-full lg:w-[90%] py-3.5 md:py-6 lg:py-5 px-[2px] md:px-1 text-[15px] md:text-xl lg:text-lg xl:text-xl border-b-[2px] border-focusSec font-semibold outline-0 focus:border-secondary linear duration-300 z-10"
+                  className="w-full lg:w-[90%] py-3.5 md:py-6 lg:py-5 px-[2px] md:px-1 text-[15px] md:text-xl lg:text-lg xl:text-xl border-b-[2px] border-focusSec font-semibold outline-0 focus:border-secondary linear duration-300 z-10"
                   ref={refEmail}
                   onBlur={handleBlurEmail}
                   onChange={handleEmail}

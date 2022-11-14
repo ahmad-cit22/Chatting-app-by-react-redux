@@ -193,7 +193,7 @@ const JoinGroupField = () => {
 
   return (
     <>
-      <div className="w-full overflow-hidden py-1 px-3 relative bg-white drop-shadow-[0px_6px_4px_rgba(0,0,0,0.25)] h-[36%] rounded-lg">
+      <div className="w-full py-1 px-3 relative bg-white drop-shadow-[0px_6px_4px_rgba(0,0,0,0.25)] lg:h-[36.5%] rounded-lg">
         <div className="flex justify-between items-center pb-5 mb-1 border-b-[3px] pr-2">
           <h3 className="text-xl font-semibold px-2">Join Groups</h3>
           <button
@@ -204,7 +204,7 @@ const JoinGroupField = () => {
           </button>
           {/* <HiOutlineDotsVertical className="text-[22px] mr-1 !text-primaryTwo z-[2] text-black/80 cursor-pointer" /> */}
         </div>
-        <SimpleBar style={{ maxHeight: 271 }} className="flex flex-col px-2">
+        <SimpleBar className="flex flex-col px-2 max-h-[350px] lg:max-h-[199px] px-1">
           {groupList.length < 1 ? (
             <p className="p-4 text-center bg-primary/20 mt-8 font-semibold text-[15px] text-black rounded-md">
               Groups created by others will be shown here.
@@ -214,13 +214,13 @@ const JoinGroupField = () => {
               <ChatDisplayMin
                 avatarPath={"images/grp_avatar_1.png"}
                 avatarAlt={"grp_avatar_1"}
-                classAvatar={"!mr-1"}
+                classAvatar={"xl:!mr-1 !w-1/5 xl:!w-[22%]"}
                 chatName={item.grpName}
                 message={item.grpTag}
                 messageFooter={`Admin: ${item.adminName}`}
-                classTextBox={"!w-[57%]"}
-                classChtName={"!text-lg"}
-                classImg={"!h-[72px] !w-[72px]"}
+                classTextBox={"xl:!w-[57%]"}
+                classChtName={"xl:!text-base"}
+                classImg={"xl:!h-[65px] xl:!w-[65px]"}
                 btnText={`${
                   grpReqList.includes(item.id + currentId)
                     ? "Request Sent"

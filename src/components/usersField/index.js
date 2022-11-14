@@ -110,15 +110,14 @@ const UsersField = () => {
   };
 
   return (
-    <div className="w-full py-3 px-3 relative bg-white drop-shadow-[0px_6px_3px_rgba(0,0,0,0.25)] lg:h-[47%] rounded-lg">
+    <div className="w-full py-3 px-3 relative bg-white drop-shadow-[0px_6px_3px_rgba(0,0,0,0.25)] lg:h-[48%] rounded-lg">
       <div className="flex justify-between items-center pb-4 mb-1 border-b-[3px]">
         <h3 className="text-xl font-semibold px-2">Users</h3>
         <HiOutlineDotsVertical className="text-[22px] mr-1 !text-primaryTwo z-[2] text-black/80 cursor-pointer" />
       </div>
       <SimpleBar
         color="blue"
-        style={{ maxHeight: 369 }}
-        className="flex flex-col px-2"
+        className="flex flex-col px-2 max-h-[350px] lg:max-h-[285px] px-1"
       >
         {usersList.map((item) => (
           <ChatDisplayMin
@@ -129,7 +128,7 @@ const UsersField = () => {
             classAvatar={"mr-1"}
             classTextBox={"pl-3"}
             classChtName={""}
-            classMsg={"!text-[13px]"}
+            classMsg={""}
             classBtnBox={""}
             classBtn={`${
               friendReqList.includes(currentId + item.id) ||

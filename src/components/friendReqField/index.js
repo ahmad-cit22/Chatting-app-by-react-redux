@@ -62,7 +62,7 @@ const FriendReqField = () => {
   return (
     <div className="w-full py-3 px-3 relative bg-white drop-shadow-[0px_6px_3px_rgba(0,0,0,0.25)] lg:h-[48%] rounded-lg">
       <div className="flex justify-between items-center pb-5 mb-1 border-b-[3px]">
-        <h3 className="text-xl font-semibold px-2">
+        <h3 className="text-xl md:text-2xl lg:text-xl font-semibold px-2">
           Friend Requests{" "}
           <span className="text-primaryTwo/80 text-base ml-4">
             {friendReqList.length}
@@ -70,7 +70,7 @@ const FriendReqField = () => {
         </h3>
         <HiOutlineDotsVertical className="text-[22px] mr-1 !text-primaryTwo z-[2] text-black/80 cursor-pointer" />
       </div>
-      <SimpleBar className="flex flex-col px-2 max-h-[350px] lg:max-h-[285px] px-1">
+      <SimpleBar className="flex flex-col px-2 max-h-[350px] lg:max-h-[35vh] px-1">
         {friendReqList.length < 1 ? (
           <p className="p-3 mb-7 lg:mb-0 md:p-4 text-center bg-[red]/20 mt-8 text-sm md:text-[15px] text-[red] rounded-md w-[90%] lg:w-full m-auto">
             Currently, you've no friend requests.
@@ -85,10 +85,10 @@ const FriendReqField = () => {
               message={item.senderEmail}
               classImg={"xl:!h-[65px] xl:!w-[65px]"}
               classTextBox={"xl:!w-[70%]"}
-              classChtName={"xl:!text-lg"}
+              classChtName={"xl:!text-base"}
               btnText={"Accept"}
               classBtnBox={"xl:!w-[30%]"}
-              btnTwoText={"Remove"}
+              btnTwoText={"Decline"}
               classBtnTwo={"!bg-[red]/80 hover:!bg-[red]"}
               clickAct={() => handleFriendReqAccept(item)}
             />

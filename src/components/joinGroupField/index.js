@@ -195,16 +195,18 @@ const JoinGroupField = () => {
     <>
       <div className="w-full py-1 px-3 relative bg-white drop-shadow-[0px_6px_4px_rgba(0,0,0,0.25)] xl:h-[36.5%] rounded-lg">
         <div className="flex justify-between items-center pb-5 mb-1 border-b-[3px] pr-2">
-          <h3 className="text-xl font-semibold px-2">Join Groups</h3>
+          <h3 className="text-xl md:text-2xl lg:text-xl font-semibold px-2">
+            Join Groups
+          </h3>
           <button
-            className={`bg-primary/90 hover:bg-primary linear duration-300 text-sm md:text-[14.5px] text-white font-semibold px-2 md:px-3 py-1 rounded-md active:scale-[90%]`}
+            className={`bg-primary/90 hover:bg-primary linear duration-300 text-sm md:text-[17px] lg:text-[14.5px] text-white font-semibold px-2 md:px-3 py-1 md:py-2 lg:py-1 rounded-md active:scale-[90%]`}
             onClick={handleShowCreateGroup}
           >
             Create Group
           </button>
           {/* <HiOutlineDotsVertical className="text-[22px] mr-1 !text-primaryTwo z-[2] text-black/80 cursor-pointer" /> */}
         </div>
-        <SimpleBar className="flex flex-col px-2 max-h-[350px] xl:max-h-[199px] px-1">
+        <SimpleBar className="flex flex-col px-2 max-h-[350px] xl:max-h-[25vh] px-1">
           {groupList.length < 1 ? (
             <p className="p-3 mb-7 lg:mb-0 md:p-4 text-center bg-primary/20 mt-8 text-sm md:text-[15px] text-black rounded-md w-[85%] lg:w-full m-auto">
               Groups created by others will be shown here.
@@ -214,7 +216,7 @@ const JoinGroupField = () => {
               <ChatDisplayMin
                 avatarPath={"images/grp_avatar_1.png"}
                 avatarAlt={"grp_avatar_1"}
-                classAvatar={"xl:!mr-1 !w-1/5 md:!w-[15%] lg:!w-[24%]"}
+                classAvatar={"xl:!mr-1 !w-1/5 md:!w-[15%] lg:!w-[23%]"}
                 chatName={item.grpName}
                 message={item.grpTag}
                 messageFooter={`Admin: ${item.adminName}`}

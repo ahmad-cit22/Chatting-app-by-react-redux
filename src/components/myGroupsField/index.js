@@ -102,10 +102,10 @@ const MyGroupsField = () => {
   };
 
   return (
-    <div className="w-full py-3 px-3 relative bg-white drop-shadow-[0px_6px_3px_rgba(0,0,0,0.25)] lg:h-[48%] rounded-lg">
+    <div className="w-full py-5 px-3 relative bg-white drop-shadow-[0px_6px_3px_rgba(0,0,0,0.25)] lg:h-[48%] rounded-lg">
       <div className="flex justify-between items-center cursor-pointer pb-4 mb-1 border-b-[3px]">
         {/* heading starts */}
-        <h3 className="text-xl font-semibold px-2">
+        <h3 className="text-xl md:text-2xl lg:text-xl font-semibold px-2">
           {showInfo || showMembers ? grpName : "My Groups"}
           {!showInfo && !showMembers && (
             <span className="text-primaryTwo/80 text-base ml-4">
@@ -134,7 +134,7 @@ const MyGroupsField = () => {
       {/* header ends */}
 
       {/* main contents starts */}
-      <SimpleBar className="flex flex-col px-2 max-h-[350px] lg:max-h-[285px] px-1">
+      <SimpleBar className="flex flex-col px-2 max-h-[350px] lg:max-h-[35vh] px-1">
         {myGroupList.length < 1 ? (
           <p className="p-3 mb-7 lg:mb-0 md:p-4 text-center bg-primary/20 mt-8 text-sm md:text-[15px] text-black rounded-md w-[85%] lg:w-full m-auto">
             Groups created by you will be shown here.
@@ -159,15 +159,16 @@ const MyGroupsField = () => {
                   avatarAlt={"frnd_avatar_3"}
                   chatName={item.senderName}
                   message={item.senderEmail}
+                  messageFooter={""}
                   classAvatar={"mr-1"}
                   classTextBox={"pl-3"}
                   classChtName={""}
-                  classMsg={"!text-[13px] truncate"}
+                  classMsg={""}
                   btnText={"Accept"}
                   classBtn={""}
                   btnTwoText={"Decline"}
                   classBtnTwo={"!bg-[red]/80 hover:!bg-[red]"}
-                  classTime={"pr-1 justify-self-end hidden"}
+                  classTime={"pr-1 hidden"}
                   subText={""}
                   clickAct={() => handleGrpReqAccept(item)}
                   clickActTwo={() => handleGrpReqDecline(item)}
@@ -198,12 +199,12 @@ const MyGroupsField = () => {
                   classAvatar={"mr-1"}
                   classTextBox={"pl-3"}
                   classChtName={""}
-                  classMsg={"!text-[13px] truncate"}
+                  classMsg={""}
                   btnText={"Message"}
                   classBtn={""}
                   btnTwoText={"Remove"}
                   classBtnTwo={"!bg-[red]/80 hover:!bg-[red]"}
-                  classTime={"pr-1 justify-self-end hidden"}
+                  classTime={"pr-1 hidden"}
                   subText={""}
                   clickAct={() => handleGrpReqAccept(item)}
                   clickActTwo={() => handleGrpReqDecline(item)}
@@ -221,11 +222,11 @@ const MyGroupsField = () => {
               classAvatar={"mr-1"}
               classTextBox={"pl-3"}
               classChtName={""}
-              classMsg={"!text-[13px] truncate"}
+              classMsg={""}
               btnText={"Info"}
               classBtn={""}
               btnTwoText={"Members"}
-              classTime={"pr-1 justify-self-end hidden"}
+              classTime={"pr-1 hidden"}
               subText={""}
               clickAct={() => handleGrpInfo(item)}
               clickActTwo={() => handleGrpMembers(item)}

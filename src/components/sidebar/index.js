@@ -188,7 +188,7 @@ const Sidebar = ({ activePage }) => {
               <ImCamera className="text-[10px] md:text-sm" />
             </button>
           </div>
-          <h3 className="text-white hidden lg:block lg:text-[15px] xl:text-[17px] font-semibold text-center">
+          <h3 className="text-white hidden lg:block lg:text-[15px] xl:text-lg font-semibold text-center">
             {userData.displayName}
           </h3>
         </div>

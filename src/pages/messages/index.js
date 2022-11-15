@@ -5,6 +5,7 @@ import FriendsField from "../../components/friendsField";
 import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import ChatField from "../../components/chatField";
 
 const Messages = () => {
   const navigate = useNavigate();
@@ -39,12 +40,14 @@ const Messages = () => {
           <div className="w-full lg:w-[48%] xl:w-[35%] flex flex-col gap-y-9 lg:gap-y-8 xl:gap-y-0 justify-between">
             <GroupsField />
             <FriendsField
-              btnOneTxt={"Message"}
+              btnOneTxt={"Chat"}
               messageBtn={true}
               // clickActOne={() => handleMessage(item)}
             />
           </div>
-          <div className="w-full lg:w-[48%] xl:w-[64%] flex flex-col gap-y-9 lg:gap-y-8 xl:gap-y-0  justify-between"></div>
+          <div className="w-full lg:w-[48%] xl:w-[64%] flex flex-col gap-y-9 lg:gap-y-8 xl:gap-y-0  justify-start">
+            <ChatField />
+          </div>
         </div>
       </div>
     ))

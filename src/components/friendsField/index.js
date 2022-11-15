@@ -13,12 +13,14 @@ import {
 } from "firebase/database";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { activeChat } from "../../slices/activeChatSlice";
 
 const FriendsField = ({ btnOneTxt, messageBtn }) => {
   const db = getDatabase();
   const userData = useSelector((state) => state.userLoginInfo.userInfo);
   const currentId = userData.uid;
+  const dispatch = useDispatch();
 
   const friendsRef = ref(db, "friends/");
   const blockedUsersRef = ref(db, "blockedUsers/");
@@ -82,8 +84,22 @@ const FriendsField = ({ btnOneTxt, messageBtn }) => {
         });
   };
 
-  const handleMsgSelect = (item) => {
-    console.log("msg", item);
+  const handleActiveChatMsg = (item) => {
+    const chatInfo = {
+      status: "single",
+    };
+    if (currentId === item.receiverId) {
+      chatInfo.receiverId = item.senderId;
+      chatInfo.receiverName = item.senderName;
+      chatInfo.receiverEmail = item.senderEmail;
+      chatInfo.receiverImg = item.senderImg;
+    } else {
+      chatInfo.receiverId = item.receiverId;
+      chatInfo.receiverName = item.receiverName;
+      chatInfo.receiverEmail = item.receiverEmail;
+      chatInfo.receiverImg = item.receiverImg;
+    }
+    dispatch(activeChat(chatInfo));
   };
 
   return (
@@ -116,11 +132,11 @@ const FriendsField = ({ btnOneTxt, messageBtn }) => {
                 classTextBox={"pl-3"}
                 classChtName={""}
                 classMsg={""}
-                // classBtnBox={"ml-1"}
                 classBtnTwo={"hidden"}
+                classBtnBox={"!w-[43%] md:!w-[26%] lg:!w-[30%]"}
                 classTime={"!hidden pr-1"}
                 clickAct={() => handleBlock(item)}
-                clickActMsg={() => handleMsgSelect(item)}
+                clickActMsg={() => handleActiveChatMsg(item)}
                 messageBtn={messageBtn}
               />
             ) : (
@@ -135,11 +151,11 @@ const FriendsField = ({ btnOneTxt, messageBtn }) => {
                 classTextBox={"pl-3"}
                 classChtName={""}
                 classMsg={""}
-                // classBtnBox={"ml-1"}
                 classBtnTwo={"hidden"}
+                classBtnBox={"!w-[43%] md:!w-[26%] lg:!w-[30%]"}
                 classTime={"!hidden pr-1"}
                 clickAct={() => handleBlock(item)}
-                clickActMsg={() => handleMsgSelect(item)}
+                clickActMsg={() => handleActiveChatMsg(item)}
                 messageBtn={messageBtn}
               />
             )

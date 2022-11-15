@@ -82,6 +82,7 @@ const MyGroupsField = () => {
       grpId: item.grpId,
       grpName: item.grpName,
       grpTag: item.grpTag,
+      grpImg: item.grpImg,
       adminId: item.adminId,
       adminName: item.adminName,
       adminEmail: item.adminEmail,
@@ -217,7 +218,7 @@ const MyGroupsField = () => {
         ) : (
           myGroupList.map((item) => (
             <ChatDisplayMin
-              avatarPath={"images/grp_avatar_2.png"}
+              avatarPath={item.grpImg}
               avatarAlt={"frnd_avatar_3"}
               chatName={item.grpName}
               message={item.grpTag}

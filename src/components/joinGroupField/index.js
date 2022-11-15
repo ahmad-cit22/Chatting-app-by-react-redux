@@ -86,6 +86,7 @@ const JoinGroupField = () => {
       set(push(groupsRef), {
         grpName: grpName,
         grpTag: grpTag,
+        grpImg: "images/grp_avatar_2.png",
         adminId: currentId,
         adminName: userData.displayName,
         adminEmail: userData.email,
@@ -128,6 +129,7 @@ const JoinGroupField = () => {
       grpId: item.id,
       grpName: item.grpName,
       grpTag: item.grpTag,
+      grpImg: item.grpImg,
       adminId: item.adminId,
       adminName: item.adminName,
       adminEmail: item.adminEmail,
@@ -208,7 +210,7 @@ const JoinGroupField = () => {
           ) : (
             groupList.map((item) => (
               <ChatDisplayMin
-                avatarPath={"images/grp_avatar_1.png"}
+                avatarPath={item.grpImg}
                 avatarAlt={"grp_avatar_1"}
                 classAvatar={
                   "xl:!mr-1 !w-1/5 md:!w-[15%] lg:!w-[20%] xl:!w-[23%]"

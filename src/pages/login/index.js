@@ -162,7 +162,8 @@ const Login = () => {
   };
 
   let handleGoogleSignIn = () => {
-    signInWithPopup(auth, provider).then(() => {
+    signInWithPopup(auth, provider).then((userCredential) => {
+      // const user = userCredential.user;
       updateProfile(auth.currentUser, {
         photoURL: "images/default_avatar.png",
       }).then(() => {
@@ -173,6 +174,8 @@ const Login = () => {
           email: user.email,
           profile_picture: user.photoURL,
         }).then(() => {
+          dispatch(userLoginInfo(user));
+          localStorage.setItem("userLoginInfo", JSON.stringify(user));
           navigate("/");
         });
       });

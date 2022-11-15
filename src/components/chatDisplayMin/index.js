@@ -25,6 +25,8 @@ const ChatDisplayMin = ({
   clickActTwo,
   disableBtnTwo,
   btnTwoText,
+  messageBtn,
+  clickActMsg,
 }) => {
   return (
     <div className="py-[14px] flex items-center border-b-[.5px] border-b-slate-300 last:border-none justify-start md:px-4 lg:px-0">
@@ -68,7 +70,7 @@ const ChatDisplayMin = ({
         >
           <button
             className={`w-[78%] md:w-full break-words bg-primary/90 hover:bg-primary linear duration-300 px-[2px] py-[2px] md:py-[2px] lg:py-[0px] rounded-md active:scale-[90%] ${classBtn}`}
-            onClick={clickAct}
+            onClick={messageBtn ? clickActMsg : clickAct}
             disabled={disableBtn}
           >
             {btnText}

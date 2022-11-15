@@ -11,7 +11,7 @@ import { BeatLoader } from "react-spinners";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-const JoinGroupField = () => {
+const GroupsField = () => {
   const auth = getAuth();
   const db = getDatabase();
   const userData = useSelector((state) => state.userLoginInfo.userInfo);
@@ -157,7 +157,7 @@ const JoinGroupField = () => {
     onValue(groupsRef, (snapshot) => {
       let arr = [];
       snapshot.forEach((item) => {
-        if (currentId !== item.val().adminId) {
+        if (currentId === item.val().adminId) {
           arr.push({ ...item.val(), id: item.key });
         }
       });
@@ -190,20 +190,14 @@ const JoinGroupField = () => {
       <div className="w-full py-1 lg:pb-3 xl:pb-1 px-3 relative bg-white drop-shadow-[0px_6px_4px_rgba(0,0,0,0.25)] xl:h-[36.5%] rounded-lg">
         <div className="flex justify-between items-center pb-5 mb-1 border-b-[3px] pr-2">
           <h3 className="text-xl md:text-2xl lg:text-xl font-semibold px-2">
-            Join Groups
+            Groups
           </h3>
-          <button
-            className={`bg-primary/90 hover:bg-primary linear duration-300 text-[13px] md:text-[17px] lg:text-[14.5px] text-white font-semibold px-2 md:px-3 py-1 md:py-2 lg:py-1 rounded-md active:scale-[90%]`}
-            onClick={handleShowCreateGroup}
-          >
-            Create Group
-          </button>
-          {/* <HiOutlineDotsVertical className="text-[22px] mr-1 !text-primaryTwo z-[2] text-black/80 cursor-pointer" /> */}
         </div>
+
         <SimpleBar className="flex flex-col px-2 max-h-[350px] xl:max-h-[25vh] lg:h-[265px] xl:h-auto px-1">
           {groupList.length < 1 ? (
             <p className="p-3 mb-7 lg:mb-0 md:p-4 text-center bg-primary/20 mt-8 text-sm md:text-[15px] text-black rounded-md w-[85%] lg:w-full m-auto">
-              Groups created by others will be shown here.
+              You haven't joined or created any groups yet.
             </p>
           ) : (
             groupList.map((item) => (
@@ -232,7 +226,7 @@ const JoinGroupField = () => {
                     ? "!bg-white text-primaryTwo drop-shadow-lg"
                     : ""
                 } !w-4/5 md:!w-full`}
-                classBtnBox={"!w-[43%] md:!w-[26%] lg:!w-[43%]"}
+                classBtnBox={"!w-[43%] md:!w-[26%] lg:!w-[40%]"}
                 classBtnTwo={"hidden !w-4/5 md:!w-full"}
                 chatLink="#"
                 disableBtn={
@@ -247,82 +241,8 @@ const JoinGroupField = () => {
           )}
         </SimpleBar>
       </div>
-
-      {/* ========== Create Group modal starts ========== */}
-      <div
-        className={`fixed top-0 left-0 w-[100vw] h-[100vh] bg-black/70 z-[22] ${
-          showModal ? "block" : "hidden"
-        } animate-[smooth.3s_ease_1] grid place-items-center`}
-      >
-        <div
-          className="relative w-2/5 bg-white text-center py-10 px-6 rounded-md animate-[popUp_.3s_ease_1]"
-          ref={refCreateGroupModal}
-        >
-          <h2 className="text-primary text-2xl md:text-[32px] leading-none font-semibold mb-12">
-            Create New Group
-          </h2>
-          <form className="w-4/5 m-auto" ref={refCreateGroupFrom}>
-            <input
-              type={"text"}
-              className="w-full md:py-3 md:px-4 rounded-md border-[1.5px] border-primary text-lg text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
-              placeholder="Group Name"
-              onChange={handleGName}
-            />
-            {grpNameErrMsg !== "" && (
-              <p className="pt-[2px] pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1] text-left">
-                {grpNameErrMsg}
-              </p>
-            )}
-            {grpNameFErrMsg !== "" && (
-              <p className="pt-[2px] pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1] text-left">
-                {grpNameFErrMsg}
-              </p>
-            )}
-
-            <input
-              type={"text"}
-              className="w-full mt-4 md:py-3 md:px-4 rounded-md border-[1.5px] border-primary text-lg text-primary outline-0 focus:border-focus linear duration-300 z-10"
-              placeholder="Group Tag"
-              onChange={handleGTag}
-            />
-
-            {grpTagErrMsg !== "" && (
-              <p className="pt-[2px] pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1] text-left">
-                {grpTagErrMsg}
-              </p>
-            )}
-            {grpTagFErrMsg !== "" && (
-              <p className="pt-[2px] pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1] text-left">
-                {grpTagFErrMsg}
-              </p>
-            )}
-            {grpSuccessMsg !== "" && (
-              <p className="pt-[3px] pl-1 text-lg text-[green] font-semibold animate-[popDown_.4s_ease_1] text-left">
-                {grpSuccessMsg}
-              </p>
-            )}
-            <RiCloseFill
-              className={
-                "text-[40px] mr-[1px] mt-[2px] text-primaryTwo/70 hover:text-primaryTwo linear duration-300 rounded-full font-semibold cursor-pointer absolute top-0 right-0"
-              }
-              onClick={closeModal}
-            />
-            <Button
-              customClass={`${
-                loading ? "opacity-70 hover:bg-primary" : ""
-              } py-2 mt-8 w-[50%] text-xl leading-[40px] rounded-md font-semibold`}
-              text={`${isCompleted ? "Done" : "Create Group"}`}
-              btnDisable={loading}
-              clickAct={handleGrpSubmit}
-              Loader={BeatLoader}
-              loadingStatus={false}
-            />
-          </form>
-        </div>
-      </div>
-      {/* // ========== Create Group modal ends ==========  */}
     </>
   );
 };
 
-export default JoinGroupField;
+export default GroupsField;

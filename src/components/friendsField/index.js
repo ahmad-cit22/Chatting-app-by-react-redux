@@ -15,11 +15,11 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-const FriendsField = () => {
+const FriendsField = ({ btnOneTxt, messageBtn }) => {
   const db = getDatabase();
   const userData = useSelector((state) => state.userLoginInfo.userInfo);
   const currentId = userData.uid;
-  
+
   const friendsRef = ref(db, "friends/");
   const blockedUsersRef = ref(db, "blockedUsers/");
 
@@ -82,6 +82,10 @@ const FriendsField = () => {
         });
   };
 
+  const handleMsgSelect = (item) => {
+    console.log("msg", item);
+  };
+
   return (
     <div className="w-full py-3 px-3 relative bg-white drop-shadow-[0px_6px_3px_rgba(0,0,0,0.25)] xl:h-[48%] rounded-lg">
       <div className="flex justify-between items-center pb-4 mb-1 border-b-[3px]">
@@ -107,7 +111,7 @@ const FriendsField = () => {
                 message={item.receiverEmail}
                 avatarAlt={"frnd_avatar_3"}
                 subText={item.friendshipDate}
-                btnText={"Block"}
+                btnText={btnOneTxt}
                 classAvatar={"mr-1"}
                 classTextBox={"pl-3"}
                 classChtName={""}
@@ -116,6 +120,8 @@ const FriendsField = () => {
                 classBtnTwo={"hidden"}
                 classTime={"!hidden pr-1"}
                 clickAct={() => handleBlock(item)}
+                clickActMsg={() => handleMsgSelect(item)}
+                messageBtn={messageBtn}
               />
             ) : (
               <ChatDisplayMin
@@ -124,7 +130,7 @@ const FriendsField = () => {
                 message={item.senderEmail}
                 avatarAlt={"frnd_avatar_3"}
                 subText={item.friendshipDate}
-                btnText={"Block"}
+                btnText={btnOneTxt}
                 classAvatar={"mr-1"}
                 classTextBox={"pl-3"}
                 classChtName={""}
@@ -133,6 +139,8 @@ const FriendsField = () => {
                 classBtnTwo={"hidden"}
                 classTime={"!hidden pr-1"}
                 clickAct={() => handleBlock(item)}
+                clickActMsg={() => handleMsgSelect(item)}
+                messageBtn={messageBtn}
               />
             )
           )

@@ -20,104 +20,17 @@ const GroupsField = () => {
   const groupRequestsRef = ref(db, "groupRequests/");
   const groupMembersRef = ref(db, "groupMembers/");
 
-  const refCreateGroupModal = useRef(null);
   const refCreateGroupFrom = useRef(null);
 
-  const [showModal, setShowModal] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [isCompleted, setIsCompleted] = useState(false);
+  // const [showModal, setShowModal] = useState(false);
+  // const [loading, setLoading] = useState(false);
+  // const [isCompleted, setIsCompleted] = useState(false);
 
-  const [grpNameErrMsg, setGrpNameErrMsg] = useState("");
-  const [grpTagErrMsg, setGrpTagErrMsg] = useState("");
-  const [grpNameFErrMsg, setGrpNameFErrMsg] = useState("");
-  const [grpTagFErrMsg, setGrpTagFErrMsg] = useState("");
-  const [grpSuccessMsg, setGrpSuccessMsg] = useState("");
-
-  const [groupList, setGroupList] = useState([]);
+  const [myGroupList, setMyGroupList] = useState([]);
+  const [joinedGroupList, setJoinedGroupList] = useState([]);
   const [grpReqList, setGrpReqList] = useState([]);
   const [grpMemberList, setGrpMemberList] = useState([]);
 
-  const [grpName, setGrpName] = useState("");
-  const [grpTag, setGrpTag] = useState("");
-
-  const handleShowCreateGroup = () => {
-    setShowModal(true);
-  };
-
-  const closeModal = () => {
-    setShowModal(false);
-    setGrpNameErrMsg("");
-    setGrpNameFErrMsg("");
-    setGrpTagErrMsg("");
-    setGrpTagFErrMsg("");
-    setGrpSuccessMsg("");
-  };
-
-  const handleGName = (e) => {
-    setGrpName(e.target.value);
-    setGrpNameErrMsg("");
-    setGrpNameFErrMsg("");
-    setGrpSuccessMsg("");
-  };
-
-  const handleGTag = (e) => {
-    setGrpTag(e.target.value);
-    setGrpTagErrMsg("");
-    setGrpTagFErrMsg("");
-    setGrpSuccessMsg("");
-  };
-
-  const handleGrpSubmit = (e) => {
-    e.preventDefault();
-    if (!grpName) {
-      setGrpNameErrMsg("You must enter a name for your group!");
-    } else if (grpName.length > 25) {
-      setGrpNameErrMsg("Group name can't contain more than 25 characters!");
-    }
-
-    if (!grpTag) {
-      setGrpTagErrMsg("You must enter your group tag!");
-    } else if (grpTag.length > 35) {
-      setGrpTagErrMsg("Group tag can't contain more than 35 characters!");
-    }
-
-    if (grpName && grpTag && grpName.length < 26 && grpTag.length < 36) {
-      setLoading(true);
-      set(push(groupsRef), {
-        grpName: grpName,
-        grpTag: grpTag,
-        adminId: currentId,
-        adminName: userData.displayName,
-        adminEmail: userData.email,
-        adminImg: userData.photoURL,
-        createdAt: `${new Date().getDate()}/${
-          new Date().getMonth() + 1
-        }/${new Date().getFullYear()}`,
-      })
-        .then(() => {
-          console.log("done g");
-          setGrpSuccessMsg("Done! Group successfully created.");
-          setIsCompleted(true);
-          setTimeout(() => {
-            setShowModal(false);
-            setGrpName("");
-            setGrpTag("");
-            setGrpNameErrMsg("");
-            setGrpNameFErrMsg("");
-            setGrpTagErrMsg("");
-            setGrpTagFErrMsg("");
-            setGrpSuccessMsg("");
-            setIsCompleted(false);
-            setLoading(false);
-            refCreateGroupFrom.current.reset();
-          }, 1500);
-        })
-        .catch((err) => {
-          console.log(err.code);
-          setGrpTagFErrMsg(err.code);
-        });
-    }
-  };
 
   const handleGroupReq = (item) => {
     set(push(groupRequestsRef), {
@@ -161,33 +74,23 @@ const GroupsField = () => {
           arr.push({ ...item.val(), id: item.key });
         }
       });
-      setGroupList(arr);
-    });
-
-    onValue(groupRequestsRef, (snapshot) => {
-      let arr = [];
-      snapshot.forEach((item) => {
-        if (item.val().senderId === currentId) {
-          arr.push(item.val().grpId + item.val().senderId);
-        }
-      });
-      setGrpReqList(arr);
+      setMyGroupList(arr);
     });
 
     onValue(groupMembersRef, (snapshot) => {
       let arr = [];
       snapshot.forEach((item) => {
         if (currentId === item.val().memberId) {
-          arr.push(item.val().grpId + item.val().memberId);
+          arr.push({ ...item.val(), id: item.key });
         }
       });
-      setGrpMemberList(arr);
+      setJoinedGroupList(arr);
     });
   }, []);
 
   return (
     <>
-      <div className="w-full py-1 lg:pb-3 xl:pb-1 px-3 relative bg-white drop-shadow-[0px_6px_4px_rgba(0,0,0,0.25)] xl:h-[36.5%] rounded-lg">
+      <div className="w-full py-1 lg:pb-3 xl:pb-1 px-3 relative bg-white drop-shadow-[0px_6px_4px_rgba(0,0,0,0.25)] xl:h-[49.5%] rounded-lg">
         <div className="flex justify-between items-center pb-5 mb-1 border-b-[3px] pr-2">
           <h3 className="text-xl md:text-2xl lg:text-xl font-semibold px-2">
             Groups
@@ -235,7 +138,7 @@ const GroupsField = () => {
                     ? true
                     : false
                 }
-                clickAct={() => handleGroupReq(item)}
+                // clickAct={() => handleGroupReq(item)}
               />
             ))
           )}

@@ -232,7 +232,7 @@ const JoinGroupField = () => {
                     ? "!bg-white text-primaryTwo drop-shadow-lg"
                     : ""
                 } !w-4/5 md:!w-full`}
-                classBtnBox={"!w-[43%] md:!w-[26%] lg:!w-[43%]"}
+                classBtnBox={"!w-[43%] md:!w-[26%] lg:!w-[41%]"}
                 classBtnTwo={"hidden !w-4/5 md:!w-full"}
                 chatLink="#"
                 disableBtn={

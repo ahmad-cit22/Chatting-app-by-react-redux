@@ -3,7 +3,6 @@ import { HiOutlineDotsVertical } from "react-icons/hi";
 import ChatDisplayMin from "../chatDisplayMin";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
-import { getAuth } from "firebase/auth";
 import {
   getDatabase,
   onValue,
@@ -14,15 +13,17 @@ import {
 } from "firebase/database";
 import { useState } from "react";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const FriendsField = () => {
-  const auth = getAuth();
   const db = getDatabase();
-  const currentId = auth.currentUser.uid;
-  const [friendList, setFriendList] = useState([]);
-  const [friendEmpty, setFriendEmpty] = useState(false);
+  const userData = useSelector((state) => state.userLoginInfo.userInfo);
+  const currentId = userData.uid;
+  
   const friendsRef = ref(db, "friends/");
   const blockedUsersRef = ref(db, "blockedUsers/");
+
+  const [friendList, setFriendList] = useState([]);
 
   useEffect(() => {
     onValue(friendsRef, (snapshot) => {

@@ -19,12 +19,16 @@ import {
 } from "firebase/storage";
 import { SyncLoader } from "react-spinners";
 import { getDatabase, update } from "firebase/database";
+import { useDispatch, useSelector } from "react-redux";
+import { userLoginInfo } from "../../slices/userSlice";
 
 const Sidebar = ({ activePage }) => {
   const auth = getAuth();
+  const userData = useSelector((state) => state.userLoginInfo.userInfo);
   const navigate = useNavigate();
   const storage = getStorage();
-  const db = getDatabase();
+
+  const dispatch = useDispatch();
 
   const active = activePage;
 
@@ -98,7 +102,7 @@ const Sidebar = ({ activePage }) => {
             console.log(snapshot);
             getDownloadURL(storageRef).then((downloadURL) => {
               console.log("File available at", downloadURL);
-              // const userRef = ref(db, "users/" + auth.currentUser.uid);
+              // const userRef = ref(db, "users/" + userData.uid);
               // update(userRef, {
               //   profile_picture: downloadURL,
               // })
@@ -107,7 +111,7 @@ const Sidebar = ({ activePage }) => {
               //   })
               // .then(() => {
               // })
-              updateProfile(auth.currentUser, {
+              updateProfile(userData, {
                 photoURL: downloadURL,
               })
                 .then(() => {
@@ -158,6 +162,8 @@ const Sidebar = ({ activePage }) => {
 
   const handleSignOut = () => {
     signOut(auth).then(() => {
+      localStorage.removeItem("userLoginInfo");
+      dispatch(userLoginInfo(null));
       navigate("/login");
     });
   };
@@ -170,7 +176,7 @@ const Sidebar = ({ activePage }) => {
             <picture className="rounded-full overflow-hidden h-[35px] w-[35px] md:h-[55px] md:w-[55px] lg:h-[60px] lg:w-[60px] xl:h-[70px] xl:w-[70px] border-[3px] border-white flex justify-center items-center bg-white">
               <img
                 className="w-full"
-                src={auth.currentUser.photoURL}
+                src={userData.photoURL}
                 loading="lazy"
                 alt="user_avatar"
               />
@@ -183,7 +189,7 @@ const Sidebar = ({ activePage }) => {
             </button>
           </div>
           <h3 className="text-white hidden lg:block lg:text-[15px] xl:text-[17px] font-semibold text-center">
-            {auth.currentUser.displayName}
+            {userData.displayName}
           </h3>
         </div>
 
@@ -252,7 +258,7 @@ const Sidebar = ({ activePage }) => {
                 {img ? (
                   <img src={previewImg} loading={"lazy"} />
                 ) : (
-                  <img src={auth.currentUser.photoURL} loading={"lazy"} />
+                  <img src={userData.photoURL} loading={"lazy"} />
                 )}
               </picture>
             </div>

@@ -12,12 +12,12 @@ import {
   remove,
   set,
 } from "firebase/database";
-import { getAuth } from "firebase/auth";
+import { useSelector } from "react-redux";
 
 const BlockField = () => {
   const db = getDatabase();
-  const auth = getAuth();
-  const currentId = auth.currentUser.uid;
+const userData = useSelector((state) => state.userLoginInfo.userInfo);
+const currentId = userData.uid;
   const blockedUsersRef = ref(db, "blockedUsers/");
   const friendsRef = ref(db, "friends/");
 

@@ -9,18 +9,19 @@ import {
   onValue,
   push,
   ref,
-  remove,
   set,
 } from "firebase/database";
 import Button from "../button";
 import ChatDisplayMin from "../chatDisplayMin";
 import { BeatLoader } from "react-spinners";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const JoinGroupField = () => {
   const auth = getAuth();
   const db = getDatabase();
-  const currentId = auth.currentUser.uid;
+  const userData = useSelector((state) => state.userLoginInfo.userInfo);
+  const currentId = userData.uid;
   const groupsRef = ref(db, "groups/");
   const groupRequestsRef = ref(db, "groupRequests/");
   const groupMembersRef = ref(db, "groupMembers/");
@@ -92,9 +93,9 @@ const JoinGroupField = () => {
         grpName: grpName,
         grpTag: grpTag,
         adminId: currentId,
-        adminName: auth.currentUser.displayName,
-        adminEmail: auth.currentUser.email,
-        adminImg: auth.currentUser.photoURL,
+        adminName: userData.displayName,
+        adminEmail: userData.email,
+        adminImg: userData.photoURL,
         createdAt: `${new Date().getDate()}/${
           new Date().getMonth() + 1
         }/${new Date().getFullYear()}`,
@@ -127,9 +128,9 @@ const JoinGroupField = () => {
   const handleGroupReq = (item) => {
     set(push(groupRequestsRef), {
       senderId: currentId,
-      senderName: auth.currentUser.displayName,
-      senderEmail: auth.currentUser.email,
-      senderImg: auth.currentUser.photoURL,
+      senderName: userData.displayName,
+      senderEmail: userData.email,
+      senderImg: userData.photoURL,
       grpId: item.id,
       grpName: item.grpName,
       grpTag: item.grpTag,
@@ -187,7 +188,6 @@ const JoinGroupField = () => {
         }
       });
       setGrpMemberList(arr);
-      console.log(grpMemberList);
     });
   }, []);
 

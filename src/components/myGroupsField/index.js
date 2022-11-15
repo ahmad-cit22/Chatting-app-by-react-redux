@@ -13,11 +13,13 @@ import {
   set,
 } from "firebase/database";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const MyGroupsField = () => {
-  const auth = getAuth();
   const db = getDatabase();
-  const currentId = auth.currentUser.uid;
+  const userData = useSelector((state) => state.userLoginInfo.userInfo);
+  const currentId = userData.uid;
+  
   const groupsRef = ref(db, "groups/");
   const groupRequestsRef = ref(db, "groupRequests/");
   const groupMembersRef = ref(db, "groupMembers/");

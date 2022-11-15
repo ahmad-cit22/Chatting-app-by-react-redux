@@ -4,16 +4,18 @@ import ChatDisplayMin from "../chatDisplayMin";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import { getDatabase, ref, onValue, set, push } from "firebase/database";
-import { getAuth } from "firebase/auth";
+import { useSelector } from "react-redux";
 
 const UsersField = () => {
-  const auth = getAuth();
   const db = getDatabase();
+ const userData = useSelector((state) => state.userLoginInfo.userInfo);
+ const currentId = userData.uid;
+
   const userListRef = ref(db, "users/");
   const friendReqRef = ref(db, "friendRequests/");
   const friendsRef = ref(db, "friends/");
   const blockedUsersRef = ref(db, "blockedUsers/");
-  const currentId = auth.currentUser.uid;
+
   const [usersList, setUsersList] = useState([]);
   const [friendReqList, setFriendReqList] = useState([]);
   const [friendList, setFriendList] = useState([]);
@@ -97,9 +99,9 @@ const UsersField = () => {
     const friendReqRef = ref(db, "friendRequests/");
     set(push(friendReqRef), {
       senderId: currentId,
-      senderName: auth.currentUser.displayName,
-      senderEmail: auth.currentUser.email,
-      senderImg: auth.currentUser.photoURL,
+      senderName: userData.displayName,
+      senderEmail: userData.email,
+      senderImg: userData.photoURL,
       receiverId: item.id,
       receiverName: item.fullName,
       receiverEmail: item.email,

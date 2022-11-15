@@ -11,11 +11,12 @@ import {
   push,
   remove,
 } from "firebase/database";
-import { getAuth } from "firebase/auth";
+import { useSelector } from "react-redux";
 
 const FriendReqField = () => {
-  const auth = getAuth();
   const db = getDatabase();
+  const userData = useSelector((state) => state.userLoginInfo.userInfo);
+  const currentId = userData.uid;
   const friendReqRef = ref(db, "friendRequests/");
   const friendsRef = ref(db, "friends/");
   let [friendReqList, setFriendReqList] = useState([]);
@@ -25,7 +26,7 @@ const FriendReqField = () => {
     onValue(friendReqRef, (snapshot) => {
       let arr = [];
       snapshot.forEach((item) => {
-        if (auth.currentUser.uid === item.val().receiverId) {
+        if (currentId === item.val().receiverId) {
           arr.push({ ...item.val(), id: item.key });
         }
       });

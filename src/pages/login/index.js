@@ -15,11 +15,15 @@ import {
   sendPasswordResetEmail,
 } from "firebase/auth";
 import { getDatabase, ref, set, push } from "firebase/database";
+import { useDispatch } from "react-redux";
+import { userLoginInfo } from "../../slices/userSlice";
 
 const Login = () => {
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
   const db = getDatabase();
+
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -194,10 +198,11 @@ const Login = () => {
           // Signed in
           console.log("logged in!");
           const user = userCredential.user;
-          console.log(user.displayName);
           setSuccessMsg(
             "Credentials matched successfully! We're redirecting you to the homepage..."
           );
+          dispatch(userLoginInfo(user));
+          localStorage.setItem("userLoginInfo", JSON.stringify(user));
           setTimeout(() => {
             navigate("/");
             setLoading(false);
@@ -257,7 +262,7 @@ const Login = () => {
             <form
               action="#"
               method="POST"
-              className="flex flex-col gap-y-8 md:gap-y-12 lg:gap-y-8 xl:gap-y-10 w-full md:w-[400px] lg:w-[360px] xl:w-[380px] mb-4 xl:mb-6"
+              className="flex flex-col gap-y-8 md:gap-y-12 lg:gap-y-8 xl:gap-y-10 w-full md:w-[400px] lg:w-[360px] xl:w-[370px] mb-4 xl:mb-6"
             >
               <div className="relative" onClick={handleFocusEmail}>
                 <input
@@ -331,14 +336,14 @@ const Login = () => {
                   </p>
                 )}
                 {successMsg != "" && (
-                  <p className="mt-4 md:mt-8 px-2 py-[2px] md:py-1 text-[green] bg-[green]/20 border-[1px] border-[green] rounded-md text-xs md:text-lg font-semibold animate-[popDown_.4s_ease_1]">
+                  <p className="mt-4 md:mt-8 px-2 py-[2px] md:py-1 text-[green] bg-[green]/20 border-[1px] border-[green] rounded-md text-xs md:text-lg lg:text-base xl:text-lg font-semibold animate-[popDown_.4s_ease_1]">
                     {successMsg}
                   </p>
                 )}
               </div>
 
               <Button
-                customClass={`py-3.5 md:py-6 lg:py-5 lg:py-5 w-full lg:w-[95%] block lg:w-full text-[15px] md:text-xl lg:text-lg xl:text-xl rounded-[10px] font-semibold mb-2 md:mb-5 lg:mt-2 xl:mt-0 ${
+                customClass={`py-3.5 md:py-6 lg:py-5 lg:py-5 w-full lg:w-full block xl:w-full text-[15px] md:text-xl lg:text-lg xl:text-xl rounded-[10px] font-semibold mb-2 md:mb-5 lg:mt-2 xl:mt-0 ${
                   loading && "!pt-[14px] !pb-[10px] md:!pt-6 md:!pb-4"
                 }`}
                 goTo={"#"}
@@ -354,7 +359,7 @@ const Login = () => {
             {/* ========== login form ends ========== */}
 
             <p
-              className="text-yellow font-semibold text-[13px] md:text-[17px] lg:text-sm xl:text-base  text-center cursor-pointer hover:text-yellowHover linear duration-300 self-center lg:mr-16"
+              className="text-yellow font-semibold text-[13px] md:text-[17px] lg:text-sm xl:text-base  text-center cursor-pointer hover:text-yellowHover linear duration-300 self-center lg:mr-9"
               onClick={handleShowForgot}
               ref={refForgotPassToggler}
             >
@@ -425,7 +430,7 @@ const Login = () => {
             </div>
             {/* ========== forgot pass modal ends ========== */}
 
-            <p className="text-secondary text-[13px] md:text-[17px] lg:text-sm xl:text-[15px] text-center mt-2 xl:mt-4 self-center lg:mr-16">
+            <p className="text-secondary text-[13px] md:text-[17px] lg:text-sm xl:text-[15px] text-center mt-2 xl:mt-4 self-center lg:mr-10">
               Don’t have an account ?{" "}
               <Link
                 to="/registration"

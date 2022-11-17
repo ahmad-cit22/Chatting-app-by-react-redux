@@ -2,9 +2,11 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { BsFillTelephoneFill, BsFillCameraVideoFill } from "react-icons/bs";
+import { MdSend } from "react-icons/md";
 
 const ChatField = () => {
   const activeChatData = useSelector((state) => state.activeChatInfo.value);
+  const userData = useSelector((state) => state.userLoginInfo.userInfo);
 
   return activeChatData !== null ? (
     <>
@@ -71,11 +73,94 @@ const ChatField = () => {
            </p> */}
         </div>
       </div>
-      <div>
-        <div className="flex flex-col items-start justify-center">
-          <p className="p-3 mb-7 lg:mb-0 md:p-4 text-center bg-primary/20 mt-8 xl:mt-14 text-sm md:text-[15px] text-black font-semibold rounded-md w-[65%] m-auto">
-            Hello Friend!
-          </p>
+      <div className="h-full flex flex-col justify-end w-full">
+        <div className="w-full flex flex-col items-start justify-center gap-y-2 first:mt-3">
+          <div className="max-w-[65%] flex items-center justify-center gap-x-2">
+            <picture
+              className={`rounded-full overflow-hidden h-[35px] w-[35px] bg-white`}
+            >
+              <img
+                src={activeChatData.receiverImg}
+                // src={userData.photoURL}
+                className={"w-full"}
+                loading="lazy"
+                alt={"msgSenderAvatar"}
+              />
+            </picture>
+            <p className="py-2 px-3 bg-hoverPrimary/10 text-black rounded-lg">
+              Hello Friend!
+            </p>
+          </div>
+          <div className="max-w-[65%] flex items-center justify-center gap-x-2">
+            <picture
+              className={`rounded-full overflow-hidden h-[35px] w-[35px] bg-white`}
+            >
+              <img
+                src={activeChatData.receiverImg}
+                // src={userData.photoURL}
+                className={"w-full"}
+                loading="lazy"
+                alt={"msgSenderAvatar"}
+              />
+            </picture>
+            <p className="py-2 px-3 bg-hoverPrimary/10 text-black rounded-lg">
+              How r u?
+            </p>
+          </div>
+          <div className="max-w-[65%] self-end flex items-center justify-center gap-x-2 flex-row-reverse">
+            <picture
+              className={`rounded-full overflow-hidden h-[35px] w-[35px] bg-white`}
+            >
+              <img
+                // src={activeChatData.receiverImg}
+                src={userData.photoURL}
+                className={"w-full"}
+                loading="lazy"
+                alt={"msgSenderAvatar"}
+              />
+            </picture>
+            <p className="py-2 px-3 bg-hoverPrimary/10 text-black rounded-lg">
+              Hey! I'm fine. What about you man?
+            </p>
+          </div>
+
+          <div className="max-w-[65%] flex items-center justify-center gap-x-2">
+            <picture
+              className={`rounded-full overflow-hidden h-[35px] w-[35px] bg-white`}
+            >
+              <img
+                src={activeChatData.receiverImg}
+                // src={userData.photoURL}
+                className={"w-full"}
+                loading="lazy"
+                alt={"msgSenderAvatar"}
+              />
+            </picture>
+            <p className="py-2 px-3 bg-hoverPrimary/10 text-black rounded-lg">
+              I'm also good :D
+            </p>
+          </div>
+
+          <div className="max-w-[65%] self-end flex items-center justify-center gap-x-2 flex-row-reverse">
+            <picture
+              className={`rounded-full overflow-hidden h-[35px] w-[35px] bg-white`}
+            >
+              <img
+                // src={activeChatData.receiverImg}
+                src={userData.photoURL}
+                className={"w-full"}
+                loading="lazy"
+                alt={"msgSenderAvatar"}
+              />
+            </picture>
+            <p className="py-2 px-3 bg-hoverPrimary/10 text-black rounded-lg">
+              What r u doing now?
+            </p>
+          </div>
+        </div>
+        <div className="flex gap-x-2 items-center justify-center">
+          <input className="w-[94%] block py-3 px-5 rounded-full mt-6 border-[1px] border-primary/20 focus:border-photoUp/80 text-[17px] text-primary outline-0 linear duration-300" />
+          <MdSend className="w-[6%] text-primary/60 hover:text-primary/90 text-[35px] leading-[15px] mt-6" />
         </div>
       </div>
     </>

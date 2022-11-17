@@ -1,13 +1,9 @@
 import React, { useState, useRef } from "react";
-import { HiOutlineDotsVertical } from "react-icons/hi";
-import { RiCloseFill } from "react-icons/ri";
 import SimpleBar from "simplebar-react";
 import "simplebar-react/dist/simplebar.min.css";
 import { getAuth } from "firebase/auth";
 import { getDatabase, onValue, push, ref, set } from "firebase/database";
-import Button from "../button";
 import ChatDisplayMin from "../chatDisplayMin";
-import { BeatLoader } from "react-spinners";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { activeChat } from "../../slices/activeChatSlice";
@@ -20,7 +16,6 @@ const GroupsField = () => {
   const dispatch = useDispatch();
 
   const groupsRef = ref(db, "groups/");
-  const groupRequestsRef = ref(db, "groupRequests/");
   const groupMembersRef = ref(db, "groupMembers/");
 
   const refCreateGroupFrom = useRef(null);

@@ -36,6 +36,10 @@ module.exports = {
           "0%": { opacity: "0", transform: "scaleY(10%)" },
           "100%": { opacity: "1", transform: "scaleY(100%)" },
         },
+        popUpX: {
+          "0%": { opacity: "0", transform: "scaleX(10%)" },
+          "100%": { opacity: "1", transform: "scaleX(100%)" },
+        },
         popDown: {
           "0%": { opacity: "0", transform: "scaleX(170%)" },
           "100%": { opacity: "1", transform: "scaleX(100%)" },

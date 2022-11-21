@@ -35,7 +35,7 @@ const ChatDisplayMin = ({
         className={`w-[18%] md:w-[12%] lg:w-[15%] xl:w-[17%] ${classAvatar}`}
       >
         <picture
-          className={`rounded-full overflow-hidden w-full border-[0px] border-photoUp flex justify-center items-center bg-white ${classImg}`}
+          className={`rounded-full overflow-hidden h-[15vw] md:h-[9vw] lg:h-[5.5vw] xl:h-[4vw] w-[15vw] md:w-[9vw] lg:w-[5.5vw] xl:w-[4vw] border-[0px] border-photoUp flex justify-center items-center bg-white ${classImg}`}
         >
           <img
             src={avatarPath}

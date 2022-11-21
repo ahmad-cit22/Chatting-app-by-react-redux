@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { BsFillTelephoneFill, BsFillCameraVideoFill } from "react-icons/bs";
 import { MdSend } from "react-icons/md";
-import { getDatabase, push, ref, set } from "firebase/database";
+import { getDatabase, onValue, push, ref, set } from "firebase/database";
 
 const ChatField = () => {
   const db = getDatabase();
@@ -14,10 +14,17 @@ const ChatField = () => {
   const userData = useSelector((state) => state.userLoginInfo.userInfo);
 
   const [msg, setMsg] = useState("");
+  const [msgErr, setMsgErr] = useState("");
   const [msgBlank, setMsgBlank] = useState(true);
+
+  const msgFormRef = useRef(null);
+
+  const [grpMsgs, setGrpMsgs] = useState([]);
+  const [singleMsgs, setSingleMsgs] = useState([]);
 
   const handleMsg = (e) => {
     setMsg(e.target.value);
+    setMsgErr("");
     console.log(msg);
   };
 
@@ -39,6 +46,7 @@ const ChatField = () => {
             new Date().getMonth() + 1
           }/${new Date().getFullYear()}`,
         }).then(() => {
+          msgFormRef.current.reset();
           console.log("done msg");
         });
       } else {
@@ -56,18 +64,50 @@ const ChatField = () => {
             new Date().getMonth() + 1
           }/${new Date().getFullYear()}`,
         }).then(() => {
+          msgFormRef.current.reset();
           console.log("done msg");
         });
       }
+    } else {
+      setMsgErr("You can't send blank message!");
     }
   };
 
+  useEffect(() => {
+    if ((activeChatData !== null && activeChatData.status) === "group") {
+      onValue(groupMsgRef, (snapshot) => {
+        let arr = [];
+        snapshot.forEach((item) => {
+          if (activeChatData.receiverId === item.val().receiverId) {
+            arr.push({ ...item.val(), id: item.key });
+          }
+        });
+        setGrpMsgs(arr);
+      });
+    } else if (activeChatData !== null && activeChatData.status === "single") {
+      onValue(singleMsgRef, (snapshot) => {
+        let arr = [];
+        snapshot.forEach((item) => {
+          if (
+            (activeChatData.receiverId === item.val().receiverId &&
+              userData.uid === item.val().senderId) ||
+            (activeChatData.receiverId === item.val().senderId &&
+              userData.uid === item.val().receiverId)
+          ) {
+            arr.push({ ...item.val(), id: item.key });
+          }
+        });
+        setSingleMsgs(arr);
+      });
+    }
+  }, [activeChatData]);
+
   return activeChatData !== null ? (
     <>
-      <div className="py-[14px] flex items-center border-b-[.5px] justify-between shadow-md pr-4">
+      <div className="py-[14px] flex items-center border-b-[.5px] justify-between shadow-md pr-4 w-full">
         <Link to={""} className={`w-[11%] md:w-[8%] lg:w-[11%] xl:w-[7%]`}>
           <picture
-            className={`rounded-full overflow-hidden w-full border-[0px] border-photoUp flex justify-center items-center bg-white`}
+            className={`rounded-full overflow-hidden h-[15vw] md:h-[9vw] lg:h-[5.5vw] xl:h-[4vw] w-full border-[0px] border-photoUp flex justify-center items-center bg-white`}
           >
             <img
               src={activeChatData.receiverImg}
@@ -96,7 +136,7 @@ const ChatField = () => {
             </p>
           </div>
           <div
-            className={`flex gap-y-1 xl:gap-x-4 justify-center items-center font-semibold text-[12px] md:text-base lg:text-[13px] xl:text-2xl text-primary`}
+            className={`flex gap-y-1 xl:gap-x-6 justify-center items-center font-semibold text-[12px] md:text-base lg:text-[13px] xl:text-2xl text-primary`}
           >
             <button
               className={`w-[78%] md:w-full break-words text-primaryTwo linear duration-300 px-[2px] py-[2px] md:py-[2px] lg:py-[0px] rounded-md active:scale-[90%]`}
@@ -127,24 +167,79 @@ const ChatField = () => {
            </p> */}
         </div>
       </div>
-      <div className="h-full flex flex-col justify-end w-full">
+      <div className="h-full flex flex-col justify-end w-full pb-20 md:pb-28 lg:pb-0">
         <div className="w-full flex flex-col items-start justify-center gap-y-2 first:mt-3">
-          <div className="max-w-[65%] flex items-center justify-center gap-x-2">
-            <picture
-              className={`rounded-full overflow-hidden h-[35px] w-[35px] bg-white`}
-            >
-              <img
-                src={activeChatData.receiverImg}
-                // src={userData.photoURL}
-                className={"w-full"}
-                loading="lazy"
-                alt={"msgSenderAvatar"}
-              />
-            </picture>
-            <p className="py-2 px-3 bg-hoverPrimary/10 text-black rounded-lg">
-              Hello Friend!
-            </p>
-          </div>
+          {activeChatData !== null &&
+            (activeChatData.status === "single"
+              ? singleMsgs.map((item) => (
+                  <div
+                    className={`max-w-[65%] flex items-center justify-center gap-x-2 ${
+                      item.senderId === userData.uid
+                        ? "self-end flex-row-reverse animate-[popDown_.4s_ease_1]"
+                        : "animate-[popUp_.4s_ease_1]"
+                    }`}
+                  >
+                    <picture
+                      className={`rounded-full overflow-hidden h-[35px] w-[35px] bg-white`}
+                    >
+                      <img
+                        src={item.senderImg}
+                        // src={
+                        //   item.senderId === userData.uid
+                        //     ? userData.photoURL
+                        //     : activeChatData.receiverImg
+                        // }
+                        className={"w-full"}
+                        loading="lazy"
+                        alt={"msgSenderAvatar"}
+                      />
+                    </picture>
+                    <p
+                      className={`py-2 px-3 rounded-lg ${
+                        item.senderId === userData.uid
+                          ? "bg-primary/90 text-white"
+                          : "bg-primary/10 text-black"
+                      }`}
+                    >
+                      {item.msg}
+                    </p>
+                  </div>
+                ))
+              : grpMsgs.map((item) => (
+                  <div
+                    className={`max-w-[65%] flex items-center justify-center gap-x-2 ${
+                      item.senderId === userData.uid
+                        ? "self-end flex-row-reverse animate-[popDown_.4s_ease_1]"
+                        : "animate-[popUp_.4s_ease_1]"
+                    }`}
+                  >
+                    <picture
+                      className={`rounded-full overflow-hidden h-[35px] w-[35px] bg-white`}
+                    >
+                      <img
+                        src={item.senderImg}
+                        // src={
+                        //   item.senderId === userData.uid
+                        //     ? userData.photoURL
+                        //     : activeChatData.receiverImg
+                        // }
+                        className={"w-full"}
+                        loading="lazy"
+                        alt={"msgSenderAvatar"}
+                      />
+                    </picture>
+                    <p
+                      className={`py-2 px-3 rounded-lg ${
+                        item.senderId === userData.uid
+                          ? "bg-primary/90 text-white"
+                          : "bg-primary/10 text-black"
+                      }`}
+                    >
+                      {item.msg}
+                    </p>
+                  </div>
+                )))}
+          {/* 
           <div className="max-w-[65%] flex items-center justify-center gap-x-2">
             <picture
               className={`rounded-full overflow-hidden h-[35px] w-[35px] bg-white`}
@@ -161,7 +256,7 @@ const ChatField = () => {
               How r u?
             </p>
           </div>
-          <div className="max-w-[65%] self-end flex items-center justify-center gap-x-2 flex-row-reverse">
+          <div className="max-w-[65%] self-end flex-row-reverse flex items-center justify-center gap-x-2 ">
             <picture
               className={`rounded-full overflow-hidden h-[35px] w-[35px] bg-white`}
             >
@@ -210,19 +305,22 @@ const ChatField = () => {
             <p className="py-2 px-3 bg-hoverPrimary/10 text-black rounded-lg">
               What r u doing now?
             </p>
-          </div>
+          </div> */}
         </div>
 
         {/* input box starts */}
         <div className="">
-          <form className="flex gap-x-2 items-center justify-center">
+          <form
+            className="flex gap-x-2 items-center justify-center"
+            ref={msgFormRef}
+          >
             <input
               className="w-[94%] block py-3 px-5 rounded-full mt-6 border-[1px] border-primary/40 focus:border-photoUp/80 text-[17px] text-primary outline-0 linear duration-300"
-              placeholder="Write Your Message"
+              placeholder={`${msgErr !== "" ? msgErr : "Write Your Message"}`}
               onChange={handleMsg}
             />
             <button
-              className="pl-2 w-[6%] text-primary/60 hover:text-primary/90 text-[35px] leading-[15px] mt-6"
+              className="pl-2 w-[6%] text-primaryTwo/70 hover:text-primaryTwo text-[35px] leading-[15px] mt-6 linear duration-300 active:scale-90"
               onClick={handleSubmit}
             >
               <MdSend />

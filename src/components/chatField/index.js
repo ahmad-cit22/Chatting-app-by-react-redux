@@ -1,19 +1,73 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { BsFillTelephoneFill, BsFillCameraVideoFill } from "react-icons/bs";
 import { MdSend } from "react-icons/md";
+import { getDatabase, push, ref, set } from "firebase/database";
 
 const ChatField = () => {
+  const db = getDatabase();
+  const singleMsgRef = ref(db, "singleMsgs/");
+  const groupMsgRef = ref(db, "groupMsgs/");
+
   const activeChatData = useSelector((state) => state.activeChatInfo.value);
   const userData = useSelector((state) => state.userLoginInfo.userInfo);
 
+  const [msg, setMsg] = useState("");
+  const [msgBlank, setMsgBlank] = useState(true);
+
+  const handleMsg = (e) => {
+    setMsg(e.target.value);
+    console.log(msg);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (msg !== "") {
+      if (activeChatData.status === "group") {
+        set(push(groupMsgRef), {
+          msg: msg,
+          senderId: userData.uid,
+          senderName: userData.displayName,
+          senderEmail: userData.email,
+          senderImg: userData.photoURL,
+          receiverId: activeChatData.receiverId,
+          receiverName: activeChatData.receiverName,
+          receiverTag: activeChatData.receiverTag,
+          receiverImg: activeChatData.receiverImg,
+          msgTime: `${new Date().getDate()}/${
+            new Date().getMonth() + 1
+          }/${new Date().getFullYear()}`,
+        }).then(() => {
+          console.log("done msg");
+        });
+      } else {
+        set(push(singleMsgRef), {
+          msg: msg,
+          senderId: userData.uid,
+          senderName: userData.displayName,
+          senderEmail: userData.email,
+          senderImg: userData.photoURL,
+          receiverId: activeChatData.receiverId,
+          receiverName: activeChatData.receiverName,
+          receiverEmail: activeChatData.receiverEmail,
+          receiverImg: activeChatData.receiverImg,
+          msgTime: `${new Date().getDate()}/${
+            new Date().getMonth() + 1
+          }/${new Date().getFullYear()}`,
+        }).then(() => {
+          console.log("done msg");
+        });
+      }
+    }
+  };
+
   return activeChatData !== null ? (
     <>
-      <div className="py-[14px] flex items-center border-b-[.5px] justify-start md:px-4 lg:px-3 shadow-md">
-        <Link to={""} className={`w-[15%] md:w-[12.5%] lg:w-[15%] xl:w-[11%]`}>
+      <div className="py-[14px] flex items-center border-b-[.5px] justify-between shadow-md pr-4">
+        <Link to={""} className={`w-[11%] md:w-[8%] lg:w-[11%] xl:w-[7%]`}>
           <picture
-            className={`rounded-full overflow-hidden h-[50px] md:h-[78px] lg:h-[55px] w-[50px] md:w-[78px] lg:w-[55px] border-[0px] border-photoUp flex justify-center items-center bg-white`}
+            className={`rounded-full overflow-hidden w-full border-[0px] border-photoUp flex justify-center items-center bg-white`}
           >
             <img
               src={activeChatData.receiverImg}
@@ -23,8 +77,8 @@ const ChatField = () => {
             />
           </picture>
         </Link>
-        <div className="flex justify-between w-[84%] md:w-[87%] lg:w-[80%] items-center">
-          <div className={`w-[55%] md:w-[77%] lg:w-[59%] pr-2`}>
+        <div className="flex justify-between w-[89%] md:w-[92%] lg:w-[89%] xl:w-[93%] items-center">
+          <div className={`w-[55%] md:w-[77%] lg:w-[59%] pr-2 pl-4 `}>
             <Link to={""}>
               <p
                 className={`text-sm md:text-[19px] pb-[1px] lg:text-sm xl:text-[17px] break-words font-semibold hover:text-primaryTwo cursor-pointer linear duration-300`}
@@ -158,10 +212,24 @@ const ChatField = () => {
             </p>
           </div>
         </div>
-        <div className="flex gap-x-2 items-center justify-center">
-          <input className="w-[94%] block py-3 px-5 rounded-full mt-6 border-[1px] border-primary/20 focus:border-photoUp/80 text-[17px] text-primary outline-0 linear duration-300" />
-          <MdSend className="w-[6%] text-primary/60 hover:text-primary/90 text-[35px] leading-[15px] mt-6" />
+
+        {/* input box starts */}
+        <div className="">
+          <form className="flex gap-x-2 items-center justify-center">
+            <input
+              className="w-[94%] block py-3 px-5 rounded-full mt-6 border-[1px] border-primary/40 focus:border-photoUp/80 text-[17px] text-primary outline-0 linear duration-300"
+              placeholder="Write Your Message"
+              onChange={handleMsg}
+            />
+            <button
+              className="pl-2 w-[6%] text-primary/60 hover:text-primary/90 text-[35px] leading-[15px] mt-6"
+              onClick={handleSubmit}
+            >
+              <MdSend />
+            </button>
+          </form>
         </div>
+        {/* input box ends */}
       </div>
     </>
   ) : (

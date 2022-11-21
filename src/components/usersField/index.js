@@ -8,8 +8,8 @@ import { useSelector } from "react-redux";
 
 const UsersField = () => {
   const db = getDatabase();
- const userData = useSelector((state) => state.userLoginInfo.userInfo);
- const currentId = userData.uid;
+  const userData = useSelector((state) => state.userLoginInfo.userInfo);
+  const currentId = userData.uid;
 
   const userListRef = ref(db, "users/");
   const friendReqRef = ref(db, "friendRequests/");
@@ -121,7 +121,7 @@ const UsersField = () => {
       </div>
       <SimpleBar
         color="blue"
-        className="flex flex-col px-2 max-h-[350px] xl:max-h-[35vh] lg:h-[350px] xl:h-auto px-1"
+        className="flex flex-col px-2 max-h-[350px] xl:max-h-[37vh] lg:h-[350px] xl:h-auto px-1"
       >
         {usersList.map((item) => (
           <ChatDisplayMin

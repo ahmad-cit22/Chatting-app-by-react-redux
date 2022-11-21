@@ -213,14 +213,15 @@ const JoinGroupField = () => {
                 avatarPath={item.grpImg}
                 avatarAlt={"grp_avatar_1"}
                 classAvatar={
-                  "xl:!mr-1 !w-1/5 md:!w-[15%] lg:!w-[20%] xl:!w-[23%]"
+                  "xl:!mr-1 !w-[18%] md:!w-[13%] lg:!w-[17%] xl:!w-[18%]"
                 }
                 chatName={item.grpName}
                 message={item.grpTag}
                 messageFooter={`Admin: ${item.adminName}`}
-                classTextBox={"md:!w-[79%] lg:!w-[59%] xl:!w-[57%]"}
+                classTextBox={
+                  "w-[79%] md:!w-[79%] lg:!w-[59%] md:pl-5 lg:pl-3 xl:!w-[57%]"
+                }
                 classChtName={"xl:!text-base"}
-                classImg={"lg:!h-[64px] lg:!w-[64px] xl:!h-[70px] xl:!w-[70px]"}
                 btnText={`${
                   grpReqList.includes(item.id + currentId)
                     ? "Request Sent"

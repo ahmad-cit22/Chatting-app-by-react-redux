@@ -81,11 +81,12 @@ const FriendReqField = () => {
             <ChatDisplayMin
               avatarPath={item.senderImg}
               avatarAlt={"req_avatar_1"}
-              classAvatar={"xl:!mr-1.5 !w-1/5 xl:!w-[22%]"}
+              classAvatar={
+                "xl:!mr-1.5 !w-[18%] md:!w-[13%] lg:!w-[17%] xl:!w-[18%]"
+              }
               chatName={item.senderName}
               message={item.senderEmail}
-              classImg={"xl:!h-[65px] xl:!w-[65px]"}
-              classTextBox={"xl:!w-[70%]"}
+              classTextBox={"xl:!w-[70%] md:pl-5 lg:pl-3"}
               classChtName={"xl:!text-base"}
               btnText={"Accept"}
               classBtnBox={"xl:!w-[30%]"}

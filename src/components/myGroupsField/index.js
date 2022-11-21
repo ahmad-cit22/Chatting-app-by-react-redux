@@ -19,7 +19,7 @@ const MyGroupsField = () => {
   const db = getDatabase();
   const userData = useSelector((state) => state.userLoginInfo.userInfo);
   const currentId = userData.uid;
-  
+
   const groupsRef = ref(db, "groups/");
   const groupRequestsRef = ref(db, "groupRequests/");
   const groupMembersRef = ref(db, "groupMembers/");
@@ -137,7 +137,7 @@ const MyGroupsField = () => {
       {/* header ends */}
 
       {/* main contents starts */}
-      <SimpleBar className="flex flex-col px-2 max-h-[350px] xl:max-h-[35vh] lg:h-[350px] xl:h-auto px-1">
+      <SimpleBar className="flex flex-col px-2 max-h-[350px] xl:max-h-[37vh] lg:h-[350px] xl:h-auto px-1">
         {myGroupList.length < 1 ? (
           <p className="p-3 mb-7 lg:mb-0 md:p-4 text-center bg-primary/20 mt-8 text-sm md:text-[15px] text-black rounded-md w-[85%] lg:w-full m-auto">
             Groups created by you will be shown here.

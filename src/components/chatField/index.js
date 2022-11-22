@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { BsFillTelephoneFill, BsFillCameraVideoFill } from "react-icons/bs";
 import { MdSend } from "react-icons/md";
 import { getDatabase, onValue, push, ref, set } from "firebase/database";
+import SimpleBar from "simplebar-react";
 
 const ChatField = () => {
   const db = getDatabase();
@@ -104,7 +105,7 @@ const ChatField = () => {
 
   return activeChatData !== null ? (
     <>
-      <div className="py-[14px] flex items-center border-b-[.5px] justify-between shadow-md pr-4 w-full">
+      <div className="py-[14px] flex items-center border-b-[.5px] justify-between shadow-md pr-4 w-full bg-white z-10">
         <Link to={""} className={`w-[11%] md:w-[8%] lg:w-[11%] xl:w-[7%]`}>
           <picture
             className={`rounded-full overflow-hidden h-[15vw] md:h-[9vw] lg:h-[5.5vw] xl:h-[4vw] w-full border-[0px] border-photoUp flex justify-center items-center bg-white`}
@@ -130,9 +131,6 @@ const ChatField = () => {
               className={`opacity-80 text-[11px] md:text-base lg:text-[11px] xl:text-[13px] truncate`}
             >
               Active Now
-              {/* {activeChatData.receiverEmail
-                 ? activeChatData.receiverEmail
-                 : activeChatData.receiverTag} */}
             </p>
           </div>
           <div
@@ -140,173 +138,82 @@ const ChatField = () => {
           >
             <button
               className={`w-[78%] md:w-full break-words text-primaryTwo linear duration-300 px-[2px] py-[2px] md:py-[2px] lg:py-[0px] rounded-md active:scale-[90%]`}
-              // onClick={messageBtn ? clickActMsg : clickAct}
-              // disabled={disableBtn}
             >
               <BsFillTelephoneFill />
             </button>
             <button
               className={`w-[78%] md:w-full break-words text-primaryTwo linear duration-300 px-[2px] py-[2px] md:py-[2px] lg:py-[0px] rounded-md active:scale-[90%]`}
-              // onClick={messageBtn ? clickActMsg : clickAct}
-              // disabled={disableBtn}
             >
               <BsFillCameraVideoFill />
             </button>
-            {/* <button
-               className={`w-[78%] md:w-full break-words bg-primary/90 hover:bg-primary linear duration-300 px-[2px] py-[2px] md:py-[2px] lg:py-[0px] rounded-md active:scale-[90%] ${classBtnTwo}`}
-               onClick={clickActTwo}
-               disabled={disableBtnTwo}
-             >
-               {btnTwoText}
-             </button> */}
           </div>
-          {/*  <p
-             className={`text-[10px] font-semibold opacity-50 last:justify-self-end ${classTime}`}
-           >
-             {subText}
-           </p> */}
         </div>
       </div>
-      <div className="h-full flex flex-col justify-end w-full pb-20 md:pb-28 lg:pb-0">
-        <div className="w-full flex flex-col items-start justify-center gap-y-2 first:mt-3">
-          {activeChatData !== null &&
-            (activeChatData.status === "single"
-              ? singleMsgs.map((item) => (
-                  <div
-                    className={`max-w-[65%] flex items-center justify-center gap-x-2 ${
-                      item.senderId === userData.uid
-                        ? "self-end flex-row-reverse animate-[popDown_.4s_ease_1]"
-                        : "animate-[popUp_.4s_ease_1]"
-                    }`}
-                  >
-                    <picture
-                      className={`rounded-full overflow-hidden h-[35px] w-[35px] bg-white`}
-                    >
-                      <img
-                        src={item.senderImg}
-                        // src={
-                        //   item.senderId === userData.uid
-                        //     ? userData.photoURL
-                        //     : activeChatData.receiverImg
-                        // }
-                        className={"w-full"}
-                        loading="lazy"
-                        alt={"msgSenderAvatar"}
-                      />
-                    </picture>
-                    <p
-                      className={`py-2 px-3 rounded-lg ${
+      <div className="h-full w-full pb-20 md:pb-28 lg:pb-0">
+        <SimpleBar className="h-[75.5vh] flex flex-col !justify-end pr-5">
+          <div className="w-full flex flex-col items-start gap-y-2 first:mt-3">
+            {activeChatData !== null &&
+              (activeChatData.status === "single"
+                ? singleMsgs.map((item) => (
+                    <div
+                      className={`max-w-[65%] flex items-center justify-center gap-x-2 ${
                         item.senderId === userData.uid
-                          ? "bg-primary/90 text-white"
-                          : "bg-primary/10 text-black"
+                          ? "self-end flex-row-reverse animate-[popDown_.4s_ease_1]"
+                          : "animate-[popUp_.4s_ease_1]"
                       }`}
                     >
-                      {item.msg}
-                    </p>
-                  </div>
-                ))
-              : grpMsgs.map((item) => (
-                  <div
-                    className={`max-w-[65%] flex items-center justify-center gap-x-2 ${
-                      item.senderId === userData.uid
-                        ? "self-end flex-row-reverse animate-[popDown_.4s_ease_1]"
-                        : "animate-[popUp_.4s_ease_1]"
-                    }`}
-                  >
-                    <picture
-                      className={`rounded-full overflow-hidden h-[35px] w-[35px] bg-white`}
-                    >
-                      <img
-                        src={item.senderImg}
-                        // src={
-                        //   item.senderId === userData.uid
-                        //     ? userData.photoURL
-                        //     : activeChatData.receiverImg
-                        // }
-                        className={"w-full"}
-                        loading="lazy"
-                        alt={"msgSenderAvatar"}
-                      />
-                    </picture>
-                    <p
-                      className={`py-2 px-3 rounded-lg ${
+                      <picture
+                        className={`rounded-full overflow-hidden h-[35px] w-[35px] bg-white`}
+                      >
+                        <img
+                          src={item.senderImg}
+                          className={"w-full"}
+                          loading="lazy"
+                          alt={"msgSenderAvatar"}
+                        />
+                      </picture>
+                      <p
+                        className={`py-2 px-3 rounded-lg ${
+                          item.senderId === userData.uid
+                            ? "bg-primary/90 text-white"
+                            : "bg-primary/10 text-black"
+                        }`}
+                      >
+                        {item.msg}
+                      </p>
+                    </div>
+                  ))
+                : grpMsgs.map((item) => (
+                    <div
+                      className={`max-w-[65%] flex items-center justify-center gap-x-2 ${
                         item.senderId === userData.uid
-                          ? "bg-primary/90 text-white"
-                          : "bg-primary/10 text-black"
+                          ? "self-end flex-row-reverse animate-[popDown_.4s_ease_1]"
+                          : "animate-[popUp_.4s_ease_1]"
                       }`}
                     >
-                      {item.msg}
-                    </p>
-                  </div>
-                )))}
-          {/* 
-          <div className="max-w-[65%] flex items-center justify-center gap-x-2">
-            <picture
-              className={`rounded-full overflow-hidden h-[35px] w-[35px] bg-white`}
-            >
-              <img
-                src={activeChatData.receiverImg}
-                // src={userData.photoURL}
-                className={"w-full"}
-                loading="lazy"
-                alt={"msgSenderAvatar"}
-              />
-            </picture>
-            <p className="py-2 px-3 bg-hoverPrimary/10 text-black rounded-lg">
-              How r u?
-            </p>
+                      <picture
+                        className={`rounded-full overflow-hidden h-[35px] w-[35px] bg-white`}
+                      >
+                        <img
+                          src={item.senderImg}
+                          className={"w-full"}
+                          loading="lazy"
+                          alt={"msgSenderAvatar"}
+                        />
+                      </picture>
+                      <p
+                        className={`py-2 px-3 rounded-lg ${
+                          item.senderId === userData.uid
+                            ? "bg-primary/90 text-white"
+                            : "bg-primary/10 text-black"
+                        }`}
+                      >
+                        {item.msg}
+                      </p>
+                    </div>
+                  )))}
           </div>
-          <div className="max-w-[65%] self-end flex-row-reverse flex items-center justify-center gap-x-2 ">
-            <picture
-              className={`rounded-full overflow-hidden h-[35px] w-[35px] bg-white`}
-            >
-              <img
-                // src={activeChatData.receiverImg}
-                src={userData.photoURL}
-                className={"w-full"}
-                loading="lazy"
-                alt={"msgSenderAvatar"}
-              />
-            </picture>
-            <p className="py-2 px-3 bg-hoverPrimary/10 text-black rounded-lg">
-              Hey! I'm fine. What about you man?
-            </p>
-          </div>
-
-          <div className="max-w-[65%] flex items-center justify-center gap-x-2">
-            <picture
-              className={`rounded-full overflow-hidden h-[35px] w-[35px] bg-white`}
-            >
-              <img
-                src={activeChatData.receiverImg}
-                // src={userData.photoURL}
-                className={"w-full"}
-                loading="lazy"
-                alt={"msgSenderAvatar"}
-              />
-            </picture>
-            <p className="py-2 px-3 bg-hoverPrimary/10 text-black rounded-lg">
-              I'm also good :D
-            </p>
-          </div>
-
-          <div className="max-w-[65%] self-end flex items-center justify-center gap-x-2 flex-row-reverse">
-            <picture
-              className={`rounded-full overflow-hidden h-[35px] w-[35px] bg-white`}
-            >
-              <img
-                // src={activeChatData.receiverImg}
-                src={userData.photoURL}
-                className={"w-full"}
-                loading="lazy"
-                alt={"msgSenderAvatar"}
-              />
-            </picture>
-            <p className="py-2 px-3 bg-hoverPrimary/10 text-black rounded-lg">
-              What r u doing now?
-            </p>
-          </div> */}
-        </div>
+        </SimpleBar>
 
         {/* input box starts */}
         <div className="">

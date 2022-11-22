@@ -41,16 +41,16 @@ const Home = () => {
       <div className="py-5 px-3 md:px-8 lg:px-5 flex gap-x-6 h-screen font-pop">
         <Sidebar activePage={"home"} />
         <div className="w-full lg:ml-[135px] xl:ml-0 lg:w-[86%] xl:w-[88%] h-full flex flex-col gap-y-9 lg:gap-y-8 xl:gap-y-0 lg:gap-x-4 lg:flex-row lg:justify-between lg:flex-wrap xl:flex-nowrap">
-          <div className="w-full lg:w-[48%] xl:w-[35%] flex flex-col gap-y-9 lg:gap-y-8 xl:gap-y-0  justify-between">
+          <div className="w-full lg:w-[48%] xl:w-[34%] flex flex-col gap-y-9 lg:gap-y-8 xl:gap-y-0  justify-between">
             <SearchBar />
             <JoinGroupField />
             <FriendReqField />
           </div>
-          <div className="w-full lg:w-[48%] xl:w-[30%] flex flex-col gap-y-9 lg:gap-y-8 xl:gap-y-0  justify-between">
+          <div className="w-full lg:w-[48%] xl:w-[28%] flex flex-col gap-y-9 lg:gap-y-8 xl:gap-y-0  justify-between">
             <FriendsField btnOneTxt={"Block"} />
             <MyGroupsField />
           </div>
-          <div className="w-full xl:w-[30%] flex flex-col lg:flex-row xl:flex-col gap-y-9 lg:gap-y-0 lg:gap-x-9 xl:gap-x-0 justify-between">
+          <div className="w-full xl:w-[34%] flex flex-col lg:flex-row xl:flex-col gap-y-9 lg:gap-y-0 lg:gap-x-9 xl:gap-x-0 justify-between">
             <UsersField />
             <BlockField />
           </div>

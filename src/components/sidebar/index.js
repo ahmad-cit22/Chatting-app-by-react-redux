@@ -173,7 +173,7 @@ const Sidebar = ({ activePage }) => {
     <div
       className={`fixed xl:static z-[10] left-0 lg:left-2 bottom-0 lg:bottom-[6px] w-full lg:w-[12%] xl:w-[10%] lg:px-1 lg:py-8 bg-primary lg:h-[98%] xl:h-full lg:rounded-lg flex lg:flex-col`}
     >
-      <div className="w-full overflow-hidden lg:gap-y-[3vh] xl:gap-y-[2.5vh] flex lg:flex-col items-center lg:justify-start group px-4 lg:px-0">
+      <div className="w-full overflow-hidden lg:gap-y-[2.2vh] xl:gap-y-[2.5vh] flex lg:flex-col items-center lg:justify-start group px-4 lg:px-0">
         <div className="lg:pb-6 flex lg:flex-col items-center lg:gap-y-2 w-full justify-between md:justify-center">
           <div className="relative">
             <picture className="rounded-full overflow-hidden h-[35px] w-[35px] md:h-[55px] md:w-[55px] lg:h-[60px] lg:w-[60px] xl:h-[70px] xl:w-[70px] border-[3px] border-white flex justify-center items-center bg-white">

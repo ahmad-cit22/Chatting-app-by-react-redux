@@ -121,7 +121,7 @@ const UsersField = () => {
       </div>
       <SimpleBar
         color="blue"
-        className="flex flex-col px-2 max-h-[350px] xl:max-h-[37vh] lg:h-[350px] xl:h-auto px-1"
+        className="flex flex-col px-2 max-h-[350px] xl:max-h-[36vh] lg:h-[350px] xl:h-auto px-1"
       >
         {usersList.map((item) => (
           <ChatDisplayMin

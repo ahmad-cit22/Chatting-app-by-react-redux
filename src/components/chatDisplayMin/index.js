@@ -68,17 +68,17 @@ const ChatDisplayMin = ({
           </p>
         </div>
         <div
-          className={`w-[40%] md:w-[22%] lg:w-[30%] xl:w-[40%] flex flex-col gap-y-1 justify-center items-center font-semibold text-[12px] md:text-base lg:text-[13px] xl:text-[14px] text-white ${classBtnBox}`}
+          className={`w-[40%] md:w-[22%] lg:w-[30%] xl:w-[33%] flex flex-col gap-y-1 justify-center items-center font-semibold text-[12px] md:text-base lg:text-[13px] xl:text-[14px] text-white ${classBtnBox}`}
         >
           <button
-            className={`min-w-[95%] break-words bg-primary/90 hover:bg-primary linear duration-300 px-1 py-[2px] md:py-[2px] lg:py-[0px] rounded-md active:scale-[90%] ${classBtn}`}
+            className={`w-full break-words bg-primary/90 hover:bg-primary linear duration-300 px-1 py-[2px] md:py-[2px] lg:py-[0px] rounded-md active:scale-[90%] ${classBtn}`}
             onClick={messageBtn ? clickActMsg : clickAct}
             disabled={disableBtn}
           >
             {btnText}
           </button>
           <button
-            className={`min-w-[95%] break-words bg-primary/90 hover:bg-primary linear duration-300 px-1 py-[2px] md:py-[2px] lg:py-[0px] rounded-md active:scale-[90%] ${classBtnTwo}`}
+            className={`w-full break-words bg-primary/90 hover:bg-primary linear duration-300 px-1 py-[2px] md:py-[2px] lg:py-[0px] rounded-md active:scale-[90%] ${classBtnTwo}`}
             onClick={clickActTwo}
             disabled={disableBtnTwo}
           >

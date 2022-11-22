@@ -89,7 +89,7 @@ const GroupsField = () => {
             Groups
           </h3>
         </div>
-        <SimpleBar className="flex flex-col px-2 max-h-[350px] xl:max-h-[37vh] lg:h-[265px] xl:h-auto px-1">
+        <SimpleBar className="flex flex-col px-2 max-h-[350px] xl:max-h-[36vh] lg:h-[265px] xl:h-auto px-1">
           {myGroupList.length + joinedGroupList.length < 1 && (
             <p className="p-3 mb-7 lg:mb-0 md:p-4 text-center bg-primary/20 mt-8 text-sm md:text-[15px] text-black rounded-md w-[85%] lg:w-full m-auto">
               You haven't joined or created any groups yet.

@@ -45,7 +45,7 @@ const Messages = () => {
               // clickActOne={() => handleMessage(item)}
             />
           </div>
-          <div className="w-full lg:w-[48%] xl:w-[64%] flex flex-col gap-y-9 lg:gap-y-8 xl:gap-y-0 justify-start">
+          <div className="w-full lg:w-[48%] xl:w-[64%] flex flex-col gap-y-9 lg:gap-y-8 xl:gap-y-0 justify-start border-l-4 pl-4">
             <ChatField />
           </div>
         </div>

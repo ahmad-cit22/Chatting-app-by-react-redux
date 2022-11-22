@@ -113,7 +113,7 @@ const FriendsField = ({ btnOneTxt, messageBtn }) => {
         </h3>
         <HiOutlineDotsVertical className="text-[22px] mr-1 !text-primaryTwo z-[2] text-black/80 cursor-pointer" />
       </div>
-      <SimpleBar className="flex flex-col px-2 max-h-[350px] xl:max-h-[37vh] lg:h-[350px] xl:h-auto px-1">
+      <SimpleBar className="flex flex-col px-2 max-h-[350px] xl:max-h-[36vh] lg:h-[350px] xl:h-auto px-1">
         {friendList.length < 1 ? (
           <p className="p-3 mb-7 lg:mb-0 md:p-4 text-center bg-[red]/20 mt-8 text-sm md:text-[15px] text-[red] rounded-md w-[85%] lg:w-full m-auto">
             Currently, you've no friends.

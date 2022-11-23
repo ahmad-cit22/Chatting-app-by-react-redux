@@ -109,16 +109,16 @@ const ChatField = () => {
   return activeChatData !== null ? (
     <>
       <div className="h-[10%] flex items-center justify-between shadow-md pr-2.5 md:pr-4 w-full bg-white z-10">
-        <div className="w-[22%] md:w-[13%] lg:w-[11%] xl:w-[7%] flex gap-x-2 justify-between items-center">
+        <div className="w-[22%] md:w-[18%] lg:w-[10%] flex gap-x-2 md:gap-x-4 justify-between items-center">
           <button
-            className="w-2/5 text-[28px] text-primaryTwo"
+            className="w-2/5 lg:hidden text-[28px] md:text-4xl text-primaryTwo"
             onClick={() => dispatch(activeChat(null))}
           >
             <IoIosArrowRoundBack />
           </button>
-          <Link to={""} className={`w-3/5`}>
+          <Link to={""} className={`w-3/5 lg:w-full`}>
             <picture
-              className={`rounded-full overflow-hidden h-[10vw] md:h-[9vw] lg:h-[5.5vw] xl:h-[3.5vw] w-[93%] md:w-full border-[0px] border-photoUp flex justify-center items-center bg-white`}
+              className={`!rounded-full overflow-hidden h-[10vw] md:h-[7.5vw] lg:h-[2.7vw] xl:h-[3.7vw] w-[95%] md:w-[90%] lg:w-[75%] border-[0px] border-photoUp flex justify-center items-center bg-white`}
             >
               <img
                 src={activeChatData.receiverImg}
@@ -129,17 +129,19 @@ const ChatField = () => {
             </picture>
           </Link>
         </div>
-        <div className="flex justify-between w-[78%] md:w-[87%] lg:w-[89%] xl:w-[93%] items-center">
-          <div className={`w-[55%] md:w-[77%] lg:w-[59%] pr-2 pl-3 md:pl-4 `}>
+        <div className="flex justify-between w-[78%] md:w-[82%] lg:w-[89%] xl:w-[93%] items-center">
+          <div
+            className={`w-[55%] md:w-[77%] lg:w-[59%] pr-2 pl-3 md:pl-4 lg:pl-0 `}
+          >
             <Link to={""}>
               <p
-                className={`text-sm md:text-[19px] pb-[1px] lg:text-sm xl:text-[17px] break-words font-semibold hover:text-primaryTwo cursor-pointer linear duration-300`}
+                className={`text-[13px] md:text-[19px] pb-[1px] lg:text-sm xl:text-[17px] break-words font-semibold hover:text-primaryTwo cursor-pointer linear duration-300`}
               >
                 {activeChatData.receiverName}
               </p>
             </Link>
             <p
-              className={`opacity-80 text-[11px] md:text-base lg:text-[11px] xl:text-[13px] truncate`}
+              className={`opacity-80 mt-0 md:mt-1 lg:mt-0 text-[10px] md:text-base lg:text-[11px] xl:text-[13px] truncate`}
             >
               Active Now
             </p>
@@ -174,7 +176,7 @@ const ChatField = () => {
                       }`}
                     >
                       <picture
-                        className={`rounded-full overflow-hidden h-[25px] w-[25px] md:h-[35px] md:w-[35px] bg-white`}
+                        className={`rounded-full overflow-hidden h-[25px] w-[10%] md:h-[35px] md:w-[35px] bg-white`}
                       >
                         <img
                           src={item.senderImg}
@@ -184,7 +186,7 @@ const ChatField = () => {
                         />
                       </picture>
                       <p
-                        className={`py-1.5 md:py-2 px-3 rounded-lg text-[13px] md:text-base ${
+                        className={`w-[90%] py-1.5 md:py-2 px-3 rounded-lg text-[13px] md:text-base ${
                           item.senderId === userData.uid
                             ? "bg-primary/90 text-white"
                             : "bg-primary/10 text-black"
@@ -256,3 +258,6 @@ const ChatField = () => {
 };
 
 export default ChatField;
+
+
+//thanks for watching

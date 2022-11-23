@@ -21,6 +21,7 @@ import { SyncLoader } from "react-spinners";
 import { getDatabase, update } from "firebase/database";
 import { useDispatch, useSelector } from "react-redux";
 import { userLoginInfo } from "../../slices/userSlice";
+import { activeChat } from "../../slices/activeChatSlice";
 
 const Sidebar = ({ activePage }) => {
   const auth = getAuth();
@@ -110,9 +111,7 @@ const Sidebar = ({ activePage }) => {
               //   .then(() => {
               //     console.log("realtime done");
               //   })
-              // .then(() => {
-              // })
-              updateProfile(userData, {
+              updateProfile(auth.currentUser, {
                 photoURL: downloadURL,
               })
                 .then(() => {
@@ -128,10 +127,6 @@ const Sidebar = ({ activePage }) => {
                     setPreviewImg("");
                     photoForm.current.reset();
                   }, 2000);
-                })
-                .catch((error) => {
-                  setLoadingUpload(false);
-                  setFErrUpload(error.code);
                 })
                 .catch((error) => {
                   setLoadingUpload(false);
@@ -172,7 +167,7 @@ const Sidebar = ({ activePage }) => {
   return (
     <div
       className={`fixed xl:static z-[999] left-0 lg:left-2 bottom-0 lg:bottom-[6px] w-full lg:w-[12%] xl:w-[10%] lg:px-1 lg:py-8 bg-primary lg:h-[98%] xl:h-full lg:rounded-lg flex lg:flex-col ${
-        activeChatData !== null ? "hidden lg:block" : ""
+        activeChatData !== null ? "hidden lg:flex" : ""
       }`}
     >
       <div className="w-full overflow-hidden lg:gap-y-[2.2vh] xl:gap-y-[2.5vh] flex lg:flex-col items-center lg:justify-start group px-4 lg:px-0">
@@ -206,6 +201,7 @@ const Sidebar = ({ activePage }) => {
           }`}
           Icon={VscHome}
           goTo={"/"}
+          clickAct={() => dispatch(activeChat(null))}
         ></SidebarMenu>
         <SidebarMenu
           customClass={`${
@@ -224,6 +220,7 @@ const Sidebar = ({ activePage }) => {
           }`}
           Icon={BsBell}
           goTo={"/notifications"}
+          clickAct={() => dispatch(activeChat(null))}
         ></SidebarMenu>
         <SidebarMenu
           customClass={`${
@@ -233,6 +230,7 @@ const Sidebar = ({ activePage }) => {
           }`}
           Icon={TbSettings}
           goTo={"/settings"}
+          clickAct={() => dispatch(activeChat(null))}
         ></SidebarMenu>
         <button
           className={`w-full z-10 relative py-[18px] lg:py-[22px] text-[23.2px] md:text-[41px] lg:text-[30px] xl:text-[41px] flex justify-center cursor-pointer linear duration-300 lg:ml-1 text-white/60 hover:text-white`}

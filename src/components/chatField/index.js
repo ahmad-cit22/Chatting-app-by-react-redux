@@ -1,16 +1,19 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { BsFillTelephoneFill, BsFillCameraVideoFill } from "react-icons/bs";
+import { IoIosArrowRoundBack } from "react-icons/io";
 import { MdSend } from "react-icons/md";
 import { getDatabase, onValue, push, ref, set } from "firebase/database";
 import SimpleBar from "simplebar-react";
+import { activeChat } from "../../slices/activeChatSlice";
 
 const ChatField = () => {
   const db = getDatabase();
   const singleMsgRef = ref(db, "singleMsgs/");
   const groupMsgRef = ref(db, "groupMsgs/");
 
+  const dispatch = useDispatch();
   const activeChatData = useSelector((state) => state.activeChatInfo.value);
   const userData = useSelector((state) => state.userLoginInfo.userInfo);
 
@@ -105,21 +108,29 @@ const ChatField = () => {
 
   return activeChatData !== null ? (
     <>
-      <div className="py-[14px] flex items-center border-b-[.5px] justify-between shadow-md pr-4 w-full bg-white z-10">
-        <Link to={""} className={`w-[11%] md:w-[8%] lg:w-[11%] xl:w-[7%]`}>
-          <picture
-            className={`rounded-full overflow-hidden h-[15vw] md:h-[9vw] lg:h-[5.5vw] xl:h-[4vw] w-full border-[0px] border-photoUp flex justify-center items-center bg-white`}
+      <div className="h-[10%] flex items-center justify-between shadow-md pr-2.5 md:pr-4 w-full bg-white z-10">
+        <div className="w-[22%] md:w-[13%] lg:w-[11%] xl:w-[7%] flex gap-x-2 justify-between items-center">
+          <button
+            className="w-2/5 text-[28px] text-primaryTwo"
+            onClick={() => dispatch(activeChat(null))}
           >
-            <img
-              src={activeChatData.receiverImg}
-              className={"w-full"}
-              loading="lazy"
-              alt={"activeChat"}
-            />
-          </picture>
-        </Link>
-        <div className="flex justify-between w-[89%] md:w-[92%] lg:w-[89%] xl:w-[93%] items-center">
-          <div className={`w-[55%] md:w-[77%] lg:w-[59%] pr-2 pl-4 `}>
+            <IoIosArrowRoundBack />
+          </button>
+          <Link to={""} className={`w-3/5`}>
+            <picture
+              className={`rounded-full overflow-hidden h-[10vw] md:h-[9vw] lg:h-[5.5vw] xl:h-[3.5vw] w-[93%] md:w-full border-[0px] border-photoUp flex justify-center items-center bg-white`}
+            >
+              <img
+                src={activeChatData.receiverImg}
+                className={"w-full"}
+                loading="lazy"
+                alt={"activeChat"}
+              />
+            </picture>
+          </Link>
+        </div>
+        <div className="flex justify-between w-[78%] md:w-[87%] lg:w-[89%] xl:w-[93%] items-center">
+          <div className={`w-[55%] md:w-[77%] lg:w-[59%] pr-2 pl-3 md:pl-4 `}>
             <Link to={""}>
               <p
                 className={`text-sm md:text-[19px] pb-[1px] lg:text-sm xl:text-[17px] break-words font-semibold hover:text-primaryTwo cursor-pointer linear duration-300`}
@@ -134,24 +145,24 @@ const ChatField = () => {
             </p>
           </div>
           <div
-            className={`flex gap-y-1 xl:gap-x-6 justify-center items-center font-semibold text-[12px] md:text-base lg:text-[13px] xl:text-2xl text-primary`}
+            className={`flex gap-y-1 gap-x-4 md:gap-x-6 justify-center items-center font-semibold text-lg md:text-2xl lg:text-[13px] xl:text-2xl text-primary`}
           >
             <button
-              className={`w-[78%] md:w-full break-words text-primaryTwo linear duration-300 px-[2px] py-[2px] md:py-[2px] lg:py-[0px] rounded-md active:scale-[90%]`}
+              className={` break-words text-primaryTwo linear duration-300 px-[2px] py-[2px] md:py-[2px] lg:py-[0px] rounded-md active:scale-[90%]`}
             >
               <BsFillTelephoneFill />
             </button>
             <button
-              className={`w-[78%] md:w-full break-words text-primaryTwo linear duration-300 px-[2px] py-[2px] md:py-[2px] lg:py-[0px] rounded-md active:scale-[90%]`}
+              className={` break-words text-primaryTwo linear duration-300 px-[2px] py-[2px] md:py-[2px] lg:py-[0px] rounded-md active:scale-[90%]`}
             >
               <BsFillCameraVideoFill />
             </button>
           </div>
         </div>
       </div>
-      <div className="h-full w-full pb-20 md:pb-28 lg:pb-0">
-        <SimpleBar className="h-[75.5vh] flex flex-col !justify-end pr-5">
-          <div className="w-full flex flex-col items-start gap-y-2 first:mt-3">
+      <div className="h-[90%] w-full flex flex-col">
+        <SimpleBar className="h-full lg:pr-5">
+          <div className="w-full h-[72vh] md:h-[76vh] lg:h-[73vh] flex flex-col items-start justify-end gap-y-2 first:mt-3">
             {activeChatData !== null &&
               (activeChatData.status === "single"
                 ? singleMsgs.map((item) => (
@@ -163,7 +174,7 @@ const ChatField = () => {
                       }`}
                     >
                       <picture
-                        className={`rounded-full overflow-hidden h-[35px] w-[35px] bg-white`}
+                        className={`rounded-full overflow-hidden h-[25px] w-[25px] md:h-[35px] md:w-[35px] bg-white`}
                       >
                         <img
                           src={item.senderImg}
@@ -173,7 +184,7 @@ const ChatField = () => {
                         />
                       </picture>
                       <p
-                        className={`py-2 px-3 rounded-lg ${
+                        className={`py-1.5 md:py-2 px-3 rounded-lg text-[13px] md:text-base ${
                           item.senderId === userData.uid
                             ? "bg-primary/90 text-white"
                             : "bg-primary/10 text-black"
@@ -192,7 +203,7 @@ const ChatField = () => {
                       }`}
                     >
                       <picture
-                        className={`rounded-full overflow-hidden h-[35px] w-[35px] bg-white`}
+                        className={`rounded-full overflow-hidden h-[25px] w-[25px] md:h-[35px] md:w-[35px] bg-white`}
                       >
                         <img
                           src={item.senderImg}
@@ -202,7 +213,7 @@ const ChatField = () => {
                         />
                       </picture>
                       <p
-                        className={`py-2 px-3 rounded-lg ${
+                        className={`py-1.5 md:py-2 px-3 rounded-lg text-[13px] md:text-base ${
                           item.senderId === userData.uid
                             ? "bg-primary/90 text-white"
                             : "bg-primary/10 text-black"
@@ -222,12 +233,12 @@ const ChatField = () => {
             ref={msgFormRef}
           >
             <input
-              className="w-[94%] block py-3 px-5 rounded-full mt-6 border-[1px] border-primary/40 focus:border-photoUp/80 text-[17px] text-primary outline-0 linear duration-300"
+              className="w-[94%] block py-2 md:py-3 px-3 md:px-5 rounded-full mt-3 md:mt-6 border-[1px] border-primary/40 focus:border-photoUp/80 text-sm md:text-[17px] text-primary outline-0 linear duration-300"
               placeholder={`${msgErr !== "" ? msgErr : "Write Your Message"}`}
               onChange={handleMsg}
             />
             <button
-              className="pl-2 w-[6%] text-primaryTwo/70 hover:text-primaryTwo text-[35px] leading-[15px] mt-6 linear duration-300 active:scale-90"
+              className="md:pl-2 w-[6%] text-primaryTwo/70 hover:text-primaryTwo text-2xl md:text-[35px] leading-[15px] mt-3 md:mt-6 linear duration-300 active:scale-90"
               onClick={handleSubmit}
             >
               <MdSend />

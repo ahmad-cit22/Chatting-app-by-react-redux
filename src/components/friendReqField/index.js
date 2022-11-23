@@ -92,6 +92,7 @@ const FriendReqField = () => {
               classBtnBox={"xl:!w-[30%]"}
               btnTwoText={"Decline"}
               classBtnTwo={"!bg-[red]/80 hover:!bg-[red]"}
+              classTime={"!hidden"}
               clickAct={() => handleFriendReqAccept(item)}
             />
           ))

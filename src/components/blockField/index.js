@@ -136,7 +136,7 @@ const currentId = userData.uid;
                   : ""
               }`}
               classBtnTwo={"hidden"}
-              classTime={"!hidden pr-1"}
+              classTime={"!hidden"}
               disableBtn={currentId !== item.blockedById ? true : false}
               clickAct={() =>
                 // friendReqList.includes(item.id + currentId)

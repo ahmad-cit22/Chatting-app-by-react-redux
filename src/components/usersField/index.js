@@ -143,6 +143,7 @@ const UsersField = () => {
                 : ""
             }`}
             classBtnTwo={"hidden"}
+            classTime={"!hidden pr-1"}
             btnText={`${
               friendReqList.includes(currentId + item.id)
                 ? "Added"

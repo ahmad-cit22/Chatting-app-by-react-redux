@@ -132,9 +132,10 @@ const FriendsField = ({ btnOneTxt, messageBtn }) => {
                 classTextBox={"pl-3"}
                 classChtName={""}
                 classMsg={""}
+                classBtn={`!w-4/5 md:!w-full`}
+                classBtnBox={" lg:!w-[30%]"}
                 classBtnTwo={"hidden"}
-                classBtnBox={"!w-[43%] md:!w-[26%] lg:!w-[30%]"}
-                classTime={"!hidden pr-1"}
+                classTime={"!hidden"}
                 clickAct={() => handleBlock(item)}
                 clickActMsg={() => handleActiveChatMsg(item)}
                 messageBtn={messageBtn}
@@ -151,9 +152,10 @@ const FriendsField = ({ btnOneTxt, messageBtn }) => {
                 classTextBox={"pl-3"}
                 classChtName={""}
                 classMsg={""}
+                classBtn={`!w-4/5 md:!w-full`}
+                classBtnBox={" lg:!w-[30%]"}
                 classBtnTwo={"hidden"}
-                classBtnBox={"!w-[43%] md:!w-[26%] lg:!w-[30%]"}
-                classTime={"!hidden pr-1"}
+                classTime={"!hidden"}
                 clickAct={() => handleBlock(item)}
                 clickActMsg={() => handleActiveChatMsg(item)}
                 messageBtn={messageBtn}

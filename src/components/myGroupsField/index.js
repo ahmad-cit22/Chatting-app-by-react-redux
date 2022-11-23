@@ -171,7 +171,7 @@ const MyGroupsField = () => {
                   // classBtnBox={"xl:!w-[35%]"}
                   btnTwoText={"Decline"}
                   classBtnTwo={"!bg-[red]/80 hover:!bg-[red]"}
-                  classTime={"pr-1 hidden"}
+                  classTime={"!hidden"}
                   subText={""}
                   clickAct={() => handleGrpReqAccept(item)}
                   clickActTwo={() => handleGrpReqDecline(item)}
@@ -207,7 +207,7 @@ const MyGroupsField = () => {
                   classBtn={""}
                   btnTwoText={"Remove"}
                   classBtnTwo={"!bg-[red]/80 hover:!bg-[red]"}
-                  classTime={"pr-1 hidden"}
+                  classTime={"!hidden"}
                   subText={""}
                   clickAct={() => handleGrpReqAccept(item)}
                   clickActTwo={() => handleGrpReqDecline(item)}
@@ -230,7 +230,7 @@ const MyGroupsField = () => {
               classBtn={""}
               classBtnBox={"xl:!w-[40%]"}
               btnTwoText={"Members"}
-              classTime={"pr-1 hidden"}
+              classTime={"!hidden"}
               subText={""}
               clickAct={() => handleGrpInfo(item)}
               clickActTwo={() => handleGrpMembers(item)}

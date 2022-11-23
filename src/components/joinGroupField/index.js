@@ -238,6 +238,7 @@ const JoinGroupField = () => {
                 classBtnBox={"!w-[43%] md:!w-[26%] lg:!w-[41%]"}
                 classBtnTwo={"hidden !w-4/5 md:!w-full"}
                 chatLink="#"
+                classTime={"!hidden"}
                 disableBtn={
                   grpReqList.includes(item.id + currentId) ||
                   grpMemberList.includes(item.id + currentId)

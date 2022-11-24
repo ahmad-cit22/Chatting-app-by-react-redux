@@ -47,7 +47,7 @@ const Messages = () => {
             <FriendsField btnOneTxt={"Chat"} messageBtn={true} />
           </div>
           <div
-            className={`w-full h-full lg:w-[48%] xl:w-[64%] flex flex-col gap-y-9 lg:gap-y-8 xl:gap-y-0 justify-start lg:border-l-4 lg:pl-4 ${
+            className={`w-full h-full lg:w-[48%] xl:w-[64%] flex flex-col justify-start lg:border-l-4 lg:pl-4 ${
               activeChatData === null ? "hidden lg:flex" : ""
             }`}
           >

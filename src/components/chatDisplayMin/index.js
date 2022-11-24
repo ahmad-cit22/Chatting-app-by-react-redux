@@ -29,7 +29,7 @@ const ChatDisplayMin = ({
   clickActMsg,
 }) => {
   return (
-    <div className="py-[18px] flex items-center border-b-[.5px] border-b-slate-300 last:border-none justify-start md:px-4 lg:px-0">
+    <div className="py-[18px] flex items-center border-b-[.5px] border-b-slate-300 last:border-none justify-start md:px-4 lg:px-0 !pr-2">
       <Link
         to={""}
         className={`w-[18%] md:w-[12%] lg:w-[15%] xl:w-[17%] ${classAvatar}`}

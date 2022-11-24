@@ -163,30 +163,32 @@ const ChatField = () => {
         </div>
       </div>
       <div className="h-[90%] w-full flex flex-col">
-        <SimpleBar className="h-full lg:pr-5">
-          <div className="w-full h-[72vh] md:h-[76vh] lg:h-[73vh] flex flex-col items-start justify-end gap-y-2 first:mt-3">
+        <SimpleBar className="h-[75vh] md:h-[78vh] lg:h-[76.5vh] lg:pr-2">
+          <div className="w-full flex flex-col items-start justify-end gap-y-2 first:mt-3">
             {activeChatData !== null &&
               (activeChatData.status === "single"
                 ? singleMsgs.map((item) => (
                     <div
-                      className={`max-w-[65%] flex items-center justify-center gap-x-2 ${
+                      className={`max-w-[75%] flex items-end justify-between gap-x-2 ${
                         item.senderId === userData.uid
                           ? "self-end flex-row-reverse animate-[popDown_.4s_ease_1]"
                           : "animate-[popUp_.4s_ease_1]"
                       }`}
                     >
-                      <picture
-                        className={`rounded-full overflow-hidden h-[25px] w-[10%] md:h-[35px] md:w-[35px] bg-white`}
-                      >
-                        <img
-                          src={item.senderImg}
-                          className={"w-full"}
-                          loading="lazy"
-                          alt={"msgSenderAvatar"}
-                        />
-                      </picture>
+                      <div className="w-[25px] md:!w-[35px] flex justify-center items-center">
+                        <picture
+                          className={`rounded-full overflow-hidden h-[25px] w-[25px] md:!h-[35px] md:!w-[35px] bg-white`}
+                        >
+                          <img
+                            src={item.senderImg}
+                            className={"w-full"}
+                            loading="lazy"
+                            alt={"msgSenderAvatar"}
+                          />
+                        </picture>
+                      </div>
                       <p
-                        className={`w-[90%] py-1.5 md:py-2 px-3 rounded-lg text-[13px] md:text-base ${
+                        className={`max-w-[90%] py-1.5 md:py-2 px-3 rounded-lg text-[13px] md:text-lg lg:text-base ${
                           item.senderId === userData.uid
                             ? "bg-primary/90 text-white"
                             : "bg-primary/10 text-black"
@@ -198,24 +200,26 @@ const ChatField = () => {
                   ))
                 : grpMsgs.map((item) => (
                     <div
-                      className={`max-w-[65%] flex items-center justify-center gap-x-2 ${
+                      className={`max-w-[75%] flex items-end justify-center gap-x-2 ${
                         item.senderId === userData.uid
                           ? "self-end flex-row-reverse animate-[popDown_.4s_ease_1]"
                           : "animate-[popUp_.4s_ease_1]"
                       }`}
                     >
-                      <picture
-                        className={`rounded-full overflow-hidden h-[25px] w-[25px] md:h-[35px] md:w-[35px] bg-white`}
-                      >
-                        <img
-                          src={item.senderImg}
-                          className={"w-full"}
-                          loading="lazy"
-                          alt={"msgSenderAvatar"}
-                        />
-                      </picture>
+                      <div className="w-[25px] md:!w-[35px] flex justify-center items-center">
+                        <picture
+                          className={`rounded-full overflow-hidden h-[25px] w-[25px] md:!h-[35px] md:!w-[35px] bg-white`}
+                        >
+                          <img
+                            src={item.senderImg}
+                            className={"w-full"}
+                            loading="lazy"
+                            alt={"msgSenderAvatar"}
+                          />
+                        </picture>
+                      </div>
                       <p
-                        className={`py-1.5 md:py-2 px-3 rounded-lg text-[13px] md:text-base ${
+                        className={`max-w-[90%] py-1.5 md:py-2 px-3 rounded-lg text-[13px] md:text-lg lg:text-base ${
                           item.senderId === userData.uid
                             ? "bg-primary/90 text-white"
                             : "bg-primary/10 text-black"
@@ -258,6 +262,5 @@ const ChatField = () => {
 };
 
 export default ChatField;
-
 
 //thanks for watching

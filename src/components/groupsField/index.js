@@ -36,11 +36,17 @@ const GroupsField = () => {
       chatInfo.receiverName = item.grpName;
       chatInfo.receiverTag = item.grpTag;
       chatInfo.receiverImg = item.grpImg;
+      chatInfo.adminId = item.adminId;
+      chatInfo.adminImg = item.adminImg;
+      chatInfo.adminName = item.adminName;
     } else {
       chatInfo.receiverId = item.grpId;
       chatInfo.receiverName = item.grpName;
       chatInfo.receiverTag = item.grpTag;
       chatInfo.receiverImg = item.grpImg;
+      chatInfo.adminId = item.adminId;
+      chatInfo.adminImg = item.adminImg;
+      chatInfo.adminName = item.adminName;
     }
     dispatch(activeChat(chatInfo));
   };

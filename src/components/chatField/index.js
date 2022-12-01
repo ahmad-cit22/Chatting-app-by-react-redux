@@ -26,6 +26,8 @@ const ChatField = () => {
   const [grpMsgs, setGrpMsgs] = useState([]);
   const [singleMsgs, setSingleMsgs] = useState([]);
 
+  const messagesEndRef = useRef(null);
+
   const handleMsg = (e) => {
     setMsg(e.target.value);
     setMsgErr("");
@@ -106,6 +108,14 @@ const ChatField = () => {
     }
   }, [activeChatData]);
 
+  const scrollToBottom = () => {
+    if (activeChatData !== null && grpMsgs.length !== 0) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  useEffect(scrollToBottom, [grpMsgs]);
+
   return activeChatData !== null ? (
     <>
       <div className="h-[10%] flex items-center justify-between shadow-md pr-2.5 md:pr-4 w-full bg-white z-10">
@@ -163,8 +173,37 @@ const ChatField = () => {
         </div>
       </div>
       <div className="h-[90%] w-full flex flex-col">
-        <SimpleBar className="h-[75vh] md:h-[78vh] lg:h-[76.5vh] lg:pr-2">
-          <div className="w-full flex flex-col items-start justify-end gap-y-2 first:mt-3">
+        <SimpleBar className="h-[75vh] md:h-[78vh] lg:h-[76.5vh] lg:pr-2 ">
+          <div className="w-[100%] flex flex-col items-start gap-y-2 first:mt-3">
+            <div className="items-center flex flex-col w-full pt-24">
+              <picture
+                className={`rounded-full overflow-hidden h-[90px] w-[90px] md:!h-[100px] md:!w-[100px] bg-white`}
+              >
+                <img
+                  src={activeChatData.receiverImg}
+                  className={"w-full"}
+                  loading="lazy"
+                  alt={"msgSenderAvatar"}
+                />
+              </picture>
+              <div className="text-center mt-4">
+                <p className="text-2xl md:text-3xl font-semibold mb-2">
+                  {activeChatData.receiverName}
+                </p>
+                <p className="text-sm md:text-base mb-2">
+                  {activeChatData.status === "single"
+                    ? activeChatData.receiverEmail
+                    : activeChatData.receiverTag}
+                </p>
+                <p className="text-sm md:text-base mb-56">
+                  {activeChatData.status === "single"
+                    ? "You're friends on ChitChat."
+                    : activeChatData.adminId === userData.uid
+                    ? "You're an admin of this chat group."
+                    : "You're a member in this chat group."}
+                </p>
+              </div>
+            </div>
             {activeChatData !== null &&
               (activeChatData.status === "single"
                 ? singleMsgs.map((item) => (
@@ -188,7 +227,7 @@ const ChatField = () => {
                         </picture>
                       </div>
                       <p
-                        className={`max-w-[90%] py-1.5 md:py-2 px-3 rounded-lg text-[13px] md:text-lg lg:text-base ${
+                        className={`max-w-[95%] py-1.5 md:py-2 px-3 rounded-lg text-[13px] md:text-lg lg:text-base ${
                           item.senderId === userData.uid
                             ? "bg-primary/90 text-white"
                             : "bg-primary/10 text-black"
@@ -205,6 +244,7 @@ const ChatField = () => {
                           ? "self-end flex-row-reverse animate-[popDown_.4s_ease_1]"
                           : "animate-[popUp_.4s_ease_1]"
                       }`}
+                      ref={messagesEndRef}
                     >
                       <div className="w-[25px] md:!w-[35px] flex justify-center items-center">
                         <picture
@@ -219,7 +259,7 @@ const ChatField = () => {
                         </picture>
                       </div>
                       <p
-                        className={`max-w-[90%] py-1.5 md:py-2 px-3 rounded-lg text-[13px] md:text-lg lg:text-base ${
+                        className={`max-w-[95%] py-1.5 md:py-2 px-3 rounded-lg text-[13px] md:text-lg lg:text-base ${
                           item.senderId === userData.uid
                             ? "bg-primary/90 text-white"
                             : "bg-primary/10 text-black"
@@ -235,7 +275,7 @@ const ChatField = () => {
         {/* input box starts */}
         <div className="">
           <form
-            className="flex gap-x-2 items-center justify-center"
+            className="flex gap-x-2 items-center justify-center pr-2"
             ref={msgFormRef}
           >
             <input

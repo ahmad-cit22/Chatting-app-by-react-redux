@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { VscHome } from "react-icons/vsc";
 import { TbMessageCircle, TbSettings } from "react-icons/tb";
 import { BsBell } from "react-icons/bs";
@@ -17,8 +17,7 @@ import {
   ref,
   uploadString,
 } from "firebase/storage";
-import { BeatLoader, SyncLoader } from "react-spinners";
-import { getDatabase, update } from "firebase/database";
+import { BeatLoader } from "react-spinners";
 import { useDispatch, useSelector } from "react-redux";
 import { userLoginInfo } from "../../slices/userSlice";
 import { activeChat } from "../../slices/activeChatSlice";

@@ -15,7 +15,7 @@ import {
   ref as refStorage,
   uploadString,
 } from "firebase/storage";
-import { BeatLoader, SyncLoader } from "react-spinners";
+import { BeatLoader } from "react-spinners";
 import { getDatabase, onValue, push, ref, set } from "firebase/database";
 import SimpleBar from "simplebar-react";
 import { activeChat } from "../../slices/activeChatSlice";
@@ -36,7 +36,6 @@ const ChatField = () => {
 
   const [msg, setMsg] = useState("");
   const [msgErr, setMsgErr] = useState("");
-  const [msgBlank, setMsgBlank] = useState(true);
 
   const [img, setImg] = useState("");
   const [imgName, setImgName] = useState("");
@@ -390,7 +389,7 @@ const ChatField = () => {
             </p>
           </div>
           <div
-            className={`flex gap-y-1 gap-x-4 md:gap-x-6 justify-center items-center font-semibold text-lg md:text-2xl lg:text-[13px] xl:text-2xl text-primary`}
+            className={`flex gap-y-1 gap-x-6 md:gap-x-8 justify-center items-center font-semibold text-lg md:text-2xl lg:text-[13px] xl:text-2xl text-primary`}
           >
             <button
               className={` break-words text-primaryTwo linear duration-300 px-[2px] py-[2px] md:py-[2px] lg:py-[0px] rounded-md active:scale-[90%]`}

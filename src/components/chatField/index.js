@@ -460,15 +460,18 @@ const ChatField = () => {
                         </picture>
                       </div>
                       {item.msg ? (
-                        <p
-                          className={`max-w-[95%] py-1.5 px-3 rounded-lg text-[13px] md:text-lg lg:text-[15px] ${
-                            item.senderId === userData.uid
-                              ? "bg-primary/90 text-white"
-                              : "bg-primary/10 text-black"
-                          }`}
-                        >
-                          {item.msg}
-                        </p>
+                        <div>
+                          <p
+                            className={`max-w-[95%] py-1.5 px-3 rounded-lg text-[13px] md:text-lg lg:text-[15px] ${
+                              item.senderId === userData.uid
+                                ? "bg-primary/90 text-white"
+                                : "bg-primary/10 text-black"
+                            }`}
+                          >
+                            {item.msg}
+                          </p>
+                          <span>asdasd</span>
+                        </div>
                       ) : (
                         <div
                           className={`max-w-[95%] rounded-[15px] overflow-hidden flex justify-start ${

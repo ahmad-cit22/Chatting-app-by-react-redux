@@ -470,7 +470,7 @@ const ChatField = () => {
                           >
                             {item.msg}
                           </p>
-                          <span>asdasd</span>
+                          {/* <span>asdasd</span> */}
                         </div>
                       ) : (
                         <div

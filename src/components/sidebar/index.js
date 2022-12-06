@@ -76,12 +76,14 @@ const Sidebar = ({ activePage }) => {
   const handleSelectPhoto = (e) => {
     e.preventDefault();
     setUploadErrMsg("");
+
     let files;
     if (e.dataTransfer) {
       files = e.dataTransfer.files;
     } else if (e.target) {
       files = e.target.files;
     }
+    
     const reader = new FileReader();
     reader.onload = () => {
       setImg(reader.result);
@@ -270,7 +272,6 @@ const Sidebar = ({ activePage }) => {
             <input
               type={"file"}
               className="w-full px-1 py-5 text-xl font-semibold outline-0 linear duration-300 z-10 mb-1"
-              placeholder="Email Address"
               onChange={handleSelectPhoto}
             />
             <Cropper

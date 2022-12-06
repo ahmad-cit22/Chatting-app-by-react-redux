@@ -41,7 +41,7 @@ module.exports = {
           "100%": { opacity: "1", transform: "scaleX(100%)" },
         },
         popDown: {
-          "0%": { opacity: "0", transform: "scaleX(170%)" },
+          "0%": { opacity: "0", transform: "scaleX(120%)" },
           "100%": { opacity: "1", transform: "scaleX(100%)" },
         },
         slideX: {

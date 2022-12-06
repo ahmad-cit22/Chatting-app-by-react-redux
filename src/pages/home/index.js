@@ -11,12 +11,14 @@ import { useNavigate } from "react-router-dom";
 import MyGroupsField from "../../components/myGroupsField";
 import { useDispatch, useSelector } from "react-redux";
 import { userLoginInfo } from "../../slices/userSlice";
+import { render } from "@testing-library/react";
 
 const Home = () => {
   const navigate = useNavigate();
   const userData = useSelector((state) => state.userLoginInfo.userInfo);
   const auth = getAuth();
   const dispatch = useDispatch();
+  const currentUserAuth = auth.currentUser;
 
   const [emailVerify, setEmailVerify] = useState(false);
 
@@ -36,22 +38,30 @@ const Home = () => {
     }
   }, []);
 
+  // useEffect(() => {
+  //   if (currentUserAuth !== null && currentUserAuth.emailVerified) {
+  //     dispatch(userLoginInfo(currentUserAuth));
+  //     localStorage.setItem("userLoginInfo", JSON.stringify(currentUserAuth));
+  //     console.log(auth.currentUser.emailVerified);
+  //   }
+  // }, []);
+
   return (
     userData !== null &&
     (!emailVerify ? (
       <div className="bg-primary/20 border-[1px] lg:border-[3px] border-[#5F35F580] rounded-md mt-14 text-primaryTwo flex-col justify-center items-center p-5 lg:p-10 lg:pt-8 w-4/5 lg:w-3/5 m-auto text-xl lg:text-[28px] font-semibold text-center animate-[popUp_.4s_ease_1]">
         <p className="lg:leading-[34px]">
-          Please verify your email address first in order to get access to your
-          account. After completing verification, please login again.
+          Please verify your email address first and then login again in order
+          to get access to your account.
         </p>
         <p className="mt-2 lg:mt-3 text-lg lg:text-2xl">
           Check your email for the verification link.
         </p>
         <button
-          className={`py-1 px-3 mt-6 md:mt-10 md:w-[15%] text-sm md:text-lg leading-[40px] rounded-md text-white font-semibold opacity-80 bg-[red]/70 hover:bg-[red] linear duration-500 active:scale-90`}
+          className={`md:py-1 px-3 mt-6 md:mt-10 md:w-[15%] text-sm md:text-lg leading-[40px] rounded-md text-white font-semibold opacity-80 bg-[red]/70 hover:bg-[red] linear duration-500 active:scale-90`}
           onClick={handleSignOut}
         >
-          Sign Out
+          Log Out
         </button>
       </div>
     ) : (

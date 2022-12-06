@@ -259,7 +259,7 @@ const JoinGroupField = () => {
         } animate-[smooth.3s_ease_1] grid place-items-center`}
       >
         <div
-          className="relative w-2/5 bg-white text-center py-10 px-6 rounded-md animate-[popUp_.3s_ease_1]"
+          className="relative  w-[90%] md:w-2/5 bg-white text-center py-6 md:py-10 px-2 md:px-6 rounded-md animate-[popUp_.3s_ease_1]"
           ref={refCreateGroupModal}
         >
           <h2 className="text-primary text-2xl md:text-[32px] leading-none font-semibold mb-12">
@@ -268,53 +268,53 @@ const JoinGroupField = () => {
           <form className="w-4/5 m-auto" ref={refCreateGroupFrom}>
             <input
               type={"text"}
-              className="w-full md:py-3 md:px-4 rounded-md border-[1.5px] border-primary text-lg text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
+              className="w-full py-2 md:py-3 px-2.5 md:px-4 rounded-md border-[1.5px] border-primary text-sm md:text-lg text-primary font-semibold outline-0 focus:border-focus linear duration-300 z-10"
               placeholder="Group Name"
               onChange={handleGName}
             />
             {grpNameErrMsg !== "" && (
-              <p className="pt-[2px] pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1] text-left">
+              <p className="pt-[2px] pl-1 text-sm text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1] text-left">
                 {grpNameErrMsg}
               </p>
             )}
             {grpNameFErrMsg !== "" && (
-              <p className="pt-[2px] pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1] text-left">
+              <p className="pt-[2px] pl-1 text-sm text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1] text-left">
                 {grpNameFErrMsg}
               </p>
             )}
 
             <input
               type={"text"}
-              className="w-full mt-4 md:py-3 md:px-4 rounded-md border-[1.5px] border-primary text-lg text-primary outline-0 focus:border-focus linear duration-300 z-10"
+              className="w-full mt-4 py-2 md:py-3 px-2.5 md:px-4 rounded-md border-[1.5px] border-primary text-sm md:text-lg text-primary outline-0 focus:border-focus linear duration-300 z-10"
               placeholder="Group Tag"
               onChange={handleGTag}
             />
 
             {grpTagErrMsg !== "" && (
-              <p className="pt-[2px] pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1] text-left">
+              <p className="pt-[2px] pl-1 text-sm text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1] text-left">
                 {grpTagErrMsg}
               </p>
             )}
             {grpTagFErrMsg !== "" && (
-              <p className="pt-[2px] pl-1 text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1] text-left">
+              <p className="pt-[2px] pl-1 text-sm text-[red]/90 font-semibold animate-[popUpY_.4s_ease_1] text-left">
                 {grpTagFErrMsg}
               </p>
             )}
             {grpSuccessMsg !== "" && (
-              <p className="pt-[3px] pl-1 text-lg text-[green] font-semibold animate-[popDown_.4s_ease_1] text-left">
+              <p className="pt-[3px] pl-1 text-base md:text-lg text-[green] font-semibold animate-[popDown_.4s_ease_1] text-left">
                 {grpSuccessMsg}
               </p>
             )}
             <RiCloseFill
               className={
-                "text-[40px] mr-[1px] mt-[2px] text-primaryTwo/70 hover:text-primaryTwo linear duration-300 rounded-full font-semibold cursor-pointer absolute top-0 right-0"
+                "text-3xl md:text-[40px] mr-[1px] mt-[2px] text-primaryTwo/70 hover:text-primaryTwo linear duration-300 rounded-full font-semibold cursor-pointer absolute top-0 right-0"
               }
               onClick={closeModal}
             />
             <Button
               customClass={`${
                 loading ? "opacity-70 hover:bg-primary" : ""
-              } py-2 mt-8 w-[50%] text-xl leading-[40px] rounded-md font-semibold`}
+              } py-1 md:py-2 px-4 mt-6 md:mt-8 md:w-[50%] text-sm md:text-xl leading-[40px] rounded-md font-semibold`}
               text={`${isCompleted ? "Done" : "Create Group"}`}
               btnDisable={loading}
               clickAct={handleGrpSubmit}

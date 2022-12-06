@@ -17,7 +17,7 @@ import {
   ref,
   uploadString,
 } from "firebase/storage";
-import { SyncLoader } from "react-spinners";
+import { BeatLoader, SyncLoader } from "react-spinners";
 import { getDatabase, update } from "firebase/database";
 import { useDispatch, useSelector } from "react-redux";
 import { userLoginInfo } from "../../slices/userSlice";
@@ -83,7 +83,7 @@ const Sidebar = ({ activePage }) => {
     } else if (e.target) {
       files = e.target.files;
     }
-    
+
     const reader = new FileReader();
     reader.onload = () => {
       setImg(reader.result);
@@ -101,7 +101,7 @@ const Sidebar = ({ activePage }) => {
       if (typeof cropper !== "undefined") {
         cropper.getCroppedCanvas().toDataURL();
         const message = cropper.getCroppedCanvas().toDataURL();
-        
+
         uploadString(storageRef, message, "data_url")
           .then((snapshot) => {
             console.log(snapshot);
@@ -249,17 +249,17 @@ const Sidebar = ({ activePage }) => {
         } animate-[smooth.3s_ease_1] grid place-items-center`}
       >
         <div
-          className="relative w-2/5 bg-white text-center py-12 px-6 rounded-lg animate-[popUp_.3s_ease_1]"
+          className="relative w-[90%] md:w-2/5 bg-white text-center py-8 md:py-12 px-2 md:px-6 rounded-lg animate-[popUp_.3s_ease_1]"
           ref={refPhotoUpload}
         >
-          <h2 className="text-primaryTwo text-[34px] leading-none font-semibold mb-12">
+          <h2 className="text-primaryTwo text-[22px] md:text-[34px] leading-none font-semibold mb-7 md:mb-12">
             Upload Profile Picture
           </h2>
           <div className="flex pl-16 items-center gap-x-6">
-            <p className="text-lg font-semibold text-primary">
+            <p className="text-sm md:text-lg font-semibold text-primary">
               Preview Image :
             </p>
-            <div className="rounded-full overflow-hidden h-[100px] w-[100px] border-[1px] border-photoUp p-0 grid justify-center items-center">
+            <div className="rounded-full overflow-hidden h-[60px] md:h-[100px] w-[60px] md:w-[100px] border-[1px] border-photoUp p-0 grid justify-center items-center">
               <picture>
                 {img ? (
                   <img src={previewImg} loading={"lazy"} />
@@ -272,7 +272,7 @@ const Sidebar = ({ activePage }) => {
           <form className="w-4/5 m-auto" ref={photoForm}>
             <input
               type={"file"}
-              className="w-full px-1 py-5 text-xl font-semibold outline-0 linear duration-300 z-10 mb-1"
+              className="w-full px-1 py-5 text-sm md:text-xl font-semibold outline-0 linear duration-300 z-10 mb-1"
               onChange={handleSelectPhoto}
             />
             <Cropper
@@ -295,32 +295,32 @@ const Sidebar = ({ activePage }) => {
               }}
             />
             {uploadErrMsg !== "" && (
-              <p className="absolute left-[85px] bottom-36 bg-[red]/20 inline-block border-2 border-[red] px-2 pb-1 rounded opacity- text-[red]/90 font-semibold animate-[popUp_.4s_ease_1] py-1">
+              <p className="pt-1 px-1 text-sm text-[red]/90 font-semibold inline-block animate-[popUpY_.4s_ease_1]">
                 {uploadErrMsg}
               </p>
             )}
             {fErrUpload !== "" && (
-              <p className="pt-1 px-1 text-[red]/90 font-semibold inline-block animate-[popUpY_.4s_ease_1]">
+              <p className="pt-1 px-1 text-sm text-[red]/90 font-semibold inline-block animate-[popUpY_.4s_ease_1]">
                 {fErrUpload}
               </p>
             )}
             {successUpload !== "" && (
-              <p className="mt-8 px-2 py-1 text-[green] inline-block bg-[green]/20 border-[1px] border-[green] rounded-md text-xl font-semibold animate-[popDown_.4s_ease_1]">
+              <p className="mt-8 px-2 py-1 text-[green] inline-block bg-[green]/20 border-[1px] border-[green] rounded-md md:text-xl font-semibold animate-[popDown_.4s_ease_1]">
                 {successUpload}
               </p>
             )}
             <AiOutlineCloseCircle
-              className="text-[38px] mr-[6px] mt-[7px] text-primaryTwo/70 hover:text-primaryTwo linear duration-300 rounded-full font-semibold cursor-pointer absolute top-0 right-0"
+              className="text-3xl md:text-[38px] mr-[6px] mt-[7px] text-primaryTwo/70 hover:text-primaryTwo linear duration-300 rounded-full font-semibold cursor-pointer absolute top-0 right-0"
               onClick={closeModal}
             />
             <Button
               customClass={
-                "py-6 mt-10 w-full text-[22px] rounded-lg font-semibold"
+                "py-4 md:py-6 mt-10 w-full text-base md:text-[22px] rounded-lg font-semibold"
               }
               text={!loadingUpload && "Upload Photo"}
               btnDisable={loadingUpload}
               clickAct={handlePhotoUpload}
-              Loader={SyncLoader}
+              Loader={BeatLoader}
               loaderColor="#fff"
               loadingStatus={loadingUpload}
               loaderSize={13}

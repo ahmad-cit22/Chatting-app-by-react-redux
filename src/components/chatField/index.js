@@ -15,7 +15,7 @@ import {
   ref as refStorage,
   uploadString,
 } from "firebase/storage";
-import { SyncLoader } from "react-spinners";
+import { BeatLoader, SyncLoader } from "react-spinners";
 import { getDatabase, onValue, push, ref, set } from "firebase/database";
 import SimpleBar from "simplebar-react";
 import { activeChat } from "../../slices/activeChatSlice";
@@ -462,7 +462,7 @@ const ChatField = () => {
                       </div>
                       {item.msg ? (
                         <p
-                          className={`max-w-[95%] py-1 px-3 rounded-lg text-[13px] md:text-lg lg:text-[15px] ${
+                          className={`max-w-[95%] py-1.5 px-3 rounded-lg text-[13px] md:text-lg lg:text-[15px] ${
                             item.senderId === userData.uid
                               ? "bg-primary/90 text-white"
                               : "bg-primary/10 text-black"
@@ -479,7 +479,7 @@ const ChatField = () => {
                           <picture className={`max-w-[60%] cursor-pointer`}>
                             <img
                               src={item.imgPath}
-                              className={`w-full rounded-[15px] border-2 border-solid ${
+                              className={`w-full rounded-[15px] border-[1px] md:border-2 border-solid ${
                                 item.senderId === userData.uid
                                   ? "border-photoUp"
                                   : "border-photoUp/30"
@@ -516,7 +516,7 @@ const ChatField = () => {
                       </div>
                       {item.msg ? (
                         <p
-                          className={`max-w-[95%] py-1 px-3 rounded-lg text-[13px] md:text-lg lg:text-[15px] ${
+                          className={`max-w-[95%] py-1.5 px-3 rounded-lg text-[13px] md:text-lg lg:text-[15px] ${
                             item.senderId === userData.uid
                               ? "bg-primary/90 text-white"
                               : "bg-primary/10 text-black"
@@ -535,7 +535,7 @@ const ChatField = () => {
                           >
                             <img
                               src={item.imgPath}
-                              className={`w-full rounded-[15px] border-2 border-solid ${
+                              className={`w-full rounded-[15px] border-[1px] md:border-2 border-solid ${
                                 item.senderId === userData.uid
                                   ? "border-photoUp"
                                   : "border-photoUp/30"
@@ -581,11 +581,11 @@ const ChatField = () => {
 
         {/* ========== expand img modal starts ========== */}
         <div
-          className={`fixed top-0 left-0 w-full h-full bg-black/90 z-30 ${
+          className={`fixed top-0 left-0 w-full h-full bg-black/90 z-30 overflow-scroll ${
             isExpandImg ? "block" : "hidden"
           } animate-[smooth.3s_ease_1] grid place-items-center`}
         >
-          <div className="relative max-w-[80%] bg-transparent text-center animate-[popUp_.4s_ease_1]">
+          <div className="relative max-h-[70%] md:max-h-auto max-w-[80%] bg-transparent text-center animate-[popUp_.4s_ease_1]">
             <picture className="relative">
               <img src={expandImgPath} />
               <RiCloseFill
@@ -606,7 +606,7 @@ const ChatField = () => {
           } animate-[smooth.3s_ease_1] grid place-items-center`}
         >
           <div
-            className="relative w-[90%] md:w-2/5 bg-white text-center py-8 md:py-12 px-6 rounded-lg animate-[popUp_.3s_ease_1]"
+            className="relative w-[90%] md:w-2/5 bg-white text-center py-8 md:py-12 px-2 md:px-6 rounded-lg animate-[popUp_.3s_ease_1]"
             // ref={refPhotoUpload}
           >
             <h2 className="text-primaryTwo text-xl md:text-[26px] leading-none font-semibold mb-4 md:mb-10">
@@ -638,32 +638,32 @@ const ChatField = () => {
                 }}
               />
               {uploadErrMsg !== "" && (
-                <p className="pt-1 px-1 text-[red]/90 font-semibold inline-block animate-[popUpY_.4s_ease_1]">
+                <p className="pt-1 px-1 text-sm text-[red]/90 font-semibold inline-block animate-[popUpY_.4s_ease_1]">
                   {uploadErrMsg}
                 </p>
               )}
               {fErrUpload !== "" && (
-                <p className="pt-1 px-1 text-[red]/90 font-semibold inline-block animate-[popUpY_.4s_ease_1]">
+                <p className="pt-1 px-1 text-sm text-[red]/90 font-semibold inline-block animate-[popUpY_.4s_ease_1]">
                   {fErrUpload}
                 </p>
               )}
               {successUpload !== "" && (
-                <p className="mt-8 px-2 py-1 text-[green] inline-block bg-[green]/20 border-[1px] border-[green] rounded-md text-xl font-semibold animate-[popDown_.4s_ease_1]">
+                <p className="mt-8 px-2 py-1 text-[green] inline-block bg-[green]/20 border-[1px] border-[green] rounded-md md:text-xl font-semibold animate-[popDown_.4s_ease_1]">
                   {successUpload}
                 </p>
               )}
               <AiOutlineCloseCircle
-                className="text-[38px] mr-[6px] mt-[7px] text-primaryTwo/70 hover:text-primaryTwo linear duration-300 rounded-full font-semibold cursor-pointer absolute top-0 right-0"
+                className="text-3xl md:text-[38px] mr-[6px] mt-[7px] text-primaryTwo/70 hover:text-primaryTwo linear duration-300 rounded-full font-semibold cursor-pointer absolute top-0 right-0"
                 onClick={closeModal}
               />
               <Button
-                customClass={
-                  "py-2 md:py-4 mt-10 w-full text- md:text-xl rounded-lg font-semibold"
-                }
+                customClass={`py-2.5 md:py-6 lg:py-5 lg:py-5 w-full md:w-[95%] block m-auto lg:w-full mt-4 md:text-xl rounded-[15px] md:rounded-lg font-semibold  ${
+                  loadingUpload && "!pt-[12px] !pb-[8px] md:!pt-6 md:!pb-4"
+                }`}
                 text={!loadingUpload && "Send"}
                 btnDisable={loadingUpload}
                 clickAct={handleImgSend}
-                Loader={SyncLoader}
+                Loader={BeatLoader}
                 loaderColor="#fff"
                 loadingStatus={loadingUpload}
                 loaderSize={13}

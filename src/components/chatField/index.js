@@ -20,6 +20,7 @@ import { getDatabase, onValue, push, ref, set } from "firebase/database";
 import SimpleBar from "simplebar-react";
 import { activeChat } from "../../slices/activeChatSlice";
 import { RiCloseFill } from "react-icons/ri";
+import moment from "moment/moment";
 
 const ChatField = () => {
   const db = getDatabase();
@@ -35,6 +36,7 @@ const ChatField = () => {
   const userData = useSelector((state) => state.userLoginInfo.userInfo);
 
   const [msg, setMsg] = useState("");
+  const [msgId, setMsgId] = useState("");
   const [msgErr, setMsgErr] = useState("");
 
   const [img, setImg] = useState("");
@@ -49,6 +51,8 @@ const ChatField = () => {
 
   const [showModalImg, setShowModalImg] = useState(false);
   const [isExpandImg, setIsExpandImg] = useState(false);
+
+  const [showTime, setShowTime] = useState(false);
 
   const msgFormRef = useRef(null);
 
@@ -78,6 +82,11 @@ const ChatField = () => {
     if (activeChatData !== null && singleMsgEndRef.current !== null) {
       singleMsgEndRef.current.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const handleShowTime = (id) => {
+    setMsgId(id);
+    setShowTime(!showTime);
   };
 
   const closeModal = () => {
@@ -272,7 +281,7 @@ const ChatField = () => {
           receiverImg: activeChatData.receiverImg,
           msgTime: `${new Date().getDate()}/${
             new Date().getMonth() + 1
-          }/${new Date().getFullYear()}`,
+          }/${new Date().getFullYear()} ${new Date().getHours()}:${new Date().getMinutes()}`,
         })
           .then(() => {
             msgFormRef.current.reset();
@@ -295,7 +304,7 @@ const ChatField = () => {
           receiverImg: activeChatData.receiverImg,
           msgTime: `${new Date().getDate()}/${
             new Date().getMonth() + 1
-          }/${new Date().getFullYear()}`,
+          }/${new Date().getFullYear()} ${new Date().getHours()}:${new Date().getMinutes()}`,
         })
           .then(() => {
             msgFormRef.current.reset();
@@ -440,11 +449,11 @@ const ChatField = () => {
               (activeChatData.status === "single"
                 ? singleMsgs.map((item) => (
                     <div
-                      className={`max-w-[75%] flex items-end justify-between gap-x-2 ${
+                      className={`relative max-w-[75%] flex items-end justify-between gap-x-2 linear duration-300 ${
                         item.senderId === userData.uid
                           ? "self-end flex-row-reverse animate-[smooth_.6s_ease_1]"
                           : "animate-[popUp_.5s_ease_1]"
-                      }`}
+                      } ${showTime && item.id === msgId && "mb-3 pb-1"}`}
                       ref={singleMsgEndRef}
                     >
                       <div className="w-[25px] md:!w-[35px] flex justify-center items-center">
@@ -460,25 +469,25 @@ const ChatField = () => {
                         </picture>
                       </div>
                       {item.msg ? (
-                        <div>
-                          <p
-                            className={`max-w-[95%] py-1.5 px-3 rounded-lg text-[13px] md:text-lg lg:text-[15px] ${
-                              item.senderId === userData.uid
-                                ? "bg-primary/90 text-white"
-                                : "bg-primary/10 text-black"
-                            }`}
-                          >
-                            {item.msg}
-                          </p>
-                          {/* <span>asdasd</span> */}
-                        </div>
+                        <p
+                          className={`max-w-[95%] py-1.5 px-3 rounded-lg text-[13px] md:text-lg lg:text-[15px] ${
+                            item.senderId === userData.uid
+                              ? "bg-primary/90 text-white"
+                              : "bg-primary/10 text-black"
+                          }`}
+                          onClick={() => handleShowTime(item.id)}
+                        >
+                          {item.msg}
+                        </p>
                       ) : (
                         <div
                           className={`max-w-[95%] rounded-[15px] overflow-hidden flex justify-start ${
                             item.senderId === userData.uid && "justify-end"
                           }`}
                         >
-                          <picture className={`max-w-[60%] cursor-pointer`}>
+                          <picture
+                            className={`mb-4 max-w-[60%] cursor-pointer`}
+                          >
                             <img
                               src={item.imgPath}
                               className={`w-full rounded-[15px] border-[1px] md:border-2 border-solid ${
@@ -490,18 +499,38 @@ const ChatField = () => {
                               alt={"msgSenderAvatar"}
                               onClick={() => handleExpandImg(item.imgPath)}
                             />
+                            <span
+                              className={`w-[200px] absolute bottom-[-1px] text-xs opacity-90 ${
+                                item.senderId === userData.uid
+                                  ? "right-9 md:right-12 text-right"
+                                  : "left-9 md:left-12 text-left"
+                              }`}
+                            >
+                              {moment(item.msgTime, "DDMMYYYY hh:mm").fromNow()}
+                            </span>
                           </picture>
                         </div>
                       )}
+                      <span
+                        className={`opacity-0 w-[200px] absolute bottom-[-10px] md:bottom-[-12.5px]  text-[10px] md:text-xs linear duration-300 ${
+                          showTime && item.id === msgId && "!opacity-90"
+                        } ${
+                          item.senderId === userData.uid
+                            ? "right-9 md:right-12 text-right"
+                            : "left-9 md:left-12 text-left"
+                        }`}
+                      >
+                        {moment(item.msgTime, "DDMMYYYY hh:mm").fromNow()}
+                      </span>
                     </div>
                   ))
                 : grpMsgs.map((item) => (
                     <div
-                      className={`max-w-[75%] flex items-end justify-center gap-x-2 relative bottom-0 ${
+                      className={`relative max-w-[75%] flex items-end justify-center gap-x-2 linear duration-300 ${
                         item.senderId === userData.uid
                           ? "self-end flex-row-reverse animate-[smooth_.6s_ease_1]"
                           : "animate-[popUp_.5s_ease_1]"
-                      }`}
+                      } ${showTime && item.id === msgId && "mb-3 pb-1"}`}
                       ref={grpMsgEndRef}
                     >
                       <div className="w-[25px] md:!w-[35px] flex justify-center items-center">
@@ -523,6 +552,7 @@ const ChatField = () => {
                               ? "bg-primary/90 text-white"
                               : "bg-primary/10 text-black"
                           }`}
+                          onClick={() => handleShowTime(item.id)}
                         >
                           {item.msg}
                         </p>
@@ -533,7 +563,7 @@ const ChatField = () => {
                           }`}
                         >
                           <picture
-                            className={`max-w-[60%] flex cursor-pointer`}
+                            className={`mb-4 max-w-[60%] flex cursor-pointer`}
                           >
                             <img
                               src={item.imgPath}
@@ -546,9 +576,29 @@ const ChatField = () => {
                               alt={"msgSenderAvatar"}
                               onClick={() => handleExpandImg(item.imgPath)}
                             />
+                            <span
+                              className={`w-[200px] absolute bottom-[-1px] text-xs opacity-90 ${
+                                item.senderId === userData.uid
+                                  ? "right-9 md:right-12 text-right"
+                                  : "left-9 md:left-12 text-left"
+                              }`}
+                            >
+                              {moment(item.msgTime, "DDMMYYYY hh:mm").fromNow()}
+                            </span>
                           </picture>
                         </div>
                       )}
+                      <span
+                        className={`opacity-0 w-[200px] absolute bottom-[-10px] md:bottom-[-12.5px]  text-[10px] md:text-xs linear duration-300 ${
+                          showTime && item.id === msgId && "!opacity-90"
+                        } ${
+                          item.senderId === userData.uid
+                            ? "right-9 md:right-12 text-right"
+                            : "left-9 md:left-12 text-left"
+                        }`}
+                      >
+                        {moment(item.msgTime, "DDMMYYYY hh:mm").fromNow()}
+                      </span>
                     </div>
                   )))}
           </div>

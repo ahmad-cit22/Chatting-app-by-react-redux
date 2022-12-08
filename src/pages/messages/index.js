@@ -35,7 +35,7 @@ const Messages = () => {
         </p>
       </div>
     ) : (
-      <div className="pt-2 pb-4 md:py-5 px-3 md:px-6 lg:px-5 flex gap-x-6 h-screen font-pop">
+      <div className="py-5 px-3 md:py-5 px-3 md:px-6 lg:px-5 flex gap-x-6 h-screen font-pop">
         <Sidebar activePage={"messages"} />
         <div className="w-full lg:ml-[135px] xl:ml-0 lg:w-[86%] xl:w-[88%] h-full flex flex-col gap-y-9 lg:gap-y-8 xl:gap-y-0 lg:gap-x-4 lg:flex-row lg:justify-between">
           <div

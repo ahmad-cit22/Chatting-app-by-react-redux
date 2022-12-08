@@ -20,6 +20,7 @@ import { getDatabase, onValue, push, ref, set } from "firebase/database";
 import SimpleBar from "simplebar-react";
 import { activeChat } from "../../slices/activeChatSlice";
 import { RiCloseFill } from "react-icons/ri";
+import ScrollToBottom from "react-scroll-to-bottom";
 import moment from "moment/moment";
 
 const ChatField = () => {
@@ -72,17 +73,17 @@ const ChatField = () => {
     setExpandImgPath(expandImgPath);
   };
 
-  const scrollToBottomGrp = () => {
-    if (activeChatData !== null && grpMsgEndRef.current !== null) {
-      grpMsgEndRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  // const scrollToBottomGrp = () => {
+  //   if (activeChatData !== null && grpMsgEndRef.current !== null) {
+  //     grpMsgEndRef.current.scrollIntoView({ behavior: "smooth" });
+  //   }
+  // };
 
-  const scrollToBottomSingle = () => {
-    if (activeChatData !== null && singleMsgEndRef.current !== null) {
-      singleMsgEndRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  // const scrollToBottomSingle = () => {
+  //   if (activeChatData !== null && singleMsgEndRef.current !== null) {
+  //     singleMsgEndRef.current.scrollIntoView({ behavior: "smooth" });
+  //   }
+  // };
 
   const handleShowTime = (id) => {
     setMsgId(id);
@@ -349,14 +350,6 @@ const ChatField = () => {
     }
   }, [activeChatData]);
 
-  useEffect(() => {
-    scrollToBottomGrp();
-  }, [grpMsgs]);
-
-  useEffect(() => {
-    scrollToBottomSingle();
-  }, [singleMsgs]);
-
   return activeChatData !== null ? (
     <>
       <div className="h-[10%] flex items-center justify-between shadow-md pr-2.5 md:pr-4 w-full bg-white z-10">
@@ -414,7 +407,7 @@ const ChatField = () => {
         </div>
       </div>
       <div className="h-[90%] w-full flex flex-col">
-        <SimpleBar className="h-[78vh] md:h-[78vh] lg:h-[76.5vh] lg:pr-2">
+        <ScrollToBottom className="h-[78vh] md:h-[78vh] lg:h-[76.5vh] lg:pr-2">
           <div className="w-[100%] flex flex-col items-start gap-y-2 first:mt-3">
             <div className="items-center flex flex-col w-full pt-24">
               <picture
@@ -602,7 +595,7 @@ const ChatField = () => {
                     </div>
                   )))}
           </div>
-        </SimpleBar>
+        </ScrollToBottom>
 
         {/* input box starts */}
         <div className="">

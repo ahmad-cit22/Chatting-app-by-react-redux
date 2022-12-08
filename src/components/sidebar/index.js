@@ -168,7 +168,7 @@ const Sidebar = ({ activePage }) => {
 
   return (
     <div
-      className={`fixed xl:static z-20 left-0 lg:left-2 bottom-0 lg:bottom-[6px] w-full lg:w-[12%] xl:w-[10%] lg:px-1 lg:py-8 bg-primary lg:h-[98%] xl:h-full lg:rounded-lg flex lg:flex-col ${
+      className={`fixed xl:static z-20 left-0 lg:left-2 bottom-0 lg:bottom-[6px] w-full lg:w-[12%] xl:w-[11%] lg:px-1 lg:py-8 bg-primary lg:h-[98%] xl:h-full lg:rounded-lg flex lg:flex-col ${
         activeChatData !== null ? "hidden lg:flex" : ""
       }`}
     >

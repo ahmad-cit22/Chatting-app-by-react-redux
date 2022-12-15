@@ -1,12 +1,60 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Sidebar from "../../components/sidebar";
+import GroupsField from "../../components/groupsField";
+import FriendsField from "../../components/friendsField";
+import { getAuth } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import ChatField from "../../components/chatField";
 
 const Settings = () => {
+  const navigate = useNavigate();
+  const userData = useSelector((state) => state.userLoginInfo.userInfo);
+  const activeChatData = useSelector((state) => state.activeChatInfo.value);
+
+  const [emailVerify, setEmailVerify] = useState(false);
+
+  useEffect(() => {
+    if (userData === null) {
+      navigate("/login");
+    } else if (userData.emailVerified) {
+      setEmailVerify(true);
+    }
+  }, []);
+
   return (
-    <div className="py-5 px-3 md:py-5 px-3 md:px-6 lg:px-5 flex gap-x-6 h-screen font-pop">
-      <Sidebar activePage={"settings"} />
-      <div className="w-4/5">Settings Page</div>
-    </div>
+    userData !== null &&
+    (!emailVerify ? (
+      <div className="bg-primary/20 border-[1px] lg:border-[3px] border-[#5F35F580] rounded-md mt-14 text-primaryTwo flex-col justify-center items-center p-5 lg:p-10 lg:pt-8 w-4/5 lg:w-3/5 m-auto text-xl lg:text-[28px] font-semibold text-center animate-[popUp_.4s_ease_1]">
+        <p className="lg:leading-[34px]">
+          Please verify your email address first in order to get access to your
+          account.
+        </p>
+        <p className="mt-2 lg:mt-3 text-lg lg:text-2xl">
+          Check your email for the verification link.
+        </p>
+      </div>
+    ) : (
+      <div className="py-5 px-3 md:py-5 px-3 md:px-6 lg:px-5 flex gap-x-6 h-screen font-pop">
+        <Sidebar activePage={"messages"} />
+        <div className="w-full lg:ml-[135px] xl:ml-0 lg:w-[86%] xl:w-[88%] h-full flex flex-col gap-y-9 lg:gap-y-8 xl:gap-y-0 lg:gap-x-4 lg:flex-row lg:justify-between">
+          <div
+            className={`w-full lg:w-[48%] xl:w-[35%] flex flex-col gap-y-9 lg:gap-y-8 justify-between pb-20 lg:pb-0 ${
+              activeChatData !== null ? "hidden lg:flex" : ""
+            }`}
+          >
+            <GroupsField />
+          </div>
+          <div
+            className={`w-full h-full lg:w-[48%] xl:w-[64%] flex flex-col justify-start lg:border-l-4 lg:pl-4 ${
+              activeChatData === null ? "hidden lg:flex" : ""
+            }`}
+          >
+            <ChatField />
+          </div>
+        </div>
+      </div>
+    ))
   );
 };
 

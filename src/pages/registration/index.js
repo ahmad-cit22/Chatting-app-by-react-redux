@@ -285,8 +285,8 @@ const Registration = () => {
               </p>
             )}
 
-            {/* ========== Registration form starts ========== */}
             <div>
+            {/* ========== Registration form starts ========== */}
               <form
                 action="#"
                 method="POST"

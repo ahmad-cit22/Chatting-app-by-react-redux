@@ -249,15 +249,15 @@ const Login = () => {
           </h1>
 
           {/* google login button */}
-          <a
-            className="text-[11px] md:text-sm font-semibold mt-5 md:mt-9 lg:mt-7 xl:mt-9 mb-10 md:mb-12 lg:mb-8 xl:mb-10 inline-block pl-3 md:pl-6 lg:pl-5 xl:pl-6 pr-4 md:pr-8 lg:pr-7 xl:pr-8 py-2.5 md:py-5 lg:py-4 xl:py-5 rounded-[14px] md:rounded-lg lg:self-start border-2 border-secondary/20 hover:border-secondary/60 linear duration-300 cursor-pointer"
-            onClick={handleGoogleSignIn}
-          >
-            <button className="flex items-center gap-2">
-              <FcGoogle className="text-base md:text-[22px]" /> Login with
-              Google
-            </button>
-          </a>
+//           <a
+//             className="text-[11px] md:text-sm font-semibold mt-5 md:mt-9 lg:mt-7 xl:mt-9 mb-10 md:mb-12 lg:mb-8 xl:mb-10 inline-block pl-3 md:pl-6 lg:pl-5 xl:pl-6 pr-4 md:pr-8 lg:pr-7 xl:pr-8 py-2.5 md:py-5 lg:py-4 xl:py-5 rounded-[14px] md:rounded-lg lg:self-start border-2 border-secondary/20 hover:border-secondary/60 linear duration-300 cursor-pointer"
+//             onClick={handleGoogleSignIn}
+//           >
+//             <button className="flex items-center gap-2">
+//               <FcGoogle className="text-base md:text-[22px]" /> Login with
+//               Google
+//             </button>
+//           </a>
           {/* google login button */}
 
           <div className="w-[255px] md:w-[380px] lg:w-[400px] flex flex-col m-auto items-center lg:items-start">
